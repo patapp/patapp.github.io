@@ -1,11 +1,11 @@
 'use strict';
 
 const menu = document.getElementById('menu');
-const bottomNav = document.querySelector('.bottom-nav-wrapper');
+const bottomNav = document.querySelector('.bottom-nav-bar');
 const radioButtons = document.querySelectorAll('input[type="radio"] ~ label');
 const newPostButton = document.getElementById('new-post');
 const bottomNavHeight = bottomNav.offsetHeight;
-const navBarHeight = 56;
+const navBarHeight = 50;
 const navBarHiddenPos = (bottomNavHeight - navBarHeight) * -1;
 
 const styleHidden = document.createElement('style');
