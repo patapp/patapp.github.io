@@ -5,7 +5,7 @@ const bottomNav = document.querySelector('.bottom-nav-bar');
 const radioButtons = document.querySelectorAll('input[type="radio"] ~ label');
 const newPostButton = document.getElementById('new-post');
 const bottomNavHeight = bottomNav.offsetHeight;
-const navBarHeight = 50;
+const navBarHeight = 43;
 const navBarHiddenPos = (bottomNavHeight - navBarHeight) * -1;
 
 const styleHidden = document.createElement('style');
@@ -25,5 +25,5 @@ menu.addEventListener('change', ()=> {
 });
 
 setTimeout(() => {
-	bottomNav.style.transition = 'bottom 200ms ease-in-out';
+  bottomNav.style.transition = 'bottom 300ms cubic-bezier(0.5, -0.4, 0.5, 1.4) 0s';
 }, 10);
