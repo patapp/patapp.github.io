@@ -1,4 +1,4 @@
-# pat-project-frontend
+# PAT. project frontend
 Front end code for PAT.
 
-Back-End Repo: https://github.com/joonasmkauppinen/pat-project-backend
+Code for node backend can be found form [backend repository.](https://github.com/joonasmkauppinen/pat-project-backend)
