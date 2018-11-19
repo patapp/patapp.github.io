@@ -1,6 +1,9 @@
 :root {
 	--primary-red-color: #FF145B;
-	--secondary-red-color: #FFD0DE;
+  --secondary-red-color: #FFD0DE;
+  --dark-brown-shadow-color: rgba(127, 107, 94, 0.2);
+
+  --nav-bar-height-dimen: 50px;
 }
 
 *,
@@ -11,18 +14,28 @@
 	box-sizing: border-box;
 }
 
+.top-nav-bar {
+ position: fixed;
+ top: 0;
+ width: 100vw;
+ height: var(--nav-bar-height-dimen);
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ box-shadow: 0 0 5px 2px var(--dark-brown-shadow-color);
+}
+
+
 input {
   display: none;
 }
 
 .bottom-nav-bar {
-  box-sizing: content-box;
 	width: 100vw;
 	position: fixed;
 	bottom: 0;
 	background: white;
-	border-top: 1.5px solid var(--primary-red-color);
-	box-shadow: 0 1px 15px #6c5a5185;
+	box-shadow: 0 0 5px 2px var(--dark-brown-shadow-color);
 }
 
 .bottom-nav-buttons {
@@ -30,7 +43,7 @@ input {
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
-	margin-top: 10px;
+	margin-top: 8px;
 	margin-bottom: 10px;
 }
 
@@ -42,9 +55,13 @@ input {
   position: relative;
 }
 
-.bottom-nav-buttons__burger,
-.bottom-nav-buttons__burger::before,
-.bottom-nav-buttons__burger::after {
+.bottom-nav-buttons__burger {
+  padding: 5px 0;
+}
+
+.bottom-nav-buttons__burger > span,
+.bottom-nav-buttons__burger > span::before,
+.bottom-nav-buttons__burger > span::after {
 	content: '';
 	width: 28px;
 	height: 4px;
@@ -54,23 +71,23 @@ input {
   transition: all 300ms ease-in-out;
 }
 
-.bottom-nav-buttons__burger::before {
+.bottom-nav-buttons__burger > span::before {
 	transform: translateY(-8px);
 	position: initial;
 }
 
-.bottom-nav-buttons__burger::after {
+.bottom-nav-buttons__burger > span::after {
 	transform: translateY(4px);
 }
 
-#menu:checked ~ .bottom-nav-buttons__burger {
+#menu:checked ~ .bottom-nav-buttons__burger > span {
   transform: rotateZ(45deg);
 }
-#menu:checked ~ .bottom-nav-buttons__burger::before {
+#menu:checked ~ .bottom-nav-buttons__burger > span::before {
   transform: translateY(0px);
   opacity: 0;
 }
-#menu:checked ~ .bottom-nav-buttons__burger::after {
+#menu:checked ~ .bottom-nav-buttons__burger > span::after {
   transform: translateY(-4px) rotateZ(-90deg);
 }
 
@@ -135,7 +152,7 @@ label::before {
 
 .btn-visible {
   opacity: 1;
-  transition: opacity 300ms ease-in-out;
+  transition: opacity 200ms ease-in-out;
   pointer-events: all
 }
 
