@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+* { font-family: helvetica, arial; }
+.area {
+ padding:10px;
+ border: 1px solid #000;
+ margin: 10px;
+ width: 30%;
+ float:left;
+}
+</style>
+<title>Tester</title>
+</head>
+<body>
+
+<h1>Tester</h1>
+
+<div class="area">
+ <table>
+  <tr>
+    <td>BACKEND:</td>
+    <td id="backend"></td>
+  </tr>
+  <tr>
+    <td>IS Session:</td>
+    <td id="is_session"></td>
+  </tr>
+  <tr>
+    <td>Session ID:</td>
+    <td id="session_id"></td>
+  </tr>
+  <tr>
+    <td>Session Token:</td>
+    <td style="font-size:7pt;letter-spacing:-0.1em;" id="session_token"></td>
+  </tr>    
+  <tr>
+    <td>Permissions:</td>
+    <td id="session_perm">[TBA FEATURE]</td>
+  </tr>  
+ </table>
+  <input type="button" value="Refresh" onClick="ref();">
+</div>
+
+<div class="area">
+<table>
+  <tr>
+    <td>Username:</td>
+    <td><input type="text" name="username" id="username" value="samuli_v" /></td>
+  </tr>
+  <tr>
+    <td>Password:</td>
+    <td><input type="text" name="password" id="password" value="1234" /></td>
+  </tr>
+</table>
+
+<input type="button" value="Log IN" onClick="testLogin();">
+<input type="button" value="Logout" onClick="testLogout();">
+</div>
+
+<script src="js/global.js"></script>
+<script src="js/connection.js"></script>
+<script src="js/login.js"></script>
+
+<script>
+
+const testLogin = () => {
+  console.log('testLogin()');
+  const username = document.getElementById('username');
+  const password = document.getElementById('password');
+  logIn(username.value,password.value).then((e)=>{
+    if ( e.success == 0 ) {
+      console.log('Login failed! Error: ' + e.error);
+      }else{
+      console.log('Login succeeded!');
+      }
+    ref();
+  });
+  }
+  
+const testLogout = () => {
+  console.log('testLogout()');
+  logOut().then((e)=>{
+    if ( e.success == 0 ) {
+      console.log('Logout failed! Error: ' + e.error);
+      }else{
+      console.log('Logout succeeded!');
+      }
+    ref();
+  });
+  }  
+  
+
+const ref = () => {
+
+  const backend = document.getElementById('backend');
+  const is_session = document.getElementById('is_session');
+  const session_id = document.getElementById('session_id');
+  const session_token = document.getElementById('session_token');
+  is_session.innerHTML = isSession();
+  session_id.innerHTML = sessionID;
+  session_token.innerHTML = sessionToken;
+  backend.innerHTML = API_URL;
+
+}
+
+ref();
+
+setTimeout(ref, 400);
+
+</script>
+
+</body>
+</html>
