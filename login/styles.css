@@ -1,0 +1,100 @@
+
+:root {
+	--primary-red-color: #FF145B;
+  --secondary-red-color: #FFD0DE;
+  --dark-brown-shadow-color: rgba(127, 107, 94, 0.2);
+  --dark-brown-color: #7F6B5E;
+  --brown-color: #D4B7A3;
+  --light-brown-color: #FBF1EA;
+  --shadow-brown-color: rgba(212, 183, 163, 0.15);
+
+  --input-border-radius-dimen: 7px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+*:focus {
+  outline: none;
+}
+
+body {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+input {
+  border: none;
+  width: 100%;
+}
+input::placeholder {
+  color: var(--brown-color);
+}
+
+.sign-up {
+  margin: auto;
+  width: 100%;
+  max-width: 25rem;
+}
+
+.sign-up__logo {
+  display: flex;
+  margin-bottom: 8rem;
+}
+.sign-up__logo > img {
+  margin: auto;
+  height: 80px;
+}
+
+.sign-up__form {
+  margin: 0 1rem;
+}
+.sign-up__input-field {
+  display: flex;
+  height: 2.7rem;
+  border: 2px solid var(--light-brown-color);
+  border-radius: var(--input-border-radius-dimen);
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 20px var(--shadow-brown-color);
+}
+.sign-up__input-field > img {
+  margin: 0 1rem;
+  width: 16px;
+}
+.sign-up__input-field > input {
+  margin-right: 1rem;
+  font-family: 'Dosis', serif;
+  font-weight: 500;
+  font-size: 19px;
+  color: var(--dark-brown-color);
+}
+
+.sign-up__form > input[type="submit"] {
+  padding: .9rem 0;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  font-size: 18px;
+  font-family: 'Dosis', serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: white;
+  background-color: var(--primary-red-color);
+  border-radius: var(--input-border-radius-dimen);
+  border: none;
+}
+
+.sign-up > p {
+  text-align: center;
+  color: var(--brown-color);
+  font-family: 'Dosis', serif;
+  font-weight: 500;
+  font-size: 22px;
+  margin-top: 1.5rem;
+}
+.sign-up > p > a {
+  color: var(--brown-color);
+  font-weight: 700;
+}
+
+
