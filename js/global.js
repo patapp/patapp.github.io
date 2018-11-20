@@ -100,19 +100,29 @@ const sessionCheck = async () => {
       sessionExists = 1;
       sessionID = cookieID;
       sessionToken = cookieToken;
+      }else{
+      setCookie('pat_session_id', '');
+      setCookie('pat_session_token', '');
       }
     response = r;
     });
   return response;
   }
 
+var href = window.location.href;
+var dir = href.substring(0, href.lastIndexOf('/')) + "/";
+
+console.log(dir);
+console.log(dir);
+console.log(window.location.pathname);
 
 if ( typeof cookieID != 'undefined' && typeof cookieToken != 'undefined' && cookieID != "" && cookieToken != "" ) {
 console.log('*** SessionCheck!' + cookieID);
 sessionCheck().then( (r) => {
   if ( r.success ) {
-    //console.log ( r.session_exists );
     sessionPermissions = r.permissions;
     }
 });
   }
+  
+  
