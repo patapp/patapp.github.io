@@ -2,7 +2,8 @@
 
 const logIn = async (u,p) => {
   let response = '';
-  const j = await getJSON('POST', 'session/login', '?username=' + u + '&password=' + p, 0).then( (r) => {
+  const dataObject = {username: u, password: p};
+  const j = await getJSON('POST', 'session/login', '', dataObject, 0).then( (r) => {
     if ( r.success == 1 ) {
       sessionExists = 1;
       sessionID = r.session_id;
@@ -18,11 +19,11 @@ const logIn = async (u,p) => {
 const logOut = async (u,p) => {
   if ( isSession () ) {
     let response = '';
-    const j = await getJSON('POST', 'session/logout', '', 1).then( (r) => {
+    const j = await getJSON('POST', 'session/logout').then( (r) => {
       if ( r.success == 1 ) {
         sessionExists = 0;
-        sessionID = "";
-        sessionToken = "";
+        sessionID = '';
+        sessionToken = ''   ;
         setCookie ( 'pat_session_id', sessionID, 60 );
         setCookie ( 'pat_session_token', sessionToken, 60 );
         }

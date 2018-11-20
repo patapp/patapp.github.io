@@ -18,7 +18,7 @@
 <h1>Tester</h1>
 
 <div class="area">
- <table>
+ <table style="width: 100%;">
   <tr>
     <td>BACKEND:</td>
     <td id="backend"></td>
@@ -33,11 +33,11 @@
   </tr>
   <tr>
     <td>Session Token:</td>
-    <td style="font-size:7pt;letter-spacing:-0.1em;" id="session_token"></td>
+    <td style="font-size:7pt;letter-spacing:-0.3em;" id="session_token"></td>
   </tr>    
   <tr>
     <td>Permissions:</td>
-    <td id="session_perm">[TBA FEATURE]</td>
+    <td id="session_perm"></td>
   </tr>  
  </table>
   <input type="button" value="Refresh" onClick="ref();">
@@ -102,6 +102,11 @@ const ref = () => {
   session_id.innerHTML = sessionID;
   session_token.innerHTML = sessionToken;
   backend.innerHTML = API_URL;
+  
+  if ( isSession () ) {
+    const session_perm = document.getElementById('session_perm');
+    session_perm.innerHTML = sessionPermissions.join(', ');
+    } 
 
 }
 
