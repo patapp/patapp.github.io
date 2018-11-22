@@ -5,17 +5,47 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
   
-  <link href="https://fonts.googleapis.com/css?family=Dosis:400,500,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Dosis:400,500,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
 	<link href="../css/nav-bars.css" rel="stylesheet" type="text/css">
+	<link href="../css/tab-views.css" rel="stylesheet" type="text/css">
 	
 	<title>PAT.</title>
 </head>
 <body>
-  
+	
+	<!-- Header title -->
   <nav class="top-nav-bar">
     <img src="../svg/pat_ic.svg">
   </nav>
 	
+	<!-- Tab views wrapper -->
+	<div class="tab-views">
+
+		<div id="home-tab" class="tab-views__tab-home tab visible show-element">
+			<h1>Home</h1>
+			<button onclick="alert('hello home')">Click Me!</button>
+			<p>Glossier air plant blue bottle seitan snackwave put a bird on it chicharrones meh pork belly austin af. Hell of neutra live-edge pinterest typewriter chia knausgaard bitters etsy direct trade marfa iceland edison bulb. Twee franzen lo-fi tacos farm-to-table mustache drinking vinegar scenester. Pour-over edison bulb aesthetic authentic umami kombucha. Cray portland coloring book heirloom twee. Banjo vegan direct trade, butcher whatever disrupt tattooed selfies pork belly. Actually williamsburg butcher yuccie cray master cleanse hashtag hoodie, unicorn polaroid vegan four loko.</p>
+			<p>Disrupt bicycle rights live-edge ethical mixtape palo santo 3 wolf moon schlitz. Waistcoat vice franzen polaroid tacos viral. Cliche ramps echo park selvage. Food truck messenger bag skateboard seitan, fingerstache salvia vexillologist VHS ethical shoreditch tacos intelligentsia helvetica. Forage venmo disrupt aesthetic vape, kombucha etsy post-ironic flannel umami cred master cleanse.</p>
+		</div>
+
+		<div id="search-tab" class="tab-views__tab-search tab">
+			<h1>Search</h1>
+			<button onclick="alert('hello search')">Click Me!</button>
+			<p>Glossier air plant blue bottle seitan snackwave put a bird on it chicharrones meh pork belly austin af. Hell of neutra live-edge pinterest typewriter chia knausgaard bitters etsy direct trade marfa iceland edison bulb. Twee franzen lo-fi tacos farm-to-table mustache drinking vinegar scenester. Pour-over edison bulb aesthetic authentic umami kombucha. Cray portland coloring book heirloom twee. Banjo vegan direct trade, butcher whatever disrupt tattooed selfies pork belly. Actually williamsburg butcher yuccie cray master cleanse hashtag hoodie, unicorn polaroid vegan four loko.</p>
+			<p>Disrupt bicycle rights live-edge ethical mixtape palo santo 3 wolf moon schlitz. Waistcoat vice franzen polaroid tacos viral. Cliche ramps echo park selvage. Food truck messenger bag skateboard seitan, fingerstache salvia vexillologist VHS ethical shoreditch tacos intelligentsia helvetica. Forage venmo disrupt aesthetic vape, kombucha etsy post-ironic flannel umami cred master cleanse.</p>
+			<p>Raclette cornhole tilde, bicycle rights XOXO vexillologist paleo skateboard organic lumbersexual poke hashtag. Neutra craft beer waistcoat semiotics single-origin coffee. Subway tile XOXO coloring book yr slow-carb messenger bag waistcoat hoodie selfies adaptogen farm-to-table iPhone actually neutra glossier. Photo booth blue bottle tousled austin jianbing sustainable. La croix flannel sriracha, tote bag freegan synth trust fund ennui meditation vinyl cold-pressed heirloom. Forage gochujang vinyl vegan. Bitters try-hard craft beer polaroid, mlkshk you probably haven't heard of them before they sold out pop-up.</p>
+		</div>
+
+		<div id="profile-tab" class="tab-views__tab-profile tab">
+			<h1>Profile</h1>
+			<button onclick="alert('hello profile')">Click Me!</button>
+			<p>Truffaut portland keytar 3 wolf moon, normcore salvia brooklyn. Dreamcatcher gentrify officia, try-hard air plant celiac squid knausgaard ethical plaid glossier williamsburg helvetica bitters aliqua. Cold-pressed in mlkshk, copper mug kickstarter kale chips four loko disrupt try-hard iceland portland authentic salvia cillum. Slow-carb culpa et sint laboris velit aute helvetica taiyaki tempor woke forage cupidatat. Actually minim est freegan disrupt locavore skateboard. Blog pork belly before they sold out velit authentic. Mustache roof party aesthetic anim, sint cold-pressed tattooed letterpress chambray quinoa consectetur veniam affogato.</p>
+		</div>
+
+	</div>
+
+	<!-- Bottom navigation bar -->
 	<nav class="bottom-nav-bar">
 		
 		<ul class="bottom-nav-buttons">
@@ -25,8 +55,8 @@
 			</li>
 			
 			<li>
-				<input checked name="bottom-nav" id="home" class="nav-btn" type="radio">
-				<label class="btn-visible" for="home"><img src="../svg/home_ic.svg"></label>
+				<input checked name="bottom-nav" id="home-btn" class="nav-btn" type="radio">
+				<label class="btn-visible" for="home-btn"><img src="../svg/home_ic.svg"></label>
 			</li>
 			
 			<li>
@@ -34,13 +64,13 @@
 			</li>
 			
 			<li>
-				<input name="bottom-nav" id="search" class="nav-btn" type="radio">
-				<label class="btn-visible" for="search"><img src="../svg/search_ic.svg"></label>
+				<input name="bottom-nav" id="search-btn" class="nav-btn" type="radio">
+				<label class="btn-visible" for="search-btn"><img src="../svg/search_ic.svg"></label>
 			</li>
 			
 			<li>
-				<input name="bottom-nav" id="profile" class="nav-btn" type="radio">
-				<label class="btn-visible" for="profile"><img src="../svg/profile_ic.svg"></label>
+				<input name="bottom-nav" id="profile-btn" class="nav-btn" type="radio">
+				<label class="btn-visible" for="profile-btn"><img src="../svg/profile_ic.svg"></label>
 			</li>
 		</ul>
 		

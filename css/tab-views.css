@@ -1,0 +1,42 @@
+
+.tab {
+  display: none;
+  opacity: 0;
+  width: 100vw;
+  transition: opacity 130ms ease-in-out;
+}
+.visible {
+  opacity: 1;
+}
+.show-element {
+  display: block;
+}
+
+.tab h1 {
+  font-family: 'Dosis', serif;
+  font-weight: 700;
+  font-size: 28px;
+}
+.tab p {
+  font-family: 'Roboto', serif;
+  margin: 10px;
+}
+
+.tab-views {
+  margin-top: 50px;
+}
+
+
+.tab-views__tab-home {
+  background-color: steelblue;
+  height: 300vh;
+}
+.tab-views__tab-search {
+  background-color: lightcoral;
+  height: 500vh;
+}
+.tab-views__tab-profile {
+  background-color: lightgreen;
+  height: 400vh;
+}
+
