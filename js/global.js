@@ -50,7 +50,6 @@ const getJSON = async ( rMethod , request, rParams='', dataObject = {}, sendSess
   
 const isSession = () => sessionExists;
 
-
 const setCookie = (cname, cvalue, exdays) => {
     let d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
