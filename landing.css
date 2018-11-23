@@ -124,7 +124,7 @@ span {
     vertical-align: middle;
 }
 
-title__description {
+#title__description {
     margin-top: .7em;
     display: block;
     font-family: 'Dosis',serif;
