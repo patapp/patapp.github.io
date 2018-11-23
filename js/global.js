@@ -19,27 +19,33 @@ const serialize = (obj) => {
 
 const getJSON = async ( rMethod , request, rParams='', dataObject = {}, sendSessionInfo=1 ) => {
 
-  // REMOVE THIS IN PRODUCTION VERSION
-  console.log('getJSON' + rMethod + ':' + request);
-  console.log(API_URL + request + rParams + ( sendSessionInfo && sessionExists ? ( rParams == '' ? '?' : '&' ) + 'session_id=' + sessionID + '&session_token=' + sessionToken : '' ));
+  return new Promise((resolve, reject) => {
 
-  console.log('fetch data obj:');
-  console.log(dataObject);
+    // REMOVE THIS IN PRODUCTION VERSION
+    console.log('getJSON' + rMethod + ':' + request);
+    console.log(API_URL + request + rParams + ( sendSessionInfo && sessionExists ? ( rParams == '' ? '?' : '&' ) + 'session_id=' + sessionID + '&session_token=' + sessionToken : '' ));
 
-  const response = await fetch( API_URL + request + rParams + ( sendSessionInfo && sessionExists ? ( rParams == '' ? '?' : '&' ) + 'session_id=' + sessionID + '&session_token=' + sessionToken : '' ), {
-    method: "POST",
-    body: serialize(dataObject),
-    headers:
-    {
-      "Content-Type": "application/x-www-form-urlencoded"
-    }
-  } );
+    if ( sendSessionInfo ) {  
+      dataObject.session_id    = sessionID;
+      dataObject.session_token = sessionToken;
+      }
+
+    console.log('fetch data obj:');
+    console.log(dataObject);
+
+    const response = fetch( API_URL + request + rParams + ( sendSessionInfo && sessionExists ? ( rParams == '' ? '?' : '&' ) + 'session_id=' + sessionID + '&session_token=' + sessionToken : '' ), {
+        method: "POST",
+        body: serialize(dataObject),
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+      }).then( (r) => {
+        console.log('test 1234');
+        resolve(r.json());
+      });
+    
+    console.log('testing');
+    
+    });
   
-  console.log('testing');
-  
-  const json = await response.json();
-  console.log(json);
-  return json;
   }
   
 const isSession = () => sessionExists;
@@ -67,25 +73,6 @@ const getCookie = (cname) => {
     }
     return "";
 }
-
-const logOut = async (u,p) => {
-  if ( isSession () ) {
-    let response = '';
-    const j = await getJSON('POST', 'session/logout').then( (r) => {
-      if ( r.success == 1 ) {
-        sessionExists = 0;
-        sessionID = '';
-        sessionToken = ''   ;
-        setCookie ( 'pat_session_id', sessionID, 60 );
-        setCookie ( 'pat_session_token', sessionToken, 60 );
-        }
-      response = r;
-      });
-    return response;
-  }else{
-    return { success: 0 };
-    }
-  }
 
 // Session Check
 const cookieID    = getCookie ( 'pat_session_id' );
@@ -116,6 +103,8 @@ console.log(dir);
 console.log(dir);
 console.log(window.location.pathname);
 
+console.log('*** AUTO SESSION CHECK ***');
+
 if ( typeof cookieID != 'undefined' && typeof cookieToken != 'undefined' && cookieID != "" && cookieToken != "" ) {
 console.log('*** SessionCheck!' + cookieID);
 sessionCheck().then( (r) => {
@@ -123,6 +112,16 @@ sessionCheck().then( (r) => {
     sessionPermissions = r.permissions;
     }
 });
+  }else{
+  console.log('No Session :(');
   }
-  
-  
+
+const confirmDialog = async ( text ) => {
+  return new Promise((resolve, reject) => {
+    if ( confirm ( text ) ) {
+      resolve('ok');
+      }else{
+      resolve('cancel');
+      }
+    });
+  }
