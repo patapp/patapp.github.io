@@ -18,7 +18,11 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
 	<link href="css/nav-bars.css" rel="stylesheet" type="text/css">
 	<link href="css/tab-views.css" rel="stylesheet" type="text/css">
+<<<<<<< HEAD
 	<link href="../css/pat-global.css" rel="stylesheet" type="text/css">
+=======
+	<link href="css/post-card.css" rel="stylesheet" type="text/css">
+>>>>>>> 45ba46f3f2adb03e335b201bee89f762c8091e00
 	
 	<title>PAT.</title>
 </head>
@@ -32,13 +36,20 @@
 	<!-- Tab views wrapper -->
 	<div class="tab-views">
 
+		<!-- Home tab -->
 		<div id="home-tab" class="tab-views__tab-home tab visible show-element">
-			<h1>Home</h1>
-			<button onclick="alert('hello home')">Click Me!</button>
-			<p>Glossier air plant blue bottle seitan snackwave put a bird on it chicharrones meh pork belly austin af. Hell of neutra live-edge pinterest typewriter chia knausgaard bitters etsy direct trade marfa iceland edison bulb. Twee franzen lo-fi tacos farm-to-table mustache drinking vinegar scenester. Pour-over edison bulb aesthetic authentic umami kombucha. Cray portland coloring book heirloom twee. Banjo vegan direct trade, butcher whatever disrupt tattooed selfies pork belly. Actually williamsburg butcher yuccie cray master cleanse hashtag hoodie, unicorn polaroid vegan four loko.</p>
-			<p>Disrupt bicycle rights live-edge ethical mixtape palo santo 3 wolf moon schlitz. Waistcoat vice franzen polaroid tacos viral. Cliche ramps echo park selvage. Food truck messenger bag skateboard seitan, fingerstache salvia vexillologist VHS ethical shoreditch tacos intelligentsia helvetica. Forage venmo disrupt aesthetic vape, kombucha etsy post-ironic flannel umami cred master cleanse.</p>
+			
+			<ul id="home-feed">
+
+			</ul>
+
+			<div id="load-trigger" class="load-trigger">
+				<span></span>
+			</div>
+
 		</div>
 
+		<!-- Search/trending tab -->
 		<div id="search-tab" class="tab-views__tab-search tab">
 			<h1>Search</h1>
 			<button onclick="alert('hello search')">Click Me!</button>
@@ -47,6 +58,7 @@
 			<p>Raclette cornhole tilde, bicycle rights XOXO vexillologist paleo skateboard organic lumbersexual poke hashtag. Neutra craft beer waistcoat semiotics single-origin coffee. Subway tile XOXO coloring book yr slow-carb messenger bag waistcoat hoodie selfies adaptogen farm-to-table iPhone actually neutra glossier. Photo booth blue bottle tousled austin jianbing sustainable. La croix flannel sriracha, tote bag freegan synth trust fund ennui meditation vinyl cold-pressed heirloom. Forage gochujang vinyl vegan. Bitters try-hard craft beer polaroid, mlkshk you probably haven't heard of them before they sold out pop-up.</p>
 		</div>
 
+		<!-- Profile tab -->
 		<div id="profile-tab" class="tab-views__tab-profile tab">
 			<h1>Profile</h1>
 			<button onclick="alert('hello profile')">Click Me!</button>
@@ -93,6 +105,11 @@
 	</nav>
 	
 	<script src="scripts/nav_controller.js"></script>
+<<<<<<< HEAD
+=======
+	<script src="scripts/home-feed-controller.js"></script>
+	<script src="../js/global.js"></script>
+>>>>>>> 45ba46f3f2adb03e335b201bee89f762c8091e00
 	<script src="../js/home.js"></script>
 	<script src="../js/global.js"></script>
 	
