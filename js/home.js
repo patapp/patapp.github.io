@@ -1,5 +1,22 @@
 'use strict';
 
+  /*-------------------------+---------------------------+
+  |   .----.  .--.  .---.    |  CREATED BY TEAM JJS      |
+  |   | {}  }/ {} \{_   _}   +---------------------------+
+  |   | .--'/  /\  \ | |     |  Joonas Kauppinen         |
+  |   `-'   `-'  `-' `-'     |  "Jamie" GeonHui Yoon     |
+  |   - a place for pets -   |  Samuli Virtanen          |
+  +--------------------------+--------------------------*/
+
+const VIEW_PAGE = 'home';
+
+const appIsReady = () => {
+
+  // Hide the loading / waiting screen here, and do the tricks....
+  conLog('[APP_IS_READY] Called.');
+
+  }
+
 const logOut = async (u,p) => {
   return new Promise((resolve, reject) => {
   if ( isSession () ) {

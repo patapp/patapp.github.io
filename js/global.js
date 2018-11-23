@@ -1,12 +1,36 @@
 'use strict';
 
+  /*-------------------------+---------------------------+
+  |   .----.  .--.  .---.    |  CREATED BY TEAM JJS      |
+  |   | {}  }/ {} \{_   _}   +---------------------------+
+  |   | .--'/  /\  \ | |     |  Joonas Kauppinen         |
+  |   `-'   `-'  `-' `-'     |  "Jamie" GeonHui Yoon     |
+  |   - a place for pets -   |  Samuli Virtanen          |
+  +--------------------------+--------------------------*/
+
 //const API_URL = 'http://127.0.0.1:3114/';   // local
 const API_URL = 'http://82.181.20.24:3114/';   // public-server
+
+const BASE_ADDR = '/pat-project-frontend/'; // if in root folder, set this to '/'
+
+// Display all the debug messages in the console
+const DEBUG_MODE = true;
+
+/* Redirect automatically from wrong page to right page if SESSION state is wrong. 
+Plase note: Does not make effect if DEBUG_MODE = false */
+const AUTO_REDIRECT = true;
 
 let sessionExists = 0;
 let sessionID = '';
 let sessionToken = '';
 let sessionPermissions = []
+
+const conLog = ( m ) => {
+  // Print debug messages to the Console, if DEBUG_MODE is ACTIVE (TRUE).
+  if ( DEBUG_MODE ) {
+      console.log(m);
+    }
+  }
 
 const serialize = (obj) => {
   var str = [];
@@ -21,28 +45,26 @@ const getJSON = async ( rMethod , request, rParams='', dataObject = {}, sendSess
 
   return new Promise((resolve, reject) => {
 
-    // REMOVE THIS IN PRODUCTION VERSION
-    console.log('getJSON' + rMethod + ':' + request);
-    console.log(API_URL + request + rParams + ( sendSessionInfo && sessionExists ? ( rParams == '' ? '?' : '&' ) + 'session_id=' + sessionID + '&session_token=' + sessionToken : '' ));
+    conLog({ function: 'getJSON'});
+    conLog({ f: 'getJSON', method: rMethod, req: request, fullPath: API_URL + request + rParams + ( sendSessionInfo && sessionExists ? ( rParams == '' ? '?' : '&' ) + 'session_id=' + sessionID + '&session_token=' + sessionToken : '' ) });
+    
 
     if ( sendSessionInfo ) {  
       dataObject.session_id    = sessionID;
       dataObject.session_token = sessionToken;
       }
 
-    console.log('fetch data obj:');
-    console.log(dataObject);
+    conLog(Object.assign({f: 'getJSON', description: 'ajax-response-data-object'}, dataObject));
 
     const response = fetch( API_URL + request + rParams + ( sendSessionInfo && sessionExists ? ( rParams == '' ? '?' : '&' ) + 'session_id=' + sessionID + '&session_token=' + sessionToken : '' ), {
         method: "POST",
         body: serialize(dataObject),
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
       }).then( (r) => {
-        console.log('test 1234');
         resolve(r.json());
       });
     
-    console.log('testing');
+    conLog({ f: 'getJSON', finished: 'TRUE'});
     
     });
   
@@ -95,24 +117,74 @@ const sessionCheck = async () => {
   return response;
   }
 
-var href = window.location.href;
-var dir = href.substring(0, href.lastIndexOf('/')) + "/";
+conLog('[CHECK_SESSION] Checking session...');
 
-console.log(dir);
-console.log(dir);
-console.log(window.location.pathname);
+const redirectTo = (a) => {
 
-console.log('*** AUTO SESSION CHECK ***');
+  conLog('[REDIRECT_TO] `' + a + '`');
+  if ( DEBUG_MODE ) {
+    if ( AUTO_REDIRECT ) {
+      conLog('{REDIRECT_TO] We are redirecting YOU to `' + a + '`...');
+      conLog('{REDIRECT_TO] 1 second delay because of DEBUG_MODE');
+      setTimeout( () => {
+        window.location.href = BASE_ADDR + a;
+        }, 1000);
+      }else{
+      conLog('[REDIRECT_TO] Redirection cancelled, because AUTO_REDIRECT is set to FALSE');
+      }
+    }else{
+    window.location.href = BASE_ADDR + a;
+    }
+  
+
+  }
+
+const autoRedirectCheck = () => {
+
+  var href = window.location.href;
+  var dir = href.substring(0, href.lastIndexOf('/')) + "/";
+  const currentPathName = window.location.pathname;
+  const pathSplit = currentPathName.split('/');
+  conLog('[AUTO_REDIRECT_CHECK] You are currently viewing PAGE: `' + VIEW_PAGE+'`');
+  conLog('[AUTO_REDIRECT_CHECK] Are you logged in? ' + (sessionExists ? 'YES' : 'NO' ) + '.');
+
+  if ( sessionExists == 0 ) {
+  
+    if (VIEW_PAGE != 'login' && VIEW_PAGE != 'sign-up' && VIEW_PAGE != '' ) {
+        conLog('[AUTO_REDIRECT_CHECK] You SHOULD NOT be on THIS PAGE.');
+        redirectTo('');
+      }else{
+        conLog('[AUTO_REDIRECT_CHECK] This page is ALLOWED for You =)');
+      }
+
+  }else{
+
+    if (VIEW_PAGE != 'home')  {
+        conLog('[AUTO_REDIRECT_CHECK] You SHOULD NOT be on THIS PAGE.');
+        redirectTo('home/');
+      }else{
+        conLog('[AUTO_REDIRECT_CHECK] This page is ALLOWED for You =)');
+        appIsReady();
+      }
+  
+  }
+
+}
 
 if ( typeof cookieID != 'undefined' && typeof cookieToken != 'undefined' && cookieID != "" && cookieToken != "" ) {
-console.log('*** SessionCheck!' + cookieID);
+conLog('[CHECK_SESSION] Cookie found, calling backend to check is the session still valid...');
 sessionCheck().then( (r) => {
   if ( r.success ) {
+    conLog('[CHECK_SESSION] Response from BACKEND: Session is VALID.');
     sessionPermissions = r.permissions;
+    }else{
+    conLog('[CHECK_SESSION] Response from BACKEND: Not valid session.');
     }
+    autoRedirectCheck();
 });
   }else{
-  console.log('No Session :(');
+  conLog('[CHECK_SESSION] Cookie not found - or invalid. No session. Please Log In.');
+  autoRedirectCheck();
   }
 
 const confirmDialog = async ( text ) => {
