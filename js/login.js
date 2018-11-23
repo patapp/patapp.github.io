@@ -1,6 +1,17 @@
 'use strict';
 
+  /*-------------------------+---------------------------+
+  |   .----.  .--.  .---.    |  CREATED BY TEAM JJS      |
+  |   | {}  }/ {} \{_   _}   +---------------------------+
+  |   | .--'/  /\  \ | |     |  Joonas Kauppinen         |
+  |   `-'   `-'  `-' `-'     |  "Jamie" GeonHui Yoon     |
+  |   - a place for pets -   |  Samuli Virtanen          |
+  +--------------------------+--------------------------*/
+
+const VIEW_PAGE = 'login';
+
 const logIn = async (u,p) => {
+  conLog({function : 'logIn'});
   return new Promise((resolve, reject) => {
   const dataObject = {username: u, password: p};
   const j = getJSON('POST', 'session/login', '', dataObject, 0).then( (r) => {
@@ -8,9 +19,11 @@ const logIn = async (u,p) => {
       sessionExists = 1;
       sessionID = r.session_id;
       sessionToken = r.token;
+      conLog('[LOGIN] Success!');
       setCookie ( 'pat_session_id', sessionID, 60 );
       setCookie ( 'pat_session_token', sessionToken, 60 );
       }
+    conLog({f : 'logIn', 'finished' : 'TRUE', 'response' : 'FAILED'});
     resolve(r);
     });
   });
