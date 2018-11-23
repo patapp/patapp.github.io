@@ -28,8 +28,8 @@
 
 
 .tab-views__tab-home {
-  background-color: steelblue;
-  height: 300vh;
+  background-color: #FCF8F6;
+  padding-top: 1px;
 }
 .tab-views__tab-search {
   background-color: lightcoral;
@@ -40,3 +40,15 @@
   height: 400vh;
 }
 
+.load-trigger {
+  display: flex;
+  justify-content: center;
+}
+.load-trigger > span {
+  width: 20px;
+  height: 20px;
+  background-color: #D4B7A3;
+  border-radius: 50%;
+  margin: 16px;
+  
+}
