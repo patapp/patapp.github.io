@@ -91,14 +91,14 @@ body {
     border: none;
 }
 
-p {
+#title__text {
     font-family: 'Patrick Hand',serif;
     font-size: 28px;
     margin-top: 30px;
     color: var(--dark-brown-color);
 }
 
-p1 {
+#OR {
     width: 100%;
     overflow: hidden;
     text-align: center;
@@ -106,7 +106,7 @@ p1 {
     font-family: 'Dosis',serif;
 }
 
-p1:before, p1:after {
+#OR:before, #OR:after {
     content: "";
     display: inline-block;
     width: 41%;
@@ -115,7 +115,7 @@ p1:before, p1:after {
     border-bottom: 1px solid;
 }
 
-p1:after {
+#OR:after {
     margin: .5em -55% .5em .5em;
 }
 
@@ -124,7 +124,7 @@ span {
     vertical-align: middle;
 }
 
-p2 {
+#title__description {
     margin-top: .7em;
     display: block;
     font-family: 'Dosis',serif;
