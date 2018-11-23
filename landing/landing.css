@@ -32,10 +32,16 @@ body {
     color: var(--primary-red-color);
     font-family: 'Dosis',serif;
     font-size: 18px;
-    font-weight: 501;
+    font-weight: 600;
     letter-spacing: 1px;
     border: none;
 }
+
+#button__login:hover{
+    text-decoration: underline;
+    transition: all ease-in-out 2s;
+}
+
 
 #button__signup {
     background-color: var(--primary-red-color);
@@ -43,7 +49,7 @@ body {
     border: none;
     font-family: 'Dosis', serif;
     font-size: 18px;
-    font-weight: 501;
+    font-weight: 600;
     letter-spacing: 1px;
     border-radius: var(--input-border-radius-dimen);
     width: 6.5rem;
@@ -88,6 +94,7 @@ body {
 p {
     font-family: 'Patrick Hand',serif;
     font-size: 28px;
+    margin-top: 30px;
     color: var(--dark-brown-color);
 }
 
