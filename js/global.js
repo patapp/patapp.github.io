@@ -56,11 +56,16 @@ const getJSON = async ( rMethod , request, rParams='', dataObject = {}, sendSess
 
     conLog(Object.assign({f: 'getJSON', description: 'ajax-response-data-object'}, dataObject));
 
-    const response = fetch( API_URL + request + rParams + ( sendSessionInfo && sessionExists ? ( rParams == '' ? '?' : '&' ) + 'session_id=' + sessionID + '&session_token=' + sessionToken : '' ), {
-        method: "POST",
-        body: serialize(dataObject),
+    const dataParams = {
+        method: rMethod,
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
-      }).then( (r) => {
+      };
+    
+    if ( rMethod != "GET" ) {
+      dataParams.body = serialize(dataObject);
+      }
+
+    const response = fetch( API_URL + request + rParams + ( sendSessionInfo && sessionExists ? ( rParams == '' ? '?' : '&' ) + 'session_id=' + sessionID + '&session_token=' + sessionToken : '' ), dataParams).then( (r) => {
         resolve(r.json());
       });
     
@@ -71,6 +76,19 @@ const getJSON = async ( rMethod , request, rParams='', dataObject = {}, sendSess
   }
   
 const isSession = () => sessionExists;
+
+const isPermission = (p) => {
+  if ( isSession() ) {
+    if ( sessionPermissions.indexOf(p) == -1 ) {
+      return false;
+      }else{
+      return true;
+      }
+    }else{
+      conLog('[isPermission] WARNING!!! You should not call this function before session exists! ');
+      return false;
+    }
+  }
 
 const setCookie = (cname, cvalue, exdays) => {
   let d = new Date();
