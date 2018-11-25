@@ -73,32 +73,31 @@ const getJSON = async ( rMethod , request, rParams='', dataObject = {}, sendSess
 const isSession = () => sessionExists;
 
 const setCookie = (cname, cvalue, exdays) => {
-    let d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    let expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
+  let d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  let expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
 
 const getCookie = (cname) => {
-    let name = cname + "=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for(let i = 0; i <ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+      }
+  }
+  return "";
+  }
 
 // Session Check
 const cookieID    = getCookie ( 'pat_session_id' );
 const cookieToken = getCookie ( 'pat_session_token' );
-
 
 const sessionCheck = async () => {
   let response = '';
@@ -124,11 +123,11 @@ const redirectTo = (a) => {
   conLog('[REDIRECT_TO] `' + a + '`');
   if ( DEBUG_MODE ) {
     if ( AUTO_REDIRECT ) {
-      conLog('{REDIRECT_TO] We are redirecting YOU to `' + a + '`...');
-      conLog('{REDIRECT_TO] 1 second delay because of DEBUG_MODE');
+      conLog('[REDIRECT_TO] We are redirecting YOU to `' + a + '`...');
+      conLog('[REDIRECT_TO] 2 seconds delay because of DEBUG_MODE');
       setTimeout( () => {
         window.location.href = BASE_ADDR + a;
-        }, 1000);
+        }, 2000);
       }else{
       conLog('[REDIRECT_TO] Redirection cancelled, because AUTO_REDIRECT is set to FALSE');
       }
