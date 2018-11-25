@@ -11,19 +11,18 @@ self.addEventListener('install', (event) => {
     .then( (cache) => {
       cache.addAll([
         // TODO: add fonts to cache
-        '/',
-        '/index.html',
-        '/landing.css',
-        '/svg/pat_main_ic.svg',
-        '/js/pwa.js',
-        '/login/index.html',
-        '/login/styles.css',
-        '/sign-up/index.html',
-        '/sign-up/styles.css',
-        '/home/index.html',
-        '/home/css/nav-bars.css',
-        '/home/css/post-card.css',
-        '/home/css/tab-views.css'
+        'index.html',
+        'landing.css',
+        'svg/pat_main_ic.svg',
+        'js/pwa.js',
+        'login/index.html',
+        'login/styles.css',
+        'sign-up/index.html',
+        'sign-up/styles.css',
+        'home/index.html',
+        'home/css/nav-bars.css',
+        'home/css/post-card.css',
+        'home/css/tab-views.css'
       ]);
     })
   );
