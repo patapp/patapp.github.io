@@ -12,17 +12,17 @@ self.addEventListener('install', (event) => {
       cache.addAll([
         // TODO: add fonts to cache
         'index.html',
-        'landing.css',
-        'svg/pat_main_ic.svg',
-        'js/pwa.js',
+        'src/css/landing.css',
+        'src/svg/pat_main_ic.svg',
+        'src/js/pwa.js',
         'login/index.html',
-        'login/styles.css',
+        'src/css/styles_login.css',
         'sign-up/index.html',
-        'sign-up/styles.css',
+        'src/css/styles_signup.css',
         'home/index.html',
-        'home/css/nav-bars.css',
-        'home/css/post-card.css',
-        'home/css/tab-views.css'
+        'src/css/nav-bars.css',
+        'src/css/post-card.css',
+        'src/css/tab-views.css'
       ]);
     })
   );
