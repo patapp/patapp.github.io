@@ -37,12 +37,6 @@ body {
     border: none;
 }
 
-#button__login:hover{
-    text-decoration: underline;
-    transition: all ease-in-out 2s;
-}
-
-
 #button__signup {
     background-color: var(--primary-red-color);
     color: white;
@@ -84,7 +78,7 @@ body {
     font-size: 18px;
     letter-spacing: 1px;
     border-radius: var(--input-border-radius-dimen);
-    width: 100%;
+    width: 92%;
     padding: .9rem 0;
     margin-top: 5rem;
     margin-bottom: 2rem;
@@ -98,7 +92,7 @@ body {
     color: var(--dark-brown-color);
 }
 
-#OR {
+#title__separator {
     width: 100%;
     overflow: hidden;
     text-align: center;
@@ -106,7 +100,7 @@ body {
     font-family: 'Dosis',serif;
 }
 
-#OR:before, #OR:after {
+#title__separator:before, #title__separator:after {
     content: "";
     display: inline-block;
     width: 41%;
@@ -115,7 +109,7 @@ body {
     border-bottom: 1px solid;
 }
 
-#OR:after {
+#title__separator:after {
     margin: .5em -55% .5em .5em;
 }
 

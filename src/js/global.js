@@ -1,15 +1,15 @@
-'use strict';
+"use strict";
 
-  /*-------------------------+---------------------------+
+  /* ------------------------+---------------------------+
   |   .----.  .--.  .---.    |  CREATED BY TEAM JJS      |
   |   | {}  }/ {} \{_   _}   +---------------------------+
   |   | .--'/  /\  \ | |     |  Joonas Kauppinen         |
   |   `-'   `-'  `-' `-'     |  "Jamie" GeonHui Yoon     |
   |   - a place for pets -   |  Samuli Virtanen          |
-  +--------------------------+--------------------------*/
+  +--------------------------+------------------------- */
 
 //const API_URL = 'http://127.0.0.1:3114/';   // local
-const API_URL = 'http://82.181.20.24:3114/';   // public-server
+const API_URL = 'https://tucloud.fi/pat/';   // public-server
 
 const BASE_ADDR = '/pat-project-frontend/'; // if in root folder, set this to '/'
 
@@ -56,11 +56,16 @@ const getJSON = async ( rMethod , request, rParams='', dataObject = {}, sendSess
 
     conLog(Object.assign({f: 'getJSON', description: 'ajax-response-data-object'}, dataObject));
 
-    const response = fetch( API_URL + request + rParams + ( sendSessionInfo && sessionExists ? ( rParams == '' ? '?' : '&' ) + 'session_id=' + sessionID + '&session_token=' + sessionToken : '' ), {
-        method: "POST",
-        body: serialize(dataObject),
+    const dataParams = {
+        method: rMethod,
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
-      }).then( (r) => {
+      };
+    
+    if ( rMethod != "GET" ) {
+      dataParams.body = serialize(dataObject);
+      }
+
+    const response = fetch( API_URL + request + rParams + ( sendSessionInfo && sessionExists ? ( rParams == '' ? '?' : '&' ) + 'session_id=' + sessionID + '&session_token=' + sessionToken : '' ), dataParams).then( (r) => {
         resolve(r.json());
       });
     
@@ -72,33 +77,45 @@ const getJSON = async ( rMethod , request, rParams='', dataObject = {}, sendSess
   
 const isSession = () => sessionExists;
 
+const isPermission = (p) => {
+  if ( isSession() ) {
+    if ( sessionPermissions.indexOf(p) == -1 ) {
+      return false;
+      }else{
+      return true;
+      }
+    }else{
+      conLog('[isPermission] WARNING!!! You should not call this function before session exists! ');
+      return false;
+    }
+  }
+
 const setCookie = (cname, cvalue, exdays) => {
-    let d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    let expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
+  let d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  let expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
 
 const getCookie = (cname) => {
-    let name = cname + "=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for(let i = 0; i <ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+      }
+  }
+  return "";
+  }
 
 // Session Check
 const cookieID    = getCookie ( 'pat_session_id' );
 const cookieToken = getCookie ( 'pat_session_token' );
-
 
 const sessionCheck = async () => {
   let response = '';
@@ -124,11 +141,11 @@ const redirectTo = (a) => {
   conLog('[REDIRECT_TO] `' + a + '`');
   if ( DEBUG_MODE ) {
     if ( AUTO_REDIRECT ) {
-      conLog('{REDIRECT_TO] We are redirecting YOU to `' + a + '`...');
-      conLog('{REDIRECT_TO] 1 second delay because of DEBUG_MODE');
+      conLog('[REDIRECT_TO] We are redirecting YOU to `' + a + '`...');
+      conLog('[REDIRECT_TO] 2 seconds delay because of DEBUG_MODE');
       setTimeout( () => {
         window.location.href = BASE_ADDR + a;
-        }, 1000);
+        }, 2000);
       }else{
       conLog('[REDIRECT_TO] Redirection cancelled, because AUTO_REDIRECT is set to FALSE');
       }
