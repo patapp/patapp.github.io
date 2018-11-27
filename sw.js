@@ -17,25 +17,25 @@ self.addEventListener('install', (event) => {
         './src/js/landing.js',
         './src/js/*',
         // welcome page
-        'index.html',
-        'src/css/landing.css',
-        'src/svg/pat_main_ic.svg',
+        './index.html',
+        './src/css/landing.css',
+        './src/svg/pat_main_ic.svg',
         // login page
-        'src/js/login.js',
-        'login/index.html',
-        'src/css/styles__login.css',
+        './src/js/login.js',
+        './login/index.html',
+        './src/css/styles__login.css',
         // sign up page
-        'sign-up/index.html',
-        'src/js/sign-up.js',
-        'src/css/styles_signup.css',
+        './sign-up/index.html',
+        './src/js/sign-up.js',
+        './src/css/styles_signup.css',
         // home page
-        'home/index.html',
-        'src/css/nav-bars.css',
-        'src/css/post-card.css',
-        'src/css/tab-views.css',
-        'src/js/home.js',
-        'src/js/trending-feed-controller.js',
-        'src/js/nav_controller.js'
+        './home/index.html',
+        './src/css/nav-bars.css',
+        './src/css/post-card.css',
+        './src/css/tab-views.css',
+        './src/js/home.js',
+        './src/js/trending-feed-controller.js',
+        './src/js/nav_controller.js'
       ]);
     })
   );
