@@ -8,8 +8,6 @@
   |   - a place for pets -   |  Samuli Virtanen          |
   +--------------------------+--------------------------*/
 
-const VIEW_PAGE = 'home';
-
 /* This function is called only, if the session exists and user is logged in. */
 const appIsReady = () => {
 

@@ -8,8 +8,6 @@
   |   - a place for pets -   |  Samuli Virtanen          |
   +--------------------------+--------------------------*/
 
-const VIEW_PAGE = '';
-
 const btnLogin   = document.getElementById('button__login');
 const btnSignup  = document.getElementById('button__signup');
 const btnSignup2 = document.getElementById('title__signup');

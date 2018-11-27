@@ -8,4 +8,3 @@
   |   - a place for pets -   |  Samuli Virtanen          |
   +--------------------------+--------------------------*/
   
-const VIEW_PAGE = 'sign-up';

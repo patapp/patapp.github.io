@@ -8,8 +8,6 @@
   |   - a place for pets -   |  Samuli Virtanen          |
   +--------------------------+--------------------------*/
 
-const VIEW_PAGE = 'login';
-
 const logIn = async (u,p) => {
   conLog({function : 'logIn'});
   return new Promise((resolve, reject) => {
