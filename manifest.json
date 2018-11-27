@@ -2,7 +2,7 @@
   "name": "PAT. A place for pets",
   "short_name": "PAT.",
   "start_url": ".",
-  "display": "standalone",
+  "display": "fullscreen",
   "orientation": "portrait",
   "background_color": "#fff",
   "theme_color": "#fff",
