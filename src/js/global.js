@@ -11,7 +11,7 @@
 //const API_URL = 'http://127.0.0.1:3114/';   // local
 const API_URL = 'https://tucloud.fi/pat/';   // public-server
 
-const BASE_ADDR = '/pat-project-frontend/'; // if in root folder, set this to '/'
+const BASE_ADDR = '/'; // if in root folder, set this to '/'
 
 // Display all the debug messages in the console
 const DEBUG_MODE = true;
