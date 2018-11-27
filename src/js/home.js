@@ -78,3 +78,12 @@ btnLogOut.addEventListener('click', (e) => {
       }
   });
 });
+
+
+window.addEventListener('scroll', () => {
+    if (isVisibleOnScreen(loadTrigger)) {
+        appendPosts(5);
+    }
+});
+
+appendPosts(5);

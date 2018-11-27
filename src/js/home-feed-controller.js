@@ -114,11 +114,3 @@ const isVisibleOnScreen = (element) => {
         return false;
     }
 };
-
-window.addEventListener('scroll', () => {
-    if (isVisibleOnScreen(loadTrigger)) {
-        appendPosts(5);
-    }
-});
-
-appendPosts(5);
