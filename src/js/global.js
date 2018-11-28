@@ -18,7 +18,7 @@ const DEBUG_MODE = true;
 
 /* Redirect automatically from wrong page to right page if SESSION state is wrong. 
 Plase note: Does not make effect if DEBUG_MODE = false */
-const AUTO_REDIRECT = false;
+const AUTO_REDIRECT = true;
 
 let sessionExists = false;
 let sessionID = '';
