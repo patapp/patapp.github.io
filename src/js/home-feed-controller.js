@@ -107,7 +107,7 @@ const appendPosts = (amount) => {
 
 const isVisibleOnScreen = (element) => {
     const bounding = element.getBoundingClientRect();
-    if (bounding.bottom < window.innerHeight) {
+    if (bounding.bottom <= window.innerHeight) {
         conLog('Home feed trigger in viewport');
         return true;
     } else {
