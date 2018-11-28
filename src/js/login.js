@@ -13,8 +13,8 @@ const logIn = async (u,p) => {
   return new Promise((resolve, reject) => {
   const dataObject = {username: u, password: p};
   const j = getJSON('POST', 'session/login', '', dataObject, 0).then( (r) => {
-    if ( r.success == 1 ) {
-      sessionExists = 1;
+    if ( r.success ) {
+      sessionExists = true;
       sessionID = r.session_id;
       sessionToken = r.token;
       conLog('[LOGIN] Success!');

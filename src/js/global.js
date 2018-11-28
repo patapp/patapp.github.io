@@ -20,7 +20,7 @@ const DEBUG_MODE = true;
 Plase note: Does not make effect if DEBUG_MODE = false */
 const AUTO_REDIRECT = true;
 
-let sessionExists = 0;
+let sessionExists = false;
 let sessionID = '';
 let sessionToken = '';
 let sessionPermissions = []
@@ -121,8 +121,8 @@ const sessionCheck = async () => {
   let response = '';
   // We need to pass the session id + token manually, because at this point session does not exists yet.
   const j = await getJSON('POST', 'session/check', '', {session_id : cookieID, session_token : cookieToken}, 0).then( (r) => {
-    if ( r.success == 1 && r.session_exists == 1) {
-      sessionExists = 1;
+    if ( r.success && r.session_exists ) {
+      sessionExists = true;
       sessionID = cookieID;
       sessionToken = cookieToken;
       }else{
