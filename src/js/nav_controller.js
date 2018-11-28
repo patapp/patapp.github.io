@@ -1,9 +1,14 @@
 'use strict';
 
 const menu = document.getElementById('menu');
-const bottomNav = document.querySelector('.bottom-nav-bar');
 const radioButtons = document.querySelectorAll('input[type="radio"] ~ label');
+
+const tabsWrapper = document.querySelector('.tab-views');
+const newPostView = document.querySelector('.new-post-form-wrapper');
 const newPostButton = document.getElementById('new-post');
+const newPostCancelButton = document.getElementById('new-post-cancel');
+
+const bottomNav = document.querySelector('.bottom-nav-bar');
 
 const tabElements = document.querySelectorAll('.tab');
 
@@ -50,6 +55,17 @@ document.getElementById('search-btn')
 document.getElementById('profile-btn')
 .addEventListener('change', ()=> {
   changeToTab(PROFILE);
+});
+
+newPostButton.addEventListener('click', () => {
+  tabsWrapper.classList.toggle('hidden');
+  newPostView.classList.toggle('new-post-hidden');
+  bottomNav.classList.toggle('bottom-nav-hidden');
+});
+newPostCancelButton.addEventListener('click', () => {
+  tabsWrapper.classList.toggle('hidden');
+  newPostView.classList.toggle('new-post-hidden');
+  bottomNav.classList.toggle('bottom-nav-hidden');
 });
 
 menu.addEventListener('change', ()=> {
