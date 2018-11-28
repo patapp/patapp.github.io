@@ -40,10 +40,18 @@
   margin: auto;
 }
 
+.media-preview {
+  width: 100%;
+  height: 100%;
+  max-height: 450px;
+  object-fit: cover;
+}
+
 
 .new-post-form__tags-label {
   width: 100%;
-  margin: 16px 0;
+  margin-top: 16px;
+  margin-bottom: 8px;
 }
 .new-post-form__tags-label > span {
   color: #7F6B5E;
@@ -68,7 +76,8 @@
 
 .new-post-form__desc-label {
   width: 100%;
-  margin: 16px 0;
+  margin-top: 16px;
+  margin-bottom: 8px;
 }
 .new-post-form__desc-label > span {
   color: #7F6B5E;

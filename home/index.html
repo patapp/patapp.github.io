@@ -24,7 +24,7 @@
 		<link rel="manifest" href="../manifest.json">
 		
 		<link rel="icon" href="../src/icons/pat_tab_icon_32x32.png">
-    
+		
 		<title>PAT. - Home</title>
 	</head>
 	<body>
@@ -70,73 +70,75 @@
 		
 		<!-- New post view -->
 		<div class="new-post-form-wrapper new-post-hidden">
-
+			
 			<form id="new-post-form" class="new-post-form"
-			  novalidate action="" method="POST" enctype="multipart/form-data">
-			  
-			  <input id="media" name="media" type="file" accept="image/*, video/*">
-			  <label class="new-post-form__add-media" for="media"><span class="bold-dosis">+ ADD MEDIA</span></label>
-		  
-			  <label class="new-post-form__tags-label"><span class="bold-dosis new-post-title">TAGS</span></label>
-			  <div class="input-field new-post-form__tags-input">
-				  <input type="text" placeholder="+ add tag">
-			  </div>
-		  
-			  <label class="new-post-form__desc-label"><span class="bold-dosis new-post-title">DESCRIPTION</span></label>
-			  <textarea class="new-post-form__desc-input input-field" rows="1" placeholder="Type something..."></textarea>
-		  
-			  <input class="btn btn-primary" type="submit" value="POST">
-			  <button type="button" id="new-post-cancel" class="btn btn-secondary">CANCEL</button>
-		  
-			</form>
+			novalidate action="" method="POST" enctype="multipart/form-data">
+			
+			<input id="media" name="media" type="file" accept="image/*, video/*">
+			<label class="new-post-form__add-media" for="media">
+				<span class="bold-dosis">+ ADD MEDIA</span>
+			</label>
+			
+			<label class="new-post-form__tags-label"><span class="bold-dosis new-post-title">TAGS</span></label>
+			<div class="input-field new-post-form__tags-input">
+				<input type="text" placeholder="+ add tag">
+			</div>
+			
+			<label class="new-post-form__desc-label"><span class="bold-dosis new-post-title">DESCRIPTION</span></label>
+			<textarea class="new-post-form__desc-input input-field" rows="1" placeholder="Type something..."></textarea>
+			
+			<input class="btn btn-primary" type="submit" value="POST">
+			<button type="button" id="new-post-cancel" class="btn btn-secondary">CANCEL</button>
+			
+		</form>
 		
-		</div> 
-
-		<!-- Bottom navigation bar -->
-		<nav class="bottom-nav-bar">
+	</div> 
+	
+	<!-- Bottom navigation bar -->
+	<nav class="bottom-nav-bar">
+		
+		<ul class="bottom-nav-buttons">
+			<li>
+				<input id="menu" class="menu-btn" type="checkbox">
+				<label for="menu" class="bottom-nav-buttons__burger"><span></span></label>
+			</li>
 			
-			<ul class="bottom-nav-buttons">
-				<li>
-					<input id="menu" class="menu-btn" type="checkbox">
-					<label for="menu" class="bottom-nav-buttons__burger"><span></span></label>
-				</li>
-				
-				<li>
-					<input checked name="bottom-nav" id="home-btn" class="nav-btn" type="radio">
-					<label class="btn-visible" for="home-btn"><img src="../src/svg/home_ic.svg"></label>
-				</li>
-				
-				<li>
-					<button id="new-post" class="btn-visible"><img src="../src/svg/new_ic.svg"></button>
-				</li>
-				
-				<li>
-					<input name="bottom-nav" id="search-btn" class="nav-btn" type="radio">
-					<label class="btn-visible" for="search-btn"><img src="../src/svg/search_ic.svg"></label>
-				</li>
-				
-				<li>
-					<input name="bottom-nav" id="profile-btn" class="nav-btn" type="radio">
-					<label class="btn-visible" for="profile-btn"><img src="../src/svg/profile_ic.svg"></label>
-				</li>
-			</ul>
+			<li>
+				<input checked name="bottom-nav" id="home-btn" class="nav-btn" type="radio">
+				<label class="btn-visible" for="home-btn"><img src="../src/svg/home_ic.svg"></label>
+			</li>
 			
-			<ul class="bottom-nav-menu">
-				<li id="btnLogOut"><a href="#">LOG OUT</a></li>
-				<li id="btnManageAccount"><a href="#">MANAGE ACCOUNT</a></li>
-				
-			</ul>
+			<li>
+				<button id="new-post" class="btn-visible"><img src="../src/svg/new_ic.svg"></button>
+			</li>
 			
-    </nav>
-    
-    <script src="../pwa.js"></script>
-    <script> const VIEW_PAGE = 'home'; </script>
-    <script src="../src/js/home-first.js"></script>
-    <script src="../src/js/global.js"></script>
-    <script src="../src/js/nav_controller.js"></script>
-    <script src="../src/js/home-feed-controller.js"></script>
-    <script src="../src/js/home.js"></script>
-    
-  </body>
-  </html>
-  
+			<li>
+				<input name="bottom-nav" id="search-btn" class="nav-btn" type="radio">
+				<label class="btn-visible" for="search-btn"><img src="../src/svg/search_ic.svg"></label>
+			</li>
+			
+			<li>
+				<input name="bottom-nav" id="profile-btn" class="nav-btn" type="radio">
+				<label class="btn-visible" for="profile-btn"><img src="../src/svg/profile_ic.svg"></label>
+			</li>
+		</ul>
+		
+		<ul class="bottom-nav-menu">
+			<li id="btnLogOut"><a href="#">LOG OUT</a></li>
+			<li id="btnManageAccount"><a href="#">MANAGE ACCOUNT</a></li>
+			
+		</ul>
+		
+	</nav>
+	
+	<script src="../pwa.js"></script>
+	<script> const VIEW_PAGE = 'home'; </script>
+	<script src="../src/js/home-first.js"></script>
+	<script src="../src/js/global.js"></script>
+	<script src="../src/js/nav_controller.js"></script>
+	<script src="../src/js/home-feed-controller.js"></script>
+	<script src="../src/js/new-post-controller.js"></script>
+	<script src="../src/js/home.js"></script>
+	
+</body>
+</html>
