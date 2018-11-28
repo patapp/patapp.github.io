@@ -23,13 +23,21 @@
 }
 
 .tab-views {
-  margin-top: 50px;
+  height: calc(100vh - 101px);
+  overflow: scroll;
+  background-color: #FCF8F6;
+}
+.tab-views::after {
+  content: '';
+  width: 100vw;
+  height: 100px;
+  background-color: red;
 }
 
 
 .tab-views__tab-home {
-  background-color: #FCF8F6;
-  padding-top: 1px;
+  /* background-color: #FCF8F6;
+  padding-top: 1px; */
 }
 .tab-views__tab-search {
   background-color: lightcoral;
