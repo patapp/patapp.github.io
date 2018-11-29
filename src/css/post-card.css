@@ -158,7 +158,7 @@ div:empty::after {
 }
 .post-info__timestamp > span {
     background-color: #E5CAB5;
-    width: 75%;
+    width: 73%;
     height: 2.5px;
     border-radius: 5px;
 }
