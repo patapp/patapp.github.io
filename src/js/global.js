@@ -1,12 +1,15 @@
 "use strict";
 
-  /* ------------------------+---------------------------+
-  |   .----.  .--.  .---.    |  CREATED BY TEAM JJS      |
-  |   | {}  }/ {} \{_   _}   +---------------------------+
-  |   | .--'/  /\  \ | |     |  Joonas Kauppinen         |
-  |   `-'   `-'  `-' `-'     |  "Jamie" GeonHui Yoon     |
-  |   - a place for pets -   |  Samuli Virtanen          |
-  +--------------------------+------------------------- */
+  /* ------------------------+-------------------------------+
+  |   .----.  .--.  .---.    |  CREATED BY TEAM JJS          |
+  |   | {}  }/ {} \{_   _}   +-------------------------------+
+  |   | .--'/  /\  \ | |     |  Joonas Kauppinen             |
+  |   `-'   `-'  `-' `-'     |  "Jamie" GeonHui Yoon         |
+  |   - a place for pets -   |  Samuli Virtanen              |
+  +--------------------------+-------------------------------+
+  | https://github.com/joonasmkauppinen/pat-project-backend  |
+  | https://github.com/joonasmkauppinen/pat-project-frontend |
+  +-------------------------------------------------------- */
 
 //const API_URL = 'http://127.0.0.1:3114/';   // local
 const API_URL = 'https://tucloud.fi/pat/';   // public-server
