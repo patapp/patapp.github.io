@@ -65,22 +65,28 @@ div:empty::after {
 
 .post-media img {
     max-width: 100%;
+    margin-bottom: -4px;
 }
 .post-media video {
     max-width: 100%;
+    margin-bottom: -4px;
 }  
 
 .post-info__tags {
     display: flex;
+    justify-content: center;
+    margin: 16px;
 }
 .post-info__tags > li {
     list-style: none;
     text-decoration: underline;
     color: var(--color-brown);
     background-color: var(--color-beige-light);
-    border-radius: 4px;
-    padding: 3px 5px;
-    margin: 5px;
+    border-radius: 6px;
+    padding: 6px 10px;
+    margin: 4px;
+    font-family: 'Roboto', serif;
+    font-weight: 500;
 }
 .post-info__tags:empty::after {
     height: 16px;
@@ -103,7 +109,7 @@ div:empty::after {
 .post-info__tags .post-pet__item{
     background: #face00;
 }
-.post-info__description {
+.post-info__description > p {
     margin: 0 16px;
     color: var(--color-post-description-text);
     font-size: 17px;
@@ -122,6 +128,9 @@ div:empty::after {
 }
 .post-info__comments {
     margin: 16px;
+    font-family: 'Roboto', serif;
+    font-size: 17px;
+    font-weight: 400;
 }
 .post-info__comments:empty::after {
     width: 200px;
@@ -138,6 +147,7 @@ div:empty::after {
     font-family: 'Roboto', serif;
     font-weight: 500;
     font-size: 13px;
+    margin-right: 16px;
 }
 .post-info__timestamp > p:empty {
     width: 50px;
@@ -148,8 +158,8 @@ div:empty::after {
 }
 .post-info__timestamp > span {
     background-color: #E5CAB5;
-    width: 100%;
-    height: 3px;
+    width: 75%;
+    height: 2.5px;
     border-radius: 5px;
 }
 

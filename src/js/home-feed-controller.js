@@ -97,7 +97,7 @@ const renderPosts = (from, to) => {
       if ( res.post_data[postsDataArray[p]].media_type == 'i' ) { // Image
           postmedia.innerHTML = '<img src="'+API_URL+res.post_data[postsDataArray[p]].url+'">';
         }else if ( res.post_data[postsDataArray[p]].media_type == 'v' ) { // Video
-          postmedia.innerHTML = '<video controls><source src="'+API_URL+res.post_data[postsDataArray[p]].url+'"></source></video>';
+          postmedia.innerHTML = '<video muted loop controls><source src="'+API_URL+res.post_data[postsDataArray[p]].url+'"></source></video>';
         }
       if ( res.post_data[postsDataArray[p]].comments == 0 ) {
           comments.innerHTML = '0 comments';
