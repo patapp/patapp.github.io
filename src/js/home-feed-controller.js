@@ -24,7 +24,7 @@ const postElement = `
     <!-- TODO: add rating graphic -->
 
     <div class="post-info">
-        <div class="post-info__tags"></div>
+        <ul class="post-info__tags"></ul>
         <div class="post-info__description"></div>
         <div class="post-info__comments"></div>
                 
@@ -53,34 +53,51 @@ const renderPosts = (from, to) => {
     }
   getJSON('POST','posts/getcontent', '', {items: renderItems.join('-')} ).then( (res) => {
     for(let p=from;p<=to;p++){
-      const description = document.querySelector("#post-"+p+" .post-info__description");
-      const username    = document.querySelector("#post-"+p+" .post-header__username");
-      const timestamp   = document.querySelector("#post-"+p+" .post-info__timestamp");
       const userpic     = document.querySelector("#post-"+p+" .post-header__picture");
+      const username    = document.querySelector("#post-"+p+" .post-header__username");
       const postmedia   = document.querySelector("#post-"+p+" .post-media");
       const tags        = document.querySelector("#post-"+p+" .post-info__tags");
+      const description = document.querySelector("#post-"+p+" .post-info__description");
       const comments    = document.querySelector("#post-"+p+" .post-info__comments");
+      const timestamp   = document.querySelector("#post-"+p+" .post-info__timestamp > p");
       
       console.log(res.post_data[postsDataArray[p]]);
       
-      description.textContent = res.post_data[postsDataArray[p]].post;
-      username.textContent    = res.post_data[postsDataArray[p]].addedby_user;
-      timestamp.textContent   = res.post_data[postsDataArray[p]].added_ago;
       userpic.innerHTML = '<img height="45" width="45" src="'+API_URL+res.post_data[postsDataArray[p]].user_pic+'">';
-      if ( res.post_data[postsDataArray[p]].pets.length > 0 ) {
-        for (let i=0; i<res.post_data[postsDataArray[p]].pets.length; i++){
-          tags.innerHTML += '<span class="post-pet__item">'+res.post_data[postsDataArray[p]].pets[i]+'</span>';
-          }
-        }
+      
+      //username.textContent    = res.post_data[postsDataArray[p]].addedby_user;
+      username.appendChild(
+        document.createElement('p').innerHTML = res.post_data[postsDataArray[p]].addedby_user
+      );
+      
+      //description.textContent = res.post_data[postsDataArray[p]].post;
+      description.appendChild(
+        document.createElement('p').innerHTML = res.post_data[postsDataArray[p]].post
+      );
+      
+      timestamp.innerHTML = res.post_data[postsDataArray[p]].added_ago;
+
+      // -------------- PET TAGS DISABLED FOR NOW ----------------
+      // if ( res.post_data[postsDataArray[p]].pets.length > 0 ) {
+      //   for (let i=0; i<res.post_data[postsDataArray[p]].pets.length; i++){
+      //     tags.innerHTML += '<span class="post-pet__item">'+res.post_data[postsDataArray[p]].pets[i]+'</span>';
+      //     }
+      //   }
+
+      // ----------------------- REGULAR TAGS -----------------------
       if ( res.post_data[postsDataArray[p]].tags.length > 0 ) {
         for (let i=0; i<res.post_data[postsDataArray[p]].tags.length; i++){
-          tags.innerHTML += '<span class="post-tag__item">'+res.post_data[postsDataArray[p]].tags[i]+'</span>';
-          }
+          //tags.innerHTML += '<span class="post-tag__item">'+res.post_data[postsDataArray[p]].tags[i]+'</span>';
+          tags.appendChild(
+            document.createElement('li').innerHTML = res.post_data[postsDataArray[p]].tags[i]
+          );
         }
+      }
+
       if ( res.post_data[postsDataArray[p]].media_type == 'i' ) { // Image
           postmedia.innerHTML = '<img src="'+API_URL+res.post_data[postsDataArray[p]].url+'">';
         }else if ( res.post_data[postsDataArray[p]].media_type == 'v' ) { // Video
-          postmedia.innerHTML = '<video><source src="'+API_URL+res.post_data[postsDataArray[p]].url+'"></source></video>';
+          postmedia.innerHTML = '<video controls><source src="'+API_URL+res.post_data[postsDataArray[p]].url+'"></source></video>';
         }
       if ( res.post_data[postsDataArray[p]].comments == 0 ) {
           comments.innerHTML = '0 comments';
