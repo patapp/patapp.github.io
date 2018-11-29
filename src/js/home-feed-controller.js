@@ -58,18 +58,38 @@ const renderPosts = (from, to) => {
       const timestamp   = document.querySelector("#post-"+p+" .post-info__timestamp");
       const userpic     = document.querySelector("#post-"+p+" .post-header__picture");
       const postmedia   = document.querySelector("#post-"+p+" .post-media");
+      const tags        = document.querySelector("#post-"+p+" .post-info__tags");
+      const comments    = document.querySelector("#post-"+p+" .post-info__comments");
+      
+      console.log(res.post_data[postsDataArray[p]]);
       
       description.textContent = res.post_data[postsDataArray[p]].post;
       username.textContent    = res.post_data[postsDataArray[p]].addedby_user;
       timestamp.textContent   = res.post_data[postsDataArray[p]].added_ago;
       userpic.innerHTML = '<img height="45" width="45" src="'+API_URL+res.post_data[postsDataArray[p]].user_pic+'">';
-      
-      if ( res.post_data[postsDataArray[p]].media_type == 'i' ) { // Image
-        postmedia.innerHTML = '<img src="'+API_URL+res.post_data[postsDataArray[p]].url+'">';
-        }else if ( res.post_data[postsDataArray[p]].media_type == 'v' ) { // Video
-        postmedia.innerHTML = '<video><source src="'+API_URL+res.post_data[postsDataArray[p]].url+'"></source></video>';
+      if ( res.post_data[postsDataArray[p]].pets.length > 0 ) {
+        for (let i=0; i<res.post_data[postsDataArray[p]].pets.length; i++){
+          tags.innerHTML += '<span class="post-pet__item">'+res.post_data[postsDataArray[p]].pets[i]+'</span>';
+          }
         }
-      
+      if ( res.post_data[postsDataArray[p]].tags.length > 0 ) {
+        for (let i=0; i<res.post_data[postsDataArray[p]].tags.length; i++){
+          tags.innerHTML += '<span class="post-tag__item">'+res.post_data[postsDataArray[p]].tags[i]+'</span>';
+          }
+        }
+      if ( res.post_data[postsDataArray[p]].media_type == 'i' ) { // Image
+          postmedia.innerHTML = '<img src="'+API_URL+res.post_data[postsDataArray[p]].url+'">';
+        }else if ( res.post_data[postsDataArray[p]].media_type == 'v' ) { // Video
+          postmedia.innerHTML = '<video><source src="'+API_URL+res.post_data[postsDataArray[p]].url+'"></source></video>';
+        }
+      if ( res.post_data[postsDataArray[p]].comments == 0 ) {
+          comments.innerHTML = '0 comments';
+        }else{
+          comments.innerHTML = res.post_data[postsDataArray[p]].comments+' comments';
+          comments.innerHTML += ', latest: '+res.post_data[postsDataArray[p]].latest_comment.comment;
+          comments.innerHTML += ', sender: '+res.post_data[postsDataArray[p]].latest_comment.sender;
+          comments.innerHTML += ', at: '+res.post_data[postsDataArray[p]].latest_comment.added_ago;
+        }
       }
     });
   }

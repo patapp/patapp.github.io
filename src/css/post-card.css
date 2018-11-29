@@ -28,9 +28,12 @@ div:empty::after {
     display: flex;
     align-items: center;
 }
-
 .post-header__picture {
     margin: 0 16px 0 8px;
+    border-radius: 50%;
+    height:45px;
+    width:45px;
+    overflow:hidden;
 }
 .post-header__picture:empty::after {
     height: 45px;
@@ -44,15 +47,40 @@ div:empty::after {
 
 .post-media {
     width: 100%;
+    background: #eee;
 }
+
 .post-media:empty::after {
     height: 300px;
 }
+
+.post-media img {
+  max-width: 100%;
+  }
+.post-media video {
+  max-width: 100%;
+  }  
 
 .post-info__tags:empty::after {
     height: 16px;
     width: 290px;
     margin: 16px auto;
+}
+
+.post-info__tags .post-tag__item,
+.post-info__tags .post-pet__item {
+    border-radius:2px;
+    margin-right:4px;
+    margin-bottom: 4px;
+    padding: 1px 4px 1px 4px;
+    float:left;
+}
+.post-info__tags .post-tag__item{
+    background: #6184ea;
+    color:#fff;
+}
+.post-info__tags .post-pet__item{
+    background: #face00;
 }
 .post-info__description {
     margin: 0 16px;
@@ -93,6 +121,8 @@ div:empty::after {
     height: 3px;
     border-radius: 5px;
 }
+
+
 
 @keyframes loading {
     from {opacity: 1;}

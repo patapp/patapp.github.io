@@ -4,6 +4,10 @@
   opacity: 0;
   width: 100vw;
   transition: opacity 130ms ease-in-out;
+  height: calc(100vh - 101px); /* ADDED BY Samppa 2018-11-29 17:50 */
+  overflow:auto;
+  overflow-x:hidden;
+  overflow-y:auto;
 }
 .visible {
   opacity: 1;
@@ -24,7 +28,8 @@
 
 .tab-views {
   height: calc(100vh - 101px);
-  overflow: scroll;
+  // overflow: scroll;  /* REMOVED BY Samppa 2018-11-29 17:50 */
+  overflow: hidden; /* ADDED BY Samppa 2018-11-29 17:50 */
   background-color: var(--color-background);
 }
 .hidden {
