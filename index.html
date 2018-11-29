@@ -24,7 +24,7 @@
     <link rel="stylesheet" type="text/css" href="./src/css/landing.css">
     <link rel="stylesheet" type="text/css" href="./src/css/pat-global.css">
     <link rel="manifest" href="manifest.json">
-
+    <link rel="stylesheet" type="text/css" href="./src/css/post-card.css">
     <link rel="icon" href="src/icons/pat_tab_icon_32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="src/icons/iphone_pat_icon_180x180.png">
 
@@ -58,13 +58,18 @@
     </section>
       
     <section id="trending">
-        <ul id="content"></ul>
+        <ul id="home-feed"></ul>
+
+        <div id="load-trigger" class="load-trigger">
+					<span></span>
+        </div>
     </section>
     
     <script src="pwa.js"></script>
     <script> const VIEW_PAGE = ''; </script>
     <script src="./src/js/global.js"></script>
     <script src="./src/js/landing.js"></script>
+    <script src="./trending-feed-controller.js"></script>
     
   </body>
   
