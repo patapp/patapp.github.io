@@ -21,6 +21,7 @@
 		<link href="../src/css/main.css" rel="stylesheet" type="text/css">
 		<link href="../src/css/nav-bars.css" rel="stylesheet" type="text/css">
 		<link href="../src/css/tab-views.css" rel="stylesheet" type="text/css">
+		<link href="../src/css/search-tab.css" rel="stylesheet" type="text/css">
 		<link href="../src/css/pat-global.css" rel="stylesheet" type="text/css">
 		<link href="../src/css/post-card.css" rel="stylesheet" type="text/css">
 		<link href="../src/css/new-post.css" rel="stylesheet" type="text/css">
@@ -55,11 +56,19 @@
 			
 			<!-- Search/trending tab -->
 			<div id="search-tab" class="tab-views__tab-search tab">
-				<h1>Search</h1>
-				<button onclick="alert('hello search')">Click Me!</button>
-				<p>Glossier air plant blue bottle seitan snackwave put a bird on it chicharrones meh pork belly austin af. Hell of neutra live-edge pinterest typewriter chia knausgaard bitters etsy direct trade marfa iceland edison bulb. Twee franzen lo-fi tacos farm-to-table mustache drinking vinegar scenester. Pour-over edison bulb aesthetic authentic umami kombucha. Cray portland coloring book heirloom twee. Banjo vegan direct trade, butcher whatever disrupt tattooed selfies pork belly. Actually williamsburg butcher yuccie cray master cleanse hashtag hoodie, unicorn polaroid vegan four loko.</p>
-				<p>Disrupt bicycle rights live-edge ethical mixtape palo santo 3 wolf moon schlitz. Waistcoat vice franzen polaroid tacos viral. Cliche ramps echo park selvage. Food truck messenger bag skateboard seitan, fingerstache salvia vexillologist VHS ethical shoreditch tacos intelligentsia helvetica. Forage venmo disrupt aesthetic vape, kombucha etsy post-ironic flannel umami cred master cleanse.</p>
-				<p>Raclette cornhole tilde, bicycle rights XOXO vexillologist paleo skateboard organic lumbersexual poke hashtag. Neutra craft beer waistcoat semiotics single-origin coffee. Subway tile XOXO coloring book yr slow-carb messenger bag waistcoat hoodie selfies adaptogen farm-to-table iPhone actually neutra glossier. Photo booth blue bottle tousled austin jianbing sustainable. La croix flannel sriracha, tote bag freegan synth trust fund ennui meditation vinyl cold-pressed heirloom. Forage gochujang vinyl vegan. Bitters try-hard craft beer polaroid, mlkshk you probably haven't heard of them before they sold out pop-up.</p>
+				
+				<div class="search-tab__input">
+					<img src="../src/svg/search_input_ic.svg">
+					<input type="text" placeholder="search">
+				</div>
+			
+				<div class="search-tab__feed">
+					<ul>
+						
+					</ul>
+					<span></span>
+				</div>
+
 			</div>
 			
 			<!-- Profile tab -->
@@ -141,6 +150,7 @@
 	<script src="../src/js/nav_controller.js"></script>
 	<script src="../src/js/home-feed-controller.js"></script>
 	<script src="../src/js/new-post-controller.js"></script>
+	<script src="../src/js/search-controller.js"></script>
 	<script src="../src/js/home.js"></script>
 	
 </body>

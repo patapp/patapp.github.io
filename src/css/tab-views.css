@@ -25,7 +25,7 @@
 .tab-views {
   height: calc(100vh - 101px);
   overflow: scroll;
-  background-color: #FCF8F6;
+  background-color: var(--color-background);
 }
 .hidden {
   display: none;
@@ -37,12 +37,11 @@
   background-color: red;
 } */
 
-.tab-views__tab-search {
-  background-color: lightcoral;
+/* .tab-views__tab-search {
+  background-color: var(--color-background);
   height: 500vh;
-}
+} */
 .tab-views__tab-profile {
-  background-color: lightgreen;
   height: 400vh;
 }
 

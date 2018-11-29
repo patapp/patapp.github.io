@@ -57,9 +57,15 @@ btnLogOut.addEventListener('click', (e) => {
 
 const tabWindow = document.querySelector('.tab-views');
 tabWindow.addEventListener('scroll', () => {
-  if (isVisibleOnScreen(loadTrigger) && currentTab === HOME) {
+  
+  if (currentTab === HOME && isVisibleOnScreen(loadTrigger)) {
     appendPosts(5);
   }
+
+  if (currentTab === SEARCH && isVisibleOnScreen(searchFeedLoadTrigger)) {
+    appendItems();
+  }
+
 });
 
 appendPosts(5);
