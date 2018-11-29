@@ -66,14 +66,14 @@ const renderPosts = (from, to) => {
       userpic.innerHTML = '<img height="45" width="45" src="'+API_URL+res.post_data[postsDataArray[p]].user_pic+'">';
       
       //username.textContent    = res.post_data[postsDataArray[p]].addedby_user;
-      username.appendChild(
-        document.createElement('p').innerHTML = res.post_data[postsDataArray[p]].addedby_user
-      );
+      let usernameP = document.createElement('p');
+      usernameP.innerHTML = res.post_data[postsDataArray[p]].addedby_user;
+      username.appendChild(usernameP);
       
       //description.textContent = res.post_data[postsDataArray[p]].post;
-      description.appendChild(
-        document.createElement('p').innerHTML = res.post_data[postsDataArray[p]].post
-      );
+      let descriptionP = document.createElement('p');
+      descriptionP.innerHTML = res.post_data[postsDataArray[p]].post;
+      description.appendChild(descriptionP);
       
       timestamp.innerHTML = res.post_data[postsDataArray[p]].added_ago;
 
@@ -88,9 +88,9 @@ const renderPosts = (from, to) => {
       if ( res.post_data[postsDataArray[p]].tags.length > 0 ) {
         for (let i=0; i<res.post_data[postsDataArray[p]].tags.length; i++){
           //tags.innerHTML += '<span class="post-tag__item">'+res.post_data[postsDataArray[p]].tags[i]+'</span>';
-          tags.appendChild(
-            document.createElement('li').innerHTML = res.post_data[postsDataArray[p]].tags[i]
-          );
+          let tagItem = document.createElement('li');
+          tagItem.innerHTML = res.post_data[postsDataArray[p]].tags[i];
+          tags.appendChild(tagItem);
         }
       }
 
