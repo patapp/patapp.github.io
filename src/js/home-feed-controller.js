@@ -57,11 +57,18 @@ const renderPosts = (from, to) => {
       const username    = document.querySelector("#post-"+p+" .post-header__username");
       const timestamp   = document.querySelector("#post-"+p+" .post-info__timestamp");
       const userpic     = document.querySelector("#post-"+p+" .post-header__picture");
+      const postmedia   = document.querySelector("#post-"+p+" .post-media");
       
       description.textContent = res.post_data[postsDataArray[p]].post;
       username.textContent    = res.post_data[postsDataArray[p]].addedby_user;
       timestamp.textContent   = res.post_data[postsDataArray[p]].added_ago;
       userpic.innerHTML = '<img height="45" width="45" src="'+API_URL+res.post_data[postsDataArray[p]].user_pic+'">';
+      
+      if ( res.post_data[postsDataArray[p]].media_type == 'i' ) { // Image
+        postmedia.innerHTML = '<img src="'+API_URL+res.post_data[postsDataArray[p]].url+'">';
+        }else if ( res.post_data[postsDataArray[p]].media_type == 'v' ) { // Video
+        postmedia.innerHTML = '<video><source src="'+API_URL+res.post_data[postsDataArray[p]].url+'"></source></video>';
+        }
       
       }
     });
@@ -91,7 +98,6 @@ const loadPosts = () => {
     fetchPosts();
     });
   }
-
 
 const appendPosts = (amount) => {
     conLog ( '[appendPosts] Called with amount: ' + amount );
