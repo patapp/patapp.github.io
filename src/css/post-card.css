@@ -153,6 +153,7 @@ div:empty::after {
     font-weight: 500;
     font-family: 'Roboto', serif;
     text-align: center;
+    text-decoration: underline;
     color: var(--color-brown);
 }
 
@@ -187,7 +188,7 @@ div:empty::after {
 }
 .post-info__timestamp > span {
     background-color: #E5CAB5;
-    width: 67%;
+    width: 72%;
     height: 2px;
     border-radius: 5px;
 }
