@@ -1,6 +1,6 @@
 'use strict';
 
-const welcome = () => {
-    conLog('USERS WITHOUT SESSION');
+const loadTrending = () => {
+    conLog('LOADING FRONT PAGE CONTENT');
     loadPosts();
 }
