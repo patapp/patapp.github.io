@@ -79,10 +79,12 @@ const renderPosts = (from, to) => {
       if (descriptionP.offsetHeight > 40) {
         showDesc.innerHTML = "more";
         description.classList.toggle('post-description-hidden');
+        description.classList.toggle('post-info__description::after');
       }
       showDesc.addEventListener('click', () => {
         showDesc.innerHTML = (showDesc.innerHTML == "more" ? "less":"more");
         description.classList.toggle('post-description-hidden');
+        description.classList.toggle('post-info__description::after');
       });
       
       timestamp.innerHTML = res.post_data[postsDataArray[p]].added_ago;

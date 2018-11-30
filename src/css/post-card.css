@@ -119,6 +119,15 @@ div:empty::after {
     overflow: hidden;
 }
 
+.post-info__description::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: linear-gradient(transparent, #ffffff);
+}
 .post-info__description > p {
     color: var(--color-post-description-text);
     font-size: 17px;

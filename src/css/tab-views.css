@@ -21,10 +21,6 @@
   font-weight: 700;
   font-size: 28px;
 }
-.tab p {
-  font-family: 'Roboto', serif;
-  margin: 10px;
-}
 
 .tab-views {
   height: calc(100vh - 101px);
