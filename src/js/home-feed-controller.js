@@ -26,6 +26,7 @@ const postElement = `
     <div class="post-info">
         <ul class="post-info__tags"></ul>
         <div class="post-info__description"></div>
+        <p class="post-description-toggle"></p>
         <div class="post-info__comments"></div>
                 
         <div class="post-info__timestamp">
@@ -58,6 +59,7 @@ const renderPosts = (from, to) => {
       const postmedia   = document.querySelector("#post-"+p+" .post-media");
       const tags        = document.querySelector("#post-"+p+" .post-info__tags");
       const description = document.querySelector("#post-"+p+" .post-info__description");
+      const showDesc    = document.querySelector("#post-"+p+" .post-description-toggle");
       const comments    = document.querySelector("#post-"+p+" .post-info__comments");
       const timestamp   = document.querySelector("#post-"+p+" .post-info__timestamp > p");
       
@@ -74,6 +76,14 @@ const renderPosts = (from, to) => {
       let descriptionP = document.createElement('p');
       descriptionP.innerHTML = res.post_data[postsDataArray[p]].post;
       description.appendChild(descriptionP);
+      if (descriptionP.offsetHeight > 40) {
+        showDesc.innerHTML = "more";
+        description.classList.toggle('post-description-hidden');
+      }
+      showDesc.addEventListener('click', () => {
+        showDesc.innerHTML = (showDesc.innerHTML == "more" ? "less":"more");
+        description.classList.toggle('post-description-hidden');
+      });
       
       timestamp.innerHTML = res.post_data[postsDataArray[p]].added_ago;
 

@@ -72,10 +72,14 @@ div:empty::after {
     margin-bottom: -4px;
 }  
 
+.post-info {
+    margin: 0 16px;
+}
+
 .post-info__tags {
     display: flex;
     justify-content: center;
-    margin: 16px;
+    margin: 16px 0;
 }
 .post-info__tags > li {
     list-style: none;
@@ -109,8 +113,13 @@ div:empty::after {
 .post-info__tags .post-pet__item{
     background: #face00;
 }
+.post-description-hidden {
+    height: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
 .post-info__description > p {
-    margin: 0 16px;
     color: var(--color-post-description-text);
     font-size: 17px;
     font-weight: 400;
@@ -126,8 +135,20 @@ div:empty::after {
     background-position-y: 0px, 24px;
     background-repeat: no-repeat;
 }
+.post-description-toggle:empty {
+    display: none;
+}
+.post-description-toggle {
+    display: block;
+    font-size: 17px;
+    font-weight: 500;
+    font-family: 'Roboto', serif;
+    text-align: center;
+    color: var(--color-brown);
+}
+
 .post-info__comments {
-    margin: 16px;
+    margin: 16px 0;
     font-family: 'Roboto', serif;
     font-size: 17px;
     font-weight: 400;
@@ -140,7 +161,6 @@ div:empty::after {
 .post-info__timestamp {
     display: flex;
     align-items:center;
-    margin: 16px 16px 0px 16px;
 }
 .post-info__timestamp > p {
     color: #E5CAB5;
@@ -158,8 +178,8 @@ div:empty::after {
 }
 .post-info__timestamp > span {
     background-color: #E5CAB5;
-    width: 73%;
-    height: 2.5px;
+    width: 67%;
+    height: 2px;
     border-radius: 5px;
 }
 
