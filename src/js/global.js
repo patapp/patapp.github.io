@@ -183,15 +183,12 @@ const autoRedirectCheck = () => {
         conLog('[AUTO_REDIRECT_CHECK] You SHOULD NOT be on THIS PAGE.');
         redirectTo('home/');
     }
-    else if (VIEW_PAGE == '') {
-        conLog('LOADTRENDINGCALLED');
-        loadTrending();
-    }
-      else{
+    
+    else{
         conLog('[AUTO_REDIRECT_CHECK] This page is ALLOWED for You =)');
         appIsReady();
-      }
-  
+    }
+
   }
 
 }
