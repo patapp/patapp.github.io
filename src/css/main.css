@@ -23,10 +23,12 @@ input, label {
 }
 
 .btn {
+  display: block;
+  box-sizing: border-box;
   font-size: 20px;
   font-weight: 700;
   font-family: 'Dosis', serif;
-  width: calc(100vw - 32px);
+  
   text-align: center;
   padding: 14px;
   cursor: pointer;
@@ -35,13 +37,13 @@ input, label {
   color: white;
   background-color: var(--color-pink);
   border-radius: 8px;
-  margin-top: 40px;
+  width: calc(100vw - 32px);
+  margin: 40px auto 0;
 }
 .btn-primary:disabled {
   background-color: var(--color-pink-light);
 }
 .btn-secondary {
   color: var(--color-pink);
-  width: auto;
-  margin: 8px 0;
+  margin: 8px auto;
 }

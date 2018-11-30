@@ -91,15 +91,17 @@
 				<span class="bold-dosis">+ ADD MEDIA</span>
 			</label>
 			
-			<label class="new-post-form__tags-label"><span class="bold-dosis new-post-title">TAGS</span></label>
+			<label class="new-post-form__label"><span class="bold-dosis new-post-title">TAGS</span></label>
 			<div class="input-field new-post-form__tags-input">
 				<input type="text" placeholder="+ add tag">
 			</div>
 			
-			<label class="new-post-form__desc-label"><span class="bold-dosis new-post-title">DESCRIPTION</span></label>
-			<textarea class="new-post-form__desc-input input-field" rows="1" placeholder="Type something..."></textarea>
+			<label class="new-post-form__label"><span class="bold-dosis new-post-title">DESCRIPTION</span></label>
+			<div  class="new-post-form__desc-input input-field">
+				<textarea id="new-post-description" placeholder="Type something..." rows="1"></textarea>
+			</div>
 			
-			<input class="btn btn-primary" type="submit" value="POST">
+			<button class="btn btn-primary" type="submit">POST</button>
 			<button type="button" id="new-post-cancel" class="btn btn-secondary">CANCEL</button>
 			
 		</form>

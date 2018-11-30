@@ -11,9 +11,9 @@
   | https://github.com/joonasmkauppinen/pat-project-frontend |
   +-------------------------------------------------------- */
 
-const fileInput = document.getElementById('media');
+const fileInput    = document.getElementById('media');
 const mediaElement = document.querySelector('.new-post-form__add-media');
-
+const description  = document.getElementById('new-post-description');
 
 fileInput.addEventListener('change', () => {
     
@@ -31,4 +31,9 @@ fileInput.addEventListener('change', () => {
         mediaElement.children[0].classList.add('media-preview');
     }
 
+});
+
+description.addEventListener('input', () => {
+    description.style.height = "10px";
+    description.style.height = (description.scrollHeight)+"px";
 });
