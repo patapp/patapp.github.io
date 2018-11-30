@@ -77,10 +77,10 @@ div:empty::after {
     max-width: 100%;
     margin-bottom: -4px;
 }
-.post-media video {
+/* .post-media video {
     max-width: 100%;
     margin-bottom: -4px;
-}  
+}   */
 
 .post-info {
     margin: 0 16px;
