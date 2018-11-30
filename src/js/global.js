@@ -21,7 +21,7 @@ const DEBUG_MODE = true;
 
 /* Redirect automatically from wrong page to right page if SESSION state is wrong. 
 Plase note: Does not make effect if DEBUG_MODE = false */
-const AUTO_REDIRECT = true;
+const AUTO_REDIRECT = false;
 
 let sessionExists = false;
 let sessionID = '';
@@ -143,7 +143,7 @@ const redirectTo = (a) => {
 
   conLog('[REDIRECT_TO] `' + a + '`');
   if ( DEBUG_MODE ) {
-    if ( AUTO_REDIRECT ) {
+    if ( false ) {
       conLog('[REDIRECT_TO] We are redirecting YOU to `' + a + '`...');
       conLog('[REDIRECT_TO] 2 seconds delay because of DEBUG_MODE');
       setTimeout( () => {
