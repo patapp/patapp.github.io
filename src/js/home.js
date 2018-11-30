@@ -68,4 +68,12 @@ tabWindow.addEventListener('scroll', () => {
 
 });
 
+const newPostForm = document.getElementById('new-post-form');
+
+newPostForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  alert('Submit!');
+});
+
+
 appendPosts(5);
