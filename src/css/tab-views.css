@@ -24,7 +24,7 @@
 
 .tab-views {
   height: calc(100vh - 101px);
-  // overflow: scroll;  /* REMOVED BY Samppa 2018-11-29 17:50 */
+  /* overflow: scroll;  REMOVED BY Samppa 2018-11-29 17:50 */
   overflow: hidden; /* ADDED BY Samppa 2018-11-29 17:50 */
   background-color: var(--color-background);
 }
