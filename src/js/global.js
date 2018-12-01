@@ -20,11 +20,11 @@ const BASE_ADDR = '/pat-project-frontend/'; // if in root folder, set this to '/
 const DEBUG_MODE = true;
 
 // Delay redirection for 2 seconds (only works in DEBUG_MODE
-const REDIRECT_DELAY = true;
+const REDIRECT_DELAY = false;
 
 /* Redirect automatically from wrong page to right page if SESSION state is wrong. 
 Plase note: Does not make effect if DEBUG_MODE = false */
-const AUTO_REDIRECT = false;
+const AUTO_REDIRECT = true;
 
 let sessionExists = false;
 let sessionID = '';

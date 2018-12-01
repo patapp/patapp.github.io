@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <!-- ----------------------+-------------------------------+
-  |   .----.  .--.  .---.    |  CREATED BY TEAM JJS          |
-  |   | {}  }/ {} \{_   _}   +-------------------------------+
-  |   | .--'/  /\  \ | |     |  Joonas Kauppinen             |
-  |   `-'   `-'  `-' `-'     |  "Jamie" GeonHui Yoon         |
-  |   - a place for pets -   |  Samuli Virtanen              |
-  +--------------------------+-------------------------------+
-  | https://github.com/joonasmkauppinen/pat-project-backend  |
-  | https://github.com/joonasmkauppinen/pat-project-frontend |
-  +------------------------------------------------------- -->
-  	
+<!-- ----------------------+-------------------------------+
+	|   .----.  .--.  .---.    |  CREATED BY TEAM JJS          |
+	|   | {}  }/ {} \{_   _}   +-------------------------------+
+	|   | .--'/  /\  \ | |     |  Joonas Kauppinen             |
+	|   `-'   `-'  `-' `-'     |  "Jamie" GeonHui Yoon         |
+	|   - a place for pets -   |  Samuli Virtanen              |
+	+--------------------------+-------------------------------+
+	| https://github.com/joonasmkauppinen/pat-project-backend  |
+	| https://github.com/joonasmkauppinen/pat-project-frontend |
+	+------------------------------------------------------- -->
+	
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,14 +62,14 @@
 					<img src="../src/svg/search_input_ic.svg">
 					<input type="text" placeholder="search">
 				</div>
-			
+				
 				<div class="search-tab__feed">
 					<ul>
 						
 					</ul>
 					<span></span>
 				</div>
-
+				
 			</div>
 			
 			<!-- Profile tab -->
@@ -87,21 +87,43 @@
 			<form id="new-post-form" class="new-post-form"
 			novalidate action="" method="POST" enctype="multipart/form-data">
 			
+			<!-- Media input -->
 			<input id="media" name="media" type="file" accept="image/*, video/*">
 			<label class="new-post-form__add-media" for="media">
 				<span class="bold-dosis">+ ADD MEDIA</span>
 			</label>
 			
+			<!-- Tags for post -->
 			<label class="new-post-form__label"><span class="bold-dosis new-post-title">TAGS</span></label>
 			<div class="input-field new-post-form__tags-input">
-				<input type="text" placeholder="+ add tag" id="new-post-tags">
+				
+				<ul id="current-tags">
+					
+					<input id="new-post-tags" type="text" placeholder="+ add tag" autocapitalize="off">
+				</ul>
+				
+				<div class="new-post-form__tags-input__top-tags top-tags-hidden">
+					
+					<div class="top-tags__header">
+						<span class="header__text">top tags</span>
+						<span class="header__decoration"></span>
+					</div>
+					
+					<ul id="top-tags">
+						
+					</ul>
+					
+				</div>
+				
 			</div>
 			
+			<!-- Description for post -->
 			<label class="new-post-form__label"><span class="bold-dosis new-post-title">DESCRIPTION</span></label>
 			<div  class="new-post-form__desc-input input-field">
-				<textarea id="new-post-description" placeholder="Type something..." rows="1"></textarea>
+				<textarea id="new-post-description" placeholder="Type something..." rows="1" textarea autocapitalize="sentences"></textarea>
 			</div>
 			
+			<!-- Form buttons -->
 			<button class="btn btn-primary" type="submit">POST</button>
 			<button type="button" id="new-post-cancel" class="btn btn-secondary">CANCEL</button>
 			
