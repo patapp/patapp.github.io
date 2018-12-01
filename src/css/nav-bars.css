@@ -101,7 +101,7 @@
 	transform: translateY(-4px) rotateZ(-90deg);
 }
 
-label::before {
+.nav-label::before {
 	content: '';
 	width: 41px;
 	height: 4px;

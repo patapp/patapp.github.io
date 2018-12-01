@@ -55,12 +55,12 @@
 }
 .new-post-form__tags-input {
 	margin: 0 16px;
+	padding: 13px 16px;
+	width: auto;
 }
 .new-post-form__tags-input > input {
+	width: 100%;
 	color: #7F6B5E;
-	padding: 12px;
-	padding-left: 16px;
-	padding-right: 16px;
 	font-family: 'Roboto', serif;
 	font-weight: 400;
 }
@@ -70,7 +70,6 @@
 
 
 .new-post-form__label {
-	/* width: 100%; */
 	margin-top: 16px;
 	margin-bottom: 8px;
 }
