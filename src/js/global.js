@@ -19,9 +19,12 @@ const BASE_ADDR = '/pat-project-frontend/'; // if in root folder, set this to '/
 // Display all the debug messages in the console
 const DEBUG_MODE = true;
 
+// Delay redirection for 2 seconds (only works in DEBUG_MODE
+const REDIRECT_DELAY = false;
+
 /* Redirect automatically from wrong page to right page if SESSION state is wrong. 
 Plase note: Does not make effect if DEBUG_MODE = false */
-const AUTO_REDIRECT = false;
+const AUTO_REDIRECT = true;
 
 let sessionExists = false;
 let sessionID = '';
@@ -144,11 +147,15 @@ const redirectTo = (a) => {
   conLog('[REDIRECT_TO] `' + a + '`');
   if ( DEBUG_MODE ) {
     if ( AUTO_REDIRECT ) {
-      conLog('[REDIRECT_TO] We are redirecting YOU to `' + a + '`...');
-      conLog('[REDIRECT_TO] 2 seconds delay because of DEBUG_MODE');
-      setTimeout( () => {
-        window.location.href = BASE_ADDR + a;
-        }, 2000);
+      if ( REDIRECT_DELAY ) {
+          conLog('[REDIRECT_TO] We are redirecting YOU to `' + a + '`...');
+          conLog('[REDIRECT_TO] 2 seconds delay because of REDIRECT_DELAY');
+          setTimeout( () => {
+            window.location.href = BASE_ADDR + a;
+            }, 2000);
+        }else{
+          window.location.href = BASE_ADDR + a;
+        }
       }else{
       conLog('[REDIRECT_TO] Redirection cancelled, because AUTO_REDIRECT is set to FALSE');
       }
@@ -182,13 +189,11 @@ const autoRedirectCheck = () => {
     if (VIEW_PAGE != 'home')  {
         conLog('[AUTO_REDIRECT_CHECK] You SHOULD NOT be on THIS PAGE.');
         redirectTo('home/');
-    }
-    
-    else{
+      }else{
         conLog('[AUTO_REDIRECT_CHECK] This page is ALLOWED for You =)');
         appIsReady();
-    }
-
+      }
+  
   }
 
 }
