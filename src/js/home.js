@@ -76,17 +76,17 @@ newPostForm.addEventListener('submit', (e) => {
   
   const upload_file = document.getElementById('media');
   const tags        = document.getElementById('new-post-tags');
-  const post        = document.getElementById('new-post-description');
+  const description = document.getElementById('new-post-description');
   
   const data = new FormData();
   
   data.append ( 'upload_file', upload_file.files[0] );
-  data.append ( 'tags', tags );
-  data.append ( 'post', post );
+  data.append ( 'tags', tags.value );
+  data.append ( 'description', description.value );
   data.append ( 'session_id', sessionID );
   data.append ( 'session_token', sessionToken );
   
-  const settings = { method: 'POST', body: data };
+  const settings = { method: 'POST', "Content-Type": "application/x-www-form-urlencoded", body: data };
   
   fetch(API_URL + 'posts/upload', settings).then((r) => {
     return r.json();
