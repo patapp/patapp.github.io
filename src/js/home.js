@@ -71,8 +71,30 @@ tabWindow.addEventListener('scroll', () => {
 const newPostForm = document.getElementById('new-post-form');
 
 newPostForm.addEventListener('submit', (e) => {
+  
   e.preventDefault();
-  alert('Submit!');
+  
+  const upload_file = document.getElementById('media');
+  const tags        = document.getElementById('new-post-tags');
+  const post        = document.getElementById('new-post-description');
+  
+  const data = new FormData();
+  
+  data.append ( 'upload_file', upload_file.files[0] );
+  data.append ( 'tags', tags );
+  data.append ( 'post', post );
+  data.append ( 'session_id', sessionID );
+  data.append ( 'session_token', sessionToken );
+  
+  const settings = { method: 'POST', body: data };
+  
+  fetch(API_URL + 'posts/upload', settings).then((r) => {
+    return r.json();
+  }).then((json) => {
+    console.log(json);
+  });
+  
+  
 });
 
 
