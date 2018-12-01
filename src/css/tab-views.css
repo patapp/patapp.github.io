@@ -42,6 +42,10 @@
   background-color: var(--color-background);
   height: 500vh;
 } */
+.tab-views__tab-home > ul {
+  max-width: 635px;
+  margin: 0 auto;
+}
 .tab-views__tab-profile {
   height: 400vh;
 }

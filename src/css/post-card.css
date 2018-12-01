@@ -165,6 +165,7 @@ div:empty::after {
     text-align: center;
     text-decoration: underline;
     color: var(--color-brown);
+    cursor: pointer;
 }
 
 .post-info__comments {
