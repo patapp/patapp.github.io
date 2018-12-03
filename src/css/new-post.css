@@ -54,9 +54,19 @@
 	margin-left: 24px;
 }
 .new-post-form__tags-input {
+	position: relative;
 	margin: 0 16px;
 	padding: 5px 16px 13px;
 	width: auto;
+}
+.new-post-form__tags-input__current-tags-amount {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	font-family: 'Roboto', serif;
+	font-size: 10px;
+	font-weight: 700;
+	color: var(--color-brown);
 }
 .new-post-form__tags-input > ul > input {
 	/* width: 100%; */

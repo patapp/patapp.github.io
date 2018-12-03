@@ -12,8 +12,11 @@
 +-------------------------------------------------------- */
 
 
-let topTagsArr = ['cat', 'dog', 'funny', 'cute', 'meme', 'pat-post', 'pat-app', 'doggo', 'catto', 'doge', 'boop'];
-let currentTagsArr = [];
+
+const regex = /^[a-zA-Z0-9-_., ]$/;
+
+let topTagsArr      = [];
+let currentTagsArr  = [];
 const tagDelimiters = [' ', ',', '.'];
 
 const tagsParent     = document.querySelector('new-post-form__tags-input');
@@ -22,6 +25,7 @@ const fileInput      = document.getElementById('media');
 const mediaElement   = document.querySelector('.new-post-form__add-media');
 const description    = document.getElementById('new-post-description');
 
+const tagsAmount		 = document.getElementById('current-tags-amount');
 const currentTags    = document.getElementById('current-tags');
 const tagsInput      = document.getElementById('new-post-tags');
 const topTagsSection = document.querySelector('.new-post-form__tags-input__top-tags');
@@ -31,14 +35,25 @@ const submitNewPost  = document.getElementById('submit-new-post');
 
 let topTagsExpanded = false;
 
+const updateCurrentTagsAmount = () => {
+	tagsAmount.innerHTML = currentTagsArr.length;
+}
+
 const newTag = (value, topTag = false) => {
 	const li = document.createElement('li');
-	li.classList.add('new-post-tag');
+	li.classList.add('new-post-tag', 'clickable');
 	li.innerHTML = value;
 	if (topTag) {
 		li.addEventListener('click', () => {
 			tagsInput.focus();
+			if (currentTagsArr.length === 8) return;
 			addNewCurrentTag(li.innerHTML);
+		});
+	} else {
+		li.addEventListener('click', (e) => {
+			tagsInput.focus();
+			const tagIndex = currentTagsArr.indexOf(e.target.innerHTML);
+			removeCurrentTag(tagIndex);
 		});
 	}
 	return li;
@@ -59,14 +74,17 @@ const addNewCurrentTag = (tag = null) => {
 	if (isCurrentTag(tagVal)) return;
 	
 	currentTagsArr.push(tagVal);
-	currentTags.insertBefore(newTag(tagVal), currentTags.children[currentTags.childElementCount-1]);
+	updateCurrentTagsAmount();
+	const inputElement = currentTags.children[currentTags.childElementCount-1];
+	currentTags.insertBefore(newTag(tagVal), inputElement);
 	toggleTopTag(tagVal);
 }
 
-const removeCurrentTag = () => {
-	currentTags.removeChild(currentTags.childNodes[currentTagsArr.length]);
-	const removedTag = currentTagsArr.pop();
-	toggleTopTag(removedTag);
+const removeCurrentTag = (index = currentTagsArr.length-1) => {
+	currentTags.removeChild(currentTags.children[index]);
+	toggleTopTag( currentTagsArr[index] );
+	currentTagsArr.splice(index, 1);
+	updateCurrentTagsAmount();
 }
 
 
@@ -85,7 +103,6 @@ const isCurrentTag = (tag) => {
 		return true;
 	}
 }
-
 
 
 fileInput.addEventListener('change', () => {
@@ -110,20 +127,20 @@ fileInput.addEventListener('change', () => {
 		
 		switch (fileInput.files[0].type) {
 			case "image/jpeg":
-				selectedMedia = document.createElement('img');
-				
-				reader.onload = (file) => selectedMedia.setAttribute('src', file.target.result);
-				reader.readAsDataURL(fileInput.files[0]);
+			selectedMedia = document.createElement('img');
+			
+			reader.onload = (file) => selectedMedia.setAttribute('src', file.target.result);
+			reader.readAsDataURL(fileInput.files[0]);
 			break;
 			
 			case "video/mp4":
-				selectedMedia = document.createElement('video');
-				selectedMedia.autoplay = true;
-				selectedMedia.muted = true;
-				selectedMedia.loop = true;
-				
-				reader.onload = (file) => selectedMedia.setAttribute('src', file.target.result);
-				reader.readAsDataURL(fileInput.files[0]);
+			selectedMedia = document.createElement('video');
+			selectedMedia.autoplay = true;
+			selectedMedia.muted = true;
+			selectedMedia.loop = true;
+			
+			reader.onload = (file) => selectedMedia.setAttribute('src', file.target.result);
+			reader.readAsDataURL(fileInput.files[0]);
 			break;
 			
 			default:
@@ -155,26 +172,59 @@ tagsInput.addEventListener('focus', () => {
 });
 
 tagsInput.addEventListener('blur', () => {
-	if(topTagsExpanded === true) {
+	if (topTagsExpanded === true) {
 		topTagsSection.classList.toggle('top-tags-hidden');
 		topTagsExpanded = false;
 	}
 });
 
-tagsInput.addEventListener('input', (file) => {
-	tagDelimiters.forEach(element => {
-		if (file.data === element) {
-			addNewCurrentTag();
-			tagsInput.value = "";
-		}
-	});
+tagsInput.addEventListener('input', (e) => {
+	
+	if (currentTagsArr.length === 8) {
+		tagsInput.value = "";
+		return;
+	}
+	
+	tagsInput.style.width = "70px";
+	tagsInput.style.width = (tagsInput.scrollWidth)+"px";
+	
+	if (tagsInput.value.length > 16 || ( !regex.test(e.data) && e.inputType !== "deleteContentBackward")) {
+		const currentInput = tagsInput.value;
+		const limitedInput = currentInput.substring(0, currentInput.length-1);
+		tagsInput.value = limitedInput;
+		return;
+	}
+	
+	if (regex.test(e.data) || e.inputType === "deleteContentBackward") {
+		
+		tagDelimiters.forEach(delimChar => {
+			if (e.data === delimChar) {
+				if (tagsInput.value.length >= 3) {
+					addNewCurrentTag();
+				}
+				tagsInput.value = "";
+			}
+		});
+		
+	} else {
+		tagsInput.value = "";
+	}
 });
 
-tagsInput.addEventListener('keyup', (file) => {
+let doubleTapToRemove = 0;
+tagsInput.addEventListener('keyup', (e) => {
 	
-	if (file.keyCode === 8 && tagsInput.value === "" && currentTagsArr.length > 0) {
-		console.log('removing last tag...');
-		removeCurrentTag();
+	// Check is backspace pressed and input is empty
+	if (e.keyCode === 8 && tagsInput.value === "" && currentTagsArr.length > 0) {
+		doubleTapToRemove++;
+		if (doubleTapToRemove === 2) {
+			removeCurrentTag();
+			doubleTapToRemove = 0;
+		}
+	} else if (e.keyCode === 13) { // Check if enter is pressed and add space to input value to process it correctly
+		tagsInput.value += " ";
+		addNewCurrentTag();
+		tagsInput.value = "";
 	}
 	
 });
@@ -192,6 +242,17 @@ description.addEventListener('input', () => {
 	description.style.height = (description.scrollHeight)+"px";
 });
 
-topTagsArr.forEach(element => {
-	topTagsList.appendChild(newTag(element, true));
+updateCurrentTagsAmount();
+
+getJSON('POST', 'tags')
+.then( res => {
+	if (res.success) {
+		topTagsArr = res.tags;
+		topTagsArr.forEach(element => {
+			topTagsList.appendChild(newTag(element));
+		});
+	}
+})
+.catch( err => {
+	console.log('[getJSON] error: ', err);
 });
