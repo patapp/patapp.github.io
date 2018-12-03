@@ -244,9 +244,10 @@ description.addEventListener('input', () => {
 
 updateCurrentTagsAmount();
 
-getJSON('POST', 'tags')
-.then( res => {
+getJSON('POST', 'tags').then( res => {
+	console.log('[getJSON] topTags result: ', res);
 	if (res.success) {
+		console.log('[getJSON] res.tags: ', res.tags);
 		topTagsArr = res.tags;
 		topTagsArr.forEach(element => {
 			topTagsList.appendChild(newTag(element));
