@@ -129,13 +129,10 @@ fileInput.addEventListener('change', () => {
 		
 		submitNewPost.disabled = false;
 		
-		//mediaElement.removeChild(mediaElement.children[0]);
-		
 		const reader = new FileReader();
 		
 		let selectedMedia = null;
 		
-		//, , 
 		switch (fileInput.files[0].type) {
 			case "image/jpeg":
 			case "image/png":
