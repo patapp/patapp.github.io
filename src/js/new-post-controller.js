@@ -135,15 +135,24 @@ fileInput.addEventListener('change', () => {
 		
 		let selectedMedia = null;
 		
+		//, , 
 		switch (fileInput.files[0].type) {
-			case "image/jpeg", "image/png", "image/gif", "image/bmp":
+			case "image/jpeg":
+			case "image/png":
+			case "image/gif":
+			case "image/bmp":
 			selectedMedia = document.createElement('img');
 			
 			reader.onload = (file) => selectedMedia.setAttribute('src', file.target.result);
 			reader.readAsDataURL(fileInput.files[0]);
 			break;
 			
-			case "video/mp4", "video/ogg", "video/webm", "video/quicktime", "video/x-m4v", "video/mpeg":
+			case "video/mp4":
+			case "video/ogg":
+			case "video/webm":
+			case "video/quicktime":
+			case "video/x-m4v":
+			case "video/mpeg":
 			selectedMedia = document.createElement('video');
 			selectedMedia.autoplay = true;
 			selectedMedia.muted = true;
