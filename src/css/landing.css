@@ -32,7 +32,7 @@ body {
 
 #button__container {
     margin-left: auto;
-    margin-top: 50px;
+    margin-top: 1.5rem;
 }
 
 
@@ -44,6 +44,7 @@ body {
     font-weight: 600;
     letter-spacing: 1px;
     border: none;
+    text-decoration: underline;
 }
 
 #button__signup {
@@ -55,10 +56,11 @@ body {
     font-weight: 600;
     letter-spacing: 1px;
     border-radius: var(--input-border-radius-dimen);
-    width: 6.5rem;
     margin-left: 10px;
     margin-right: 30px;
-    padding: .4rem 0;
+    padding: .4rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
 }
 
 
