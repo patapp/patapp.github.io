@@ -8,6 +8,16 @@
   --shadow-brown-color: rgba(212, 183, 163, 0.15);
 
   --input-border-radius-dimen: 7px;
+
+  --color-post-description-text: #60544A;
+  --color-background: #FCF8F6;
+  --color-beige-light: #FBF1EA;
+  --color-brown-light: #EDD1B7;
+  --color-brown: #D4B7A3;
+  --color-brown-dark: #7F6B5E;
+  --color-pink: #FF145B;
+  --color-pink-light: #FFD0DE;
+
 }
 
 * {
@@ -139,4 +149,9 @@ span {
     #title__separator:before, #title__separator:after {
         width: 110px;
     }
+}
+
+#home-feed {
+    max-width: 635px;
+    margin: 0 auto;
 }
