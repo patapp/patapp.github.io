@@ -244,16 +244,16 @@ description.addEventListener('input', () => {
 
 updateCurrentTagsAmount();
 
-getJSON('POST', 'tags').then( res => {
-	console.log('[getJSON] topTags result: ', res);
-	if (res.success) {
-		console.log('[getJSON] res.tags: ', res.tags);
-		topTagsArr = res.tags;
-		topTagsArr.forEach(element => {
-			topTagsList.appendChild(newTag(element));
-		});
-	}
-})
-.catch( err => {
-	console.log('[getJSON] error: ', err);
-});
+setTimeout(() => {
+	getJSON('POST', 'tags').then( res => {
+		if (res.success) {
+			topTagsArr = res.tags;
+			topTagsArr.forEach(element => {
+				topTagsList.appendChild(newTag(element));
+			});
+		}
+	})
+	.catch( err => {
+		console.log('[getJSON] error: ', err);
+	});	
+}, 100);
