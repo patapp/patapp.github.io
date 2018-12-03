@@ -249,7 +249,7 @@ setTimeout(() => {
 		if (res.success) {
 			topTagsArr = res.tags;
 			topTagsArr.forEach(element => {
-				topTagsList.appendChild(newTag(element));
+				topTagsList.appendChild(newTag(element, true));
 			});
 		}
 	})
