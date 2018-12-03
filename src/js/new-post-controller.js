@@ -36,6 +36,7 @@ const topTagsList    = document.getElementById('top-tags');
 const submitNewPost  = document.getElementById('submit-new-post');
 
 let topTagsExpanded = false;
+let doubleTapToRemove = 0;
 
 const updateCurrentTagsAmount = () => {
 	tagsAmount.innerHTML = currentTagsArr.length;
@@ -89,7 +90,6 @@ const removeCurrentTag = (index = currentTagsArr.length-1) => {
 	updateCurrentTagsAmount();
 }
 
-
 const toggleTopTag = (tagValue) => {
 	const i = topTagsArr.indexOf(tagValue);
 	if (i !== -1) {
@@ -136,14 +136,14 @@ fileInput.addEventListener('change', () => {
 		let selectedMedia = null;
 		
 		switch (fileInput.files[0].type) {
-			case "image/jpeg":
+			case "image/jpeg", "image/png", "image/gif", "image/bmp":
 			selectedMedia = document.createElement('img');
 			
 			reader.onload = (file) => selectedMedia.setAttribute('src', file.target.result);
 			reader.readAsDataURL(fileInput.files[0]);
 			break;
 			
-			case "video/mp4":
+			case "video/mp4", "video/ogg", "video/webm", "video/quicktime", "video/x-m4v", "video/mpeg":
 			selectedMedia = document.createElement('video');
 			selectedMedia.autoplay = true;
 			selectedMedia.muted = true;
@@ -154,8 +154,11 @@ fileInput.addEventListener('change', () => {
 			break;
 			
 			default:
+			submitNewPost.disabled = true;
+			mediaElement.children[0].classList.toggle('hidden');
+			mediaElement.style.height = "100vw";
+			alert(`Sorry, '${fileInput.files[0].type}' is not supported file type :(`);
 			return;
-			break;
 		}
 		
 		mediaElement.appendChild(selectedMedia);
@@ -221,7 +224,6 @@ tagsInput.addEventListener('input', (e) => {
 	}
 });
 
-let doubleTapToRemove = 0;
 tagsInput.addEventListener('keyup', (e) => {
 	
 	// Check is backspace pressed and input is empty
