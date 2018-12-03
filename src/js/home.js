@@ -55,6 +55,18 @@ btnLogOut.addEventListener('click', (e) => {
   });
 });
 
+const deletePost = (id) => {
+  getJSON('DELETE', 'posts/' + id, '').then( (r) => {
+    if ( r.success ) {
+      alert ( 'Delete post succeeded !' );
+      }else{
+      alert ( 'Error: ' + r.error );
+      }
+  });
+};
+
+
+
 const tabWindow = document.querySelector('.tab-views');
 tabWindow.addEventListener('scroll', () => {
   
