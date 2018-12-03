@@ -33,7 +33,6 @@ body {
 #button__container {
     margin-left: auto;
     margin-top: 50px;
-    margin-bottom: 50px;
 }
 
 
@@ -74,11 +73,15 @@ body {
 
 
 #title__container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     margin: auto;
     width: 100vw;
     height: 100vh;
     max-width: 25rem;
-    text-align: center;
 
 }
 
@@ -140,6 +143,7 @@ span {
     font-weight: 500;
     font-size: 18px;
     letter-spacing: 1px;
+    margin-bottom: 70px;
 }
 
 @media screen and (max-width:400px) {
