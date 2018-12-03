@@ -80,43 +80,5 @@ tabWindow.addEventListener('scroll', () => {
 
 });
 
-const newPostForm = document.getElementById('new-post-form');
-
-newPostForm.addEventListener('submit', (e) => {
-  
-  e.preventDefault();
-  
-  const upload_file = document.getElementById('media');
-  const tags        = document.getElementById('new-post-tags');
-  const description = document.getElementById('new-post-description');
-  
-  const data = new FormData();
-  
-  const getTagsAsString = () => {
-    
-    if ( currentTagsArr.length > 0 ) {
-      return currentTagsArr.join(' ');
-      }else{
-      return '';
-      }
-  };
-  
-  data.append ( 'upload_file', upload_file.files[0] );
-  data.append ( 'tags', getTagsAsString() );
-  data.append ( 'description', description.value );
-  data.append ( 'session_id', sessionID );
-  data.append ( 'session_token', sessionToken );
-  
-  const settings = { method: 'POST', "Content-Type": "application/x-www-form-urlencoded", body: data };
-  
-  fetch(API_URL + 'posts/upload', settings).then((r) => {
-    return r.json();
-  }).then((json) => {
-    console.log(json);
-  });
-  
-  
-});
-
 
 appendPosts(5);

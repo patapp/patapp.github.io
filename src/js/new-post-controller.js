@@ -19,6 +19,8 @@ let topTagsArr      = [];
 let currentTagsArr  = [];
 const tagDelimiters = [' ', ',', '.'];
 
+const newPostForm = document.getElementById('new-post-form');
+
 const tagsParent     = document.querySelector('new-post-form__tags-input');
 
 const fileInput      = document.getElementById('media');
@@ -103,6 +105,14 @@ const isCurrentTag = (tag) => {
 		return true;
 	}
 }
+
+const getTagsAsString = () => {	
+	if ( currentTagsArr.length > 0 ) {
+		return currentTagsArr.join(' ');
+	} else {
+		return '';
+	}
+};
 
 
 fileInput.addEventListener('change', () => {
@@ -242,7 +252,27 @@ description.addEventListener('input', () => {
 	description.style.height = (description.scrollHeight)+"px";
 });
 
-updateCurrentTagsAmount();
+newPostForm.addEventListener('submit', (e) => {
+	
+	e.preventDefault();
+	
+	const data = new FormData();
+	data.append ( 'upload_file', fileInput.files[0] );
+	data.append ( 'tags', getTagsAsString() );
+	data.append ( 'description', description.value );
+	data.append ( 'session_id', sessionID );
+	data.append ( 'session_token', sessionToken );
+	
+	const options = { method: 'POST', "Content-Type": "application/x-www-form-urlencoded", body: data };
+	
+	fetch(API_URL + 'posts/upload', options).then( res => {
+		return res.json();
+	}).then((json) => {
+		console.log(json);
+	});
+	
+	
+});
 
 setTimeout(() => {
 	getJSON('POST', 'tags').then( res => {
@@ -257,3 +287,5 @@ setTimeout(() => {
 		console.log('[getJSON] error: ', err);
 	});	
 }, 100);
+
+updateCurrentTagsAmount();
