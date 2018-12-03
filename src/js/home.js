@@ -80,8 +80,17 @@ newPostForm.addEventListener('submit', (e) => {
   
   const data = new FormData();
   
+  const getTagsAsString = () => {
+    
+    if ( currentTagsArr.length > 0 ) {
+      return currentTagsArr.join(' ');
+      }else{
+      return '';
+      }
+  };
+  
   data.append ( 'upload_file', upload_file.files[0] );
-  data.append ( 'tags', tags.value );
+  data.append ( 'tags', getTagsAsString() );
   data.append ( 'description', description.value );
   data.append ( 'session_id', sessionID );
   data.append ( 'session_token', sessionToken );
