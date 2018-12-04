@@ -175,9 +175,22 @@ const appendPosts = (amount) => {
 const isVisibleOnScreen = (element) => {
     const bounding = element.getBoundingClientRect();
     if (bounding.bottom <= window.innerHeight) {
-        conLog('Home feed trigger in viewport');
+        conLog(element.tagName + ' trigger in viewport');
         return true;
     } else {
         return false;
     }
 };
+
+const homeTab         = document.getElementById('home-tab');
+const homeLoadTrigger = document.getElementById('home-load-trigger');
+homeTab.addEventListener('scroll', () => {
+
+  if (isVisibleOnScreen(homeLoadTrigger)) {
+    console.log('Current tab HOME adding 5 new posts to home feed')
+    appendPosts(5);
+  }
+  
+});
+
+appendPosts(5);
