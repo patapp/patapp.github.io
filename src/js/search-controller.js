@@ -2,7 +2,7 @@
 
 const searchTab = document.getElementById('search-tab');
 const feedGrid = document.querySelector('.search-tab__feed > ul');
-const searchFeedLoadTrigger = document.querySelector('.search-tab__feed > span');
+const searchLoadTrigger = document.getElementById('search-load-trigger');
 
 const appendItems = (amount = 27) => {
     for (let i=0; i<amount; i++) {
@@ -10,10 +10,10 @@ const appendItems = (amount = 27) => {
     }
 }
 
-// searchTab.addEventListener('scroll', () => {
-//     if (isVisibleOnScreen(searchFeedLoadTrigger) && currentTab == SEARCH) {
-//         appendItems();
-//     }
-// });
+searchTab.addEventListener('scroll', () => {
+    if (isVisibleOnScreen(searchLoadTrigger)) {
+        appendItems();
+    }
+});
 
 appendItems();

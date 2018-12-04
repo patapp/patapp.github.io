@@ -67,18 +67,22 @@ const deletePost = (id) => {
 
 
 
-const tabWindow = document.querySelector('.tab-views');
-tabWindow.addEventListener('scroll', () => {
+// const homeTab = document.getElementById('home-tab');
+// const homeLoadTrigger = document.getElementById('home-load-trigger');
+// homeTab.addEventListener('scroll', () => {
+
+//   if (isVisibleOnScreen(homeLoadTrigger)) {
+//     console.log('Current tab HOME adding 5 new posts to home feed')
+//     appendPosts(5);
+//   }
   
-  if (currentTab === HOME && isVisibleOnScreen(loadTrigger)) {
-    appendPosts(5);
-  }
+// });
 
-  if (currentTab === SEARCH && isVisibleOnScreen(searchFeedLoadTrigger)) {
-    appendItems();
-  }
-
-});
+// const searchTab = document.getElementById('search-tab');
 
 
-appendPosts(5);
+// if (currentTab === SEARCH && isVisibleOnScreen(searchFeedLoadTrigger)) {
+//   appendItems();
+// }
+
+// appendPosts(5);
