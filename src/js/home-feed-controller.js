@@ -27,9 +27,7 @@ const postElement = `
         <ul class="post-info__tags"></ul>
         <div class="post-info__description"></div>
         <p class="post-description-toggle"></p>
-        <div class="post-info__comments">
-        <button class="post-info__comments-button"></button>
-        </div>
+        <div class="post-info__comments"></div>
                 
         <div class="post-info__timestamp">
             <p></p><span></span>
@@ -64,9 +62,6 @@ const renderPosts = (from, to) => {
       const showDesc    = document.querySelector("#post-"+p+" .post-description-toggle");
       const comments    = document.querySelector("#post-"+p+" .post-info__comments");
       const timestamp   = document.querySelector("#post-"+p+" .post-info__timestamp > p");
-      const commentCount= document.querySelector("#post-"+p+" .post-info__comments-button");
-
-      console.log(res.post_data[postsDataArray[p]]);
       
       userpic.innerHTML = '<img height="45" width="45" src="'+API_URL+res.post_data[postsDataArray[p]].user_pic+'">';
       
@@ -89,8 +84,8 @@ const renderPosts = (from, to) => {
         description.classList.toggle('post-description-hidden');
         description.classList.toggle('post-info__description::after');
       });
-      
       timestamp.innerHTML = res.post_data[postsDataArray[p]].added_ago;
+      
 
       // -------------- PET TAGS DISABLED FOR NOW ----------------
       // if ( res.post_data[postsDataArray[p]].pets.length > 0 ) {
@@ -117,11 +112,9 @@ const renderPosts = (from, to) => {
       if ( res.post_data[postsDataArray[p]].comments == 0 ) {
           comments.innerHTML = '0 comments';
         }else{
-          commentCount.innerHTML = res.post_data[postsDataArray[p]].comments;
-          comments.innerHTML = res.post_data[postsDataArray[p]].comments+' comments';
-          comments.innerHTML += ', latest: '+res.post_data[postsDataArray[p]].latest_comment.comment;
+          /*comments.innerHTML = res.post_data[postsDataArray[p]].comments+' comments';
           comments.innerHTML += ', sender: '+res.post_data[postsDataArray[p]].latest_comment.sender;
-          comments.innerHTML += ', at: '+res.post_data[postsDataArray[p]].latest_comment.added_ago;
+          comments.innerHTML += ', at: '+res.post_data[postsDataArray[p]].latest_comment.added_ago;*/
         }
       }
     });
