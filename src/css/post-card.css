@@ -57,7 +57,7 @@ div:empty::after {
 .post-media {
     width: 100%;
     max-height: 500px;
-    background: #eee;
+    background: var(--color-media-bg);
 }
 .post-media > video {
     margin: auto;
@@ -66,7 +66,7 @@ div:empty::after {
 }
 .video {
     display: flex;
-    background: #443B33;
+    /* background-color: var(--color-media-bg); */
 }
 
 .post-media:empty::after {

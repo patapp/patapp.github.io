@@ -23,13 +23,20 @@
 	border-radius: 5px;
 }
 
-
+.landscape {
+	width: 100% !important;
+}
+.media-selected {
+	height: 100% !important;
+	background-color: var(--color-media-bg) !important;
+}
 .new-post-form__add-media {
 	cursor: pointer;
 	display: flex;
 	background-color: #FBF1EA;
 	width: 100vw;
 	height: 100vw;
+	max-height: 500px;
 }
 .new-post-form__add-media > span {
 	color: #D4B7A3;
@@ -38,9 +45,9 @@
 }
 
 .media-preview {
-	width: 100%;
+	margin: auto;
 	height: 100%;
-	max-height: 400px;
+	max-height: 500px;
 }
 
 /* ************ SECTION: TAGS ******************** */

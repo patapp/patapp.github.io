@@ -120,16 +120,13 @@ fileInput.addEventListener('change', () => {
 	if (fileInput.files && fileInput.files[0]) {
 		
 		if (mediaElement.children[1] !== undefined) {
+			URL.revokeObjectURL(mediaElement.children[1]);
 			mediaElement.removeChild(mediaElement.children[1]);
 		} else {
 			mediaElement.children[0].classList.toggle('hidden');
 		}
 		
-		console.log("Media file type: ", fileInput.files[0].type);
-		
 		submitNewPost.disabled = false;
-		
-		const reader = new FileReader();
 		
 		let selectedMedia = null;
 		
@@ -140,8 +137,7 @@ fileInput.addEventListener('change', () => {
 			case "image/bmp":
 			selectedMedia = document.createElement('img');
 			
-			reader.onload = (file) => selectedMedia.setAttribute('src', file.target.result);
-			reader.readAsDataURL(fileInput.files[0]);
+			selectedMedia.src = URL.createObjectURL(fileInput.files[0]);
 			break;
 			
 			case "video/mp4":
@@ -152,32 +148,62 @@ fileInput.addEventListener('change', () => {
 			case "video/mpeg":
 			selectedMedia = document.createElement('video');
 			selectedMedia.autoplay = true;
-			selectedMedia.muted = true;
-			selectedMedia.loop = true;
+			selectedMedia.muted    = true;
+			selectedMedia.loop     = true;
 			
-			reader.onload = (file) => selectedMedia.setAttribute('src', file.target.result);
-			reader.readAsDataURL(fileInput.files[0]);
+			selectedMedia.src = URL.createObjectURL(fileInput.files[0]);
 			break;
 			
 			default:
+			if (mediaElement.classList.contains('media-selected')) {
+				mediaElement.classList.toggle('media-selected');
+			}
+			
 			submitNewPost.disabled = true;
 			mediaElement.children[0].classList.toggle('hidden');
-			mediaElement.style.height = "100vw";
 			alert(`Sorry, '${fileInput.files[0].type}' is not supported file type :(`);
 			return;
 		}
 		
 		mediaElement.appendChild(selectedMedia);
-		mediaElement.style.height = '100%';
-		mediaElement.children[1].classList.add('media-preview');
+		
+		if (!mediaElement.classList.contains('media-selected')) {
+			mediaElement.classList.toggle('media-selected');
+		}
+		
+		selectedMedia.classList.add('media-preview');
+		
+		
+		console.log(selectedMedia.tagName);
+		switch (selectedMedia.tagName) {
+			
+			case "IMG":
+			selectedMedia.addEventListener('load', () => {
+				if (selectedMedia.width >= selectedMedia.height) {
+					selectedMedia.classList.add('landscape');
+				}
+			});
+			break;
+			
+			case "VIDEO":
+			selectedMedia.addEventListener('loadeddata', () => {
+				if (selectedMedia.videoWidth >= selectedMedia.videoHeight) {
+					selectedMedia.classList.add('landscape');
+				}
+			});
+			break;
+		}
 		
 	} else {
+		
+		if (mediaElement.classList.contains('media-selected')) {
+			mediaElement.classList.toggle('media-selected');
+		}
 		
 		submitNewPost.disabled = true;
 		
 		mediaElement.removeChild(mediaElement.children[1]);
 		mediaElement.children[0].classList.toggle('hidden');
-		mediaElement.style.height = "100vw";
 		
 	}
 	
