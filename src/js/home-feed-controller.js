@@ -108,7 +108,6 @@ const renderPosts = (from, to) => {
           tags.appendChild(tagItem);
         }
       }
-      const commentCounter = res.post_data[postsDataArray[p]].comments;
       if ( res.post_data[postsDataArray[p]].media_type == 'i' ) { // Image
           postmedia.innerHTML = '<img src="'+API_URL+res.post_data[postsDataArray[p]].url+'">';
         }else if ( res.post_data[postsDataArray[p]].media_type == 'v' ) { // Video
@@ -118,7 +117,7 @@ const renderPosts = (from, to) => {
       if ( res.post_data[postsDataArray[p]].comments == 0 ) {
           comments.innerHTML = '0 comments';
         }else{
-          conLog("Comments " + res.post_data[postsDataArray[p]].comments);
+          commentCount.innerHTML = res.post_data[postsDataArray[p]].comments;
           comments.innerHTML = res.post_data[postsDataArray[p]].comments+' comments';
           comments.innerHTML += ', latest: '+res.post_data[postsDataArray[p]].latest_comment.comment;
           comments.innerHTML += ', sender: '+res.post_data[postsDataArray[p]].latest_comment.sender;
