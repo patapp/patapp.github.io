@@ -27,7 +27,9 @@ const postElement = `
         <ul class="post-info__tags"></ul>
         <div class="post-info__description"></div>
         <p class="post-description-toggle"></p>
-        <div class="post-info__comments"></div>
+        <div class="post-info__comments">
+        <button class="post-info__comments-button"></button>
+        </div>
                 
         <div class="post-info__timestamp">
             <p></p><span></span>
@@ -62,7 +64,8 @@ const renderPosts = (from, to) => {
       const showDesc    = document.querySelector("#post-"+p+" .post-description-toggle");
       const comments    = document.querySelector("#post-"+p+" .post-info__comments");
       const timestamp   = document.querySelector("#post-"+p+" .post-info__timestamp > p");
-      
+      const commentCount= document.querySelector("#post-"+p+" .post-info__comments-button");
+
       console.log(res.post_data[postsDataArray[p]]);
       
       userpic.innerHTML = '<img height="45" width="45" src="'+API_URL+res.post_data[postsDataArray[p]].user_pic+'">';
@@ -105,7 +108,6 @@ const renderPosts = (from, to) => {
           tags.appendChild(tagItem);
         }
       }
-
       if ( res.post_data[postsDataArray[p]].media_type == 'i' ) { // Image
           postmedia.innerHTML = '<img src="'+API_URL+res.post_data[postsDataArray[p]].url+'">';
         }else if ( res.post_data[postsDataArray[p]].media_type == 'v' ) { // Video
@@ -115,6 +117,7 @@ const renderPosts = (from, to) => {
       if ( res.post_data[postsDataArray[p]].comments == 0 ) {
           comments.innerHTML = '0 comments';
         }else{
+          commentCount.innerHTML = res.post_data[postsDataArray[p]].comments;
           comments.innerHTML = res.post_data[postsDataArray[p]].comments+' comments';
           comments.innerHTML += ', latest: '+res.post_data[postsDataArray[p]].latest_comment.comment;
           comments.innerHTML += ', sender: '+res.post_data[postsDataArray[p]].latest_comment.sender;
