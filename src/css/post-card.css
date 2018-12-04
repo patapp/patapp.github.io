@@ -56,17 +56,17 @@ div:empty::after {
 
 .post-media {
     width: 100%;
-    max-height: 400px;
+    max-height: 500px;
     background: #eee;
 }
 .post-media > video {
     margin: auto;
     max-width: 100%;
-    max-height: 400px;
+    max-height: 500px;
 }
 .video {
     display: flex;
-    background: black;
+    background: #443B33;
 }
 
 .post-media:empty::after {
