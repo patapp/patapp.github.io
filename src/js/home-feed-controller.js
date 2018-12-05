@@ -109,14 +109,16 @@ const renderPosts = (from, to) => {
       // --------------------------- POST MEDIA ----------------------------------
       if ( res.post_data[postsDataArray[p]].media_type == 'i' ) { // Image
         
-        postmedia.innerHTML = '<img src="'+API_URL+res.post_data[postsDataArray[p]].url+'">';
-        const mediaImage = postmedia.children[0];
-        mediaImage.addEventListener('load', () => {
-          if (mediaImage.width >= mediaImage.height) {
-            mediaImage.classList.toggle('landscape');
+        //postmedia.innerHTML = '<img src="'+API_URL+res.post_data[postsDataArray[p]].url+'">';
+        const img = document.createElement('img');
+        img.setAttribute('src', `${API_URL}${res.post_data[postsDataArray[p]].url}`);
+        img.addEventListener('load', () => {
+          if (img.width >= img.height) {
+            img.classList.add('landscape');
           }
         });
-
+        postmedia.appendChild(img);
+        
       } else if ( res.post_data[postsDataArray[p]].media_type == 'v' ) { // Video
         
         postmedia.classList.add('video');
