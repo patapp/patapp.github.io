@@ -1,40 +1,40 @@
 'use strict';
 
-  /* ------------------------+-------------------------------+
-  |   .----.  .--.  .---.    |  CREATED BY TEAM JJS          |
-  |   | {}  }/ {} \{_   _}   +-------------------------------+
-  |   | .--'/  /\  \ | |     |  Joonas Kauppinen             |
-  |   `-'   `-'  `-' `-'     |  "Jamie" GeonHui Yoon         |
-  |   - a place for pets -   |  Samuli Virtanen              |
-  +--------------------------+-------------------------------+
-  | https://github.com/joonasmkauppinen/pat-project-backend  |
-  | https://github.com/joonasmkauppinen/pat-project-frontend |
-  +-------------------------------------------------------- */
+/* ------------------------+-------------------------------+
+|   .----.  .--.  .---.    |  CREATED BY TEAM JJS          |
+|   | {}  }/ {} \{_   _}   +-------------------------------+
+|   | .--'/  /\  \ | |     |  Joonas Kauppinen             |
+|   `-'   `-'  `-' `-'     |  "Jamie" GeonHui Yoon         |
+|   - a place for pets -   |  Samuli Virtanen              |
++--------------------------+-------------------------------+
+| https://github.com/joonasmkauppinen/pat-project-backend  |
+| https://github.com/joonasmkauppinen/pat-project-frontend |
++-------------------------------------------------------- */
 
 const postElement = `
 <li class="post" id="{id}">
-            
-    <div class="post-header">
-        <div class="post-header__picture"></div>
-        <div class="post-header__username"></div>
-    </div>
 
-    <div class="post-media"></div>
+<div class="post-header">
+<div class="post-header__picture"></div>
+<div class="post-header__username"></div>
+</div>
 
-    <!-- TODO: add rating graphic -->
+<div class="post-media"></div>
 
-    <div class="post-info">
-        <ul class="post-info__tags"></ul>
-        <div class="post-info__description"></div>
-        <p class="post-description-toggle"></p>
-        <div class="post-info__comments">
-            <span></span><p></p>
-        </div>
-        <div class="post-info__timestamp">
-            <p></p><span></span>
-        </div>
+<!-- TODO: add rating graphic -->
 
-    </div>
+<div class="post-info">
+<ul class="post-info__tags"></ul>
+<div class="post-info__description"></div>
+<p class="post-description-toggle"></p>
+<div class="post-info__comments">
+<span></span><p></p>
+</div>
+<div class="post-info__timestamp">
+<p></p><span></span>
+</div>
+
+</div>
 
 </li>
 `;
@@ -52,7 +52,7 @@ const renderPosts = (from, to) => {
   let renderItems = [];
   for(let p=from;p<=to;p++){
     renderItems.push(postsDataArray[p]);
-    }
+  }
   getJSON('POST','posts/getcontent', '', {items: renderItems.join('-')} ).then( (res) => {
     for(let p=from;p<=to;p++){
       const userpic     = document.querySelector("#post-"+p+" .post-header__picture");
@@ -89,14 +89,14 @@ const renderPosts = (from, to) => {
       });
       timestamp.innerHTML = res.post_data[postsDataArray[p]].added_ago;
       
-
+      
       // -------------- PET TAGS DISABLED FOR NOW ----------------
       // if ( res.post_data[postsDataArray[p]].pets.length > 0 ) {
       //   for (let i=0; i<res.post_data[postsDataArray[p]].pets.length; i++){
       //     tags.innerHTML += '<span class="post-pet__item">'+res.post_data[postsDataArray[p]].pets[i]+'</span>';
       //     }
       //   }
-
+      
       // ----------------------- REGULAR TAGS -----------------------
       if ( res.post_data[postsDataArray[p]].tags.length > 0 ) {
         for (let i=0; i<res.post_data[postsDataArray[p]].tags.length; i++){
@@ -107,37 +107,37 @@ const renderPosts = (from, to) => {
         }
       }
       if ( res.post_data[postsDataArray[p]].media_type == 'i' ) { // Image
-          postmedia.innerHTML = '<img src="'+API_URL+res.post_data[postsDataArray[p]].url+'">';
-        }else if ( res.post_data[postsDataArray[p]].media_type == 'v' ) { // Video
-          postmedia.classList.add('video');
-          postmedia.innerHTML = '<video muted loop controls><source src="'+API_URL+res.post_data[postsDataArray[p]].url+'"></source></video>';
-        }
-        //POST COMMENTS REMOVED FOR TESTING
+        postmedia.innerHTML = '<img src="'+API_URL+res.post_data[postsDataArray[p]].url+'">';
+      } else if ( res.post_data[postsDataArray[p]].media_type == 'v' ) { // Video
+        postmedia.classList.add('video');
+        postmedia.innerHTML = '<video muted loop controls><source src="'+API_URL+res.post_data[postsDataArray[p]].url+'"></source></video>';
+      }
+      //POST COMMENTS REMOVED FOR TESTING
       /*if ( res.post_data[postsDataArray[p]].comments == 0 ) {
-          comments.innerHTML = '0 comments';
-        }else{
-          comments.innerHTML = res.post_data[postsDataArray[p]].comments+' comments';
-          comments.innerHTML += ', sender: '+res.post_data[postsDataArray[p]].latest_comment.sender;
-          comments.innerHTML += ', at: '+res.post_data[postsDataArray[p]].latest_comment.added_ago;
-        }*/
-        addComments.innerHTML = "Add comment...";
-        if (res.post_data[postsDataArray[p]].comments > 999) {
-          commentCount.innerHTML = "999+";
-        }
-        else {
-          commentCount.innerHTML = res.post_data[postsDataArray[p]].comments;
-        }
-        comment.addEventListener('click', () =>{
+        comments.innerHTML = '0 comments';
+      }else{
+        comments.innerHTML = res.post_data[postsDataArray[p]].comments+' comments';
+        comments.innerHTML += ', sender: '+res.post_data[postsDataArray[p]].latest_comment.sender;
+        comments.innerHTML += ', at: '+res.post_data[postsDataArray[p]].latest_comment.added_ago;
+      }*/
+      addComments.innerHTML = "Add comment...";
+      if (res.post_data[postsDataArray[p]].comments > 999) {
+        commentCount.innerHTML = "999+";
+      }
+      else {
+        commentCount.innerHTML = res.post_data[postsDataArray[p]].comments;
+      }
+      comment.addEventListener('click', () =>{
         if (VIEW_PAGE == 'home'){
           conLog("YOU CAN COMMENT ON STUFF");
         }
         else if (VIEW_PAGE =='') {
           conLog("YOU CANNOT COMMENT ON STUFF");
         }
-        });
-      }
-    });
-  }
+      });
+    }
+  });
+}
 
 const fetchPosts = () => {
   conLog('[fetchPosts] Skeletons: ' + postsInitialized + ", TotalItems: " + postsDataCount + ', ContentLoadedTo: ' + postsDataContentLoadedTo );
@@ -147,10 +147,10 @@ const fetchPosts = () => {
     postsDataContentLoadedTo = renderTo + 1;
     conLog('[fetchPosts] I will render from ' + renderFrom + ' to ' + renderTo );
     renderPosts (renderFrom, renderTo);
-    }else{
+  }else{
     conLog('[fetchPosts] all already fetched');
-    }
   }
+}
 
 const loadPosts = () => {
   conLog('[loadPosts] Called.');
@@ -161,46 +161,46 @@ const loadPosts = () => {
     postsDataLoaded = 1;
     postsDataCount = res.posts_count;
     fetchPosts();
-    });
-  }
+  });
+}
 
 const appendPosts = (amount) => {
-    conLog ( '[appendPosts] Called with amount: ' + amount );
-    let maxAmount = amount;
-    if ( postsDataLoaded ) {
-      // posts data is loaded, let's check, is there how many elements still left
-      maxAmount = (postsDataCount - postsInitialized);
-      conLog('[appendPosts] Elements Left: ' + maxAmount);
-      if ( maxAmount < amount ) conLog ( '[appendPosts] Only ' + maxAmount + ' items left, i will be rendering only just ' + maxAmount );
-      if ( maxAmount == 0 ) {
-        conLog('[appendPosts] No items left! Cannot append more posts!');
-        return;
-        }
-      }
-    let addedAmount = 0;
-    for (let i=0; i<amount && i<maxAmount; i++) {
-        feedContainer.innerHTML += postElement.replace('{id}', 'post-'+(i+postsInitialized));
-        addedAmount++;
+  conLog ( '[appendPosts] Called with amount: ' + amount );
+  let maxAmount = amount;
+  if ( postsDataLoaded ) {
+    // posts data is loaded, let's check, is there how many elements still left
+    maxAmount = (postsDataCount - postsInitialized);
+    conLog('[appendPosts] Elements Left: ' + maxAmount);
+    if ( maxAmount < amount ) conLog ( '[appendPosts] Only ' + maxAmount + ' items left, i will be rendering only just ' + maxAmount );
+    if ( maxAmount == 0 ) {
+      conLog('[appendPosts] No items left! Cannot append more posts!');
+      return;
     }
-    postsInitialized=postsInitialized+addedAmount;
-    conLog('[appendPosts] New elements are created!');
-    if ( postsDataLoaded ) fetchPosts();
+  }
+  let addedAmount = 0;
+  for (let i=0; i<amount && i<maxAmount; i++) {
+    feedContainer.innerHTML += postElement.replace('{id}', 'post-'+(i+postsInitialized));
+    addedAmount++;
+  }
+  postsInitialized=postsInitialized+addedAmount;
+  conLog('[appendPosts] New elements are created!');
+  if ( postsDataLoaded ) fetchPosts();
 };
 
 const isVisibleOnScreen = (element) => {
-    const bounding = element.getBoundingClientRect();
-    if (bounding.bottom <= window.innerHeight) {
-        conLog(element.tagName + ' trigger in viewport');
-        return true;
-    } else {
-        return false;
-    }
+  const bounding = element.getBoundingClientRect();
+  if (bounding.bottom <= window.innerHeight) {
+    conLog(element.tagName + ' trigger in viewport');
+    return true;
+  } else {
+    return false;
+  }
 };
 
 const homeTab         = document.getElementById('home-tab');
 const homeLoadTrigger = document.getElementById('home-load-trigger');
 homeTab.addEventListener('scroll', () => {
-
+  
   if (isVisibleOnScreen(homeLoadTrigger)) {
     console.log('Current tab HOME adding 5 new posts to home feed')
     appendPosts(5);
