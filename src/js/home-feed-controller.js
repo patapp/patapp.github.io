@@ -11,8 +11,9 @@
 | https://github.com/joonasmkauppinen/pat-project-frontend |
 +-------------------------------------------------------- */
 
+// removed: <li class="post" id="{id}">
 const postElement = `
-<li class="post" id="{id}">
+
 
   <div class="post-header">
     <div class="post-header__picture"></div>
@@ -36,7 +37,6 @@ const postElement = `
 
   </div>
 
-</li>
 `;
 
 const feedContainer = document.getElementById('home-feed');
@@ -196,7 +196,11 @@ const appendPosts = (amount) => {
   }
   let addedAmount = 0;
   for (let i=0; i<amount && i<maxAmount; i++) {
-    feedContainer.innerHTML += postElement.replace('{id}', 'post-'+(i+postsInitialized));
+    const newLIElement = document.createElement('LI');
+    newLIElement.innerHTML += postElement;
+    newLIElement.id = 'post-'+(i+postsInitialized);
+    feedContainer.appendChild(newLIElement);
+    //feedContainer.innerHTML += postElement.replace('{id}', 'post-'+(i+postsInitialized));
     addedAmount++;
   }
   postsInitialized=postsInitialized+addedAmount;
