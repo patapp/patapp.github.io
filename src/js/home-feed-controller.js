@@ -61,7 +61,8 @@ const renderPosts = (from, to) => {
       const tags        = document.querySelector("#post-"+p+" .post-info__tags");
       const description = document.querySelector("#post-"+p+" .post-info__description");
       const showDesc    = document.querySelector("#post-"+p+" .post-description-toggle");
-      const comments    = document.querySelector("#post-"+p+" .post-info__comments > span");
+      const comment     = document.querySelector('#post-'+p+" ,post-info__comments");
+      const commentCount= document.querySelector("#post-"+p+" .post-info__comments > span");
       const addComments = document.querySelector("#post-"+p+" .post-info__comments > p");
       const timestamp   = document.querySelector("#post-"+p+" .post-info__timestamp > p");
       
@@ -121,11 +122,19 @@ const renderPosts = (from, to) => {
         }*/
         addComments.innerHTML = "Add comment...";
         if (res.post_data[postsDataArray[p]].comments > 999) {
-          comments.innerHTML = "999+";
+          commentCount.innerHTML = "999+";
         }
         else {
-          comments.innerHTML = res.post_data[postsDataArray[p]].comments;
+          commentCount.innerHTML = res.post_data[postsDataArray[p]].comments;
         }
+        comment.addEventListener('click', () =>{
+        if (VIEW_PAGE == 'home'){
+          conLog("YOU CAN COMMENT ON STUFF");
+        }
+        else if (VIEW_PAGE =='') {
+          conLog("YOU CANNOT COMMENT ON STUFF");
+        }
+        });
       }
     });
   }
