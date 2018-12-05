@@ -173,6 +173,9 @@ div:empty::after {
     font-family: 'Roboto', serif;
     font-size: 17px;
     font-weight: 400;
+}
+
+.post-info__comments > span {
     background-color: var(--color-pink);
     border-radius: 50%;
 }

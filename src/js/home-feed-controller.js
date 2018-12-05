@@ -27,7 +27,9 @@ const postElement = `
         <ul class="post-info__tags"></ul>
         <div class="post-info__description"></div>
         <p class="post-description-toggle"></p>
-        <div class="post-info__comments"></div>
+        <div class="post-info__comments">
+            <span></span>
+        </div>
         <div class="post-info__timestamp">
             <p></p><span></span>
         </div>
@@ -59,7 +61,7 @@ const renderPosts = (from, to) => {
       const tags        = document.querySelector("#post-"+p+" .post-info__tags");
       const description = document.querySelector("#post-"+p+" .post-info__description");
       const showDesc    = document.querySelector("#post-"+p+" .post-description-toggle");
-      const comments    = document.querySelector("#post-"+p+" .post-info__comments");
+      const comments    = document.querySelector("#post-"+p+" .post-info__comments > span");
       const timestamp   = document.querySelector("#post-"+p+" .post-info__timestamp > p");
       
       userpic.innerHTML = '<img height="45" width="45" src="'+API_URL+res.post_data[postsDataArray[p]].user_pic+'">';
