@@ -173,11 +173,24 @@ div:empty::after {
     font-family: 'Roboto', serif;
     font-size: 17px;
     font-weight: 400;
+    display: block;
 }
 
 .post-info__comments > span {
     background-color: var(--color-pink);
-    border-radius: 50%;
+    border-radius: 40%;
+    color: white;
+    font-size: 10px;
+    padding: 2px 3px 2px 3px;
+}
+
+.post-info__comments > p {
+    display: inline-block;
+    margin-left: 3px;
+    color: var(--color-brown);
+    font-size: 13px;
+    margin-left: 20px;
+    text-decoration: underline;
 }
 .post-info__comments:empty::after {
     width: 200px;

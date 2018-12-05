@@ -28,7 +28,7 @@ const postElement = `
         <div class="post-info__description"></div>
         <p class="post-description-toggle"></p>
         <div class="post-info__comments">
-            <span></span>
+            <span></span><p></p>
         </div>
         <div class="post-info__timestamp">
             <p></p><span></span>
@@ -62,6 +62,7 @@ const renderPosts = (from, to) => {
       const description = document.querySelector("#post-"+p+" .post-info__description");
       const showDesc    = document.querySelector("#post-"+p+" .post-description-toggle");
       const comments    = document.querySelector("#post-"+p+" .post-info__comments > span");
+      const addComments = document.querySelector("#post-"+p+" .post-info__comments > p");
       const timestamp   = document.querySelector("#post-"+p+" .post-info__timestamp > p");
       
       userpic.innerHTML = '<img height="45" width="45" src="'+API_URL+res.post_data[postsDataArray[p]].user_pic+'">';
@@ -118,7 +119,13 @@ const renderPosts = (from, to) => {
           comments.innerHTML += ', sender: '+res.post_data[postsDataArray[p]].latest_comment.sender;
           comments.innerHTML += ', at: '+res.post_data[postsDataArray[p]].latest_comment.added_ago;
         }*/
-        comments.innerHTML = res.post_data[postsDataArray[p]].comments;
+        addComments.innerHTML = "Add comment...";
+        if (res.post_data[postsDataArray[p]].comments > 999) {
+          comments.innerHTML = "999+";
+        }
+        else {
+          comments.innerHTML = res.post_data[postsDataArray[p]].comments;
+        }
       }
     });
   }
