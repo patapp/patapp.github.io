@@ -113,7 +113,9 @@ const renderPosts = (from, to) => {
         const img = document.createElement('img');
         img.setAttribute('src', `${API_URL}${res.post_data[postsDataArray[p]].url}`);
         img.addEventListener('load', () => {
+          console.log('LOAD event on IMG tag');
           if (img.width >= img.height) {
+            console.log('landscape image');
             img.classList.add('landscape');
           }
         });
