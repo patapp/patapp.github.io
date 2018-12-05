@@ -68,15 +68,19 @@ document.getElementById('profile-btn')
   changeToTab(PROFILE);
 });
 
-newPostButton.addEventListener('click', () => {
+const toggelNewPostView = () => {
   tabsWrapper.classList.toggle('hidden');
   newPostView.classList.toggle('new-post-hidden');
   bottomNav.classList.toggle('bottom-nav-hidden');
+}
+
+newPostButton.addEventListener('click', () => {
+  location.href = "#new-post";
+  toggelNewPostView();
 });
 newPostCancelButton.addEventListener('click', () => {
-  tabsWrapper.classList.toggle('hidden');
-  newPostView.classList.toggle('new-post-hidden');
-  bottomNav.classList.toggle('bottom-nav-hidden');
+  window.history.back();
+  toggelNewPostView();
 });
 
 menu.addEventListener('change', ()=> {
