@@ -173,6 +173,8 @@ div:empty::after {
     font-family: 'Roboto', serif;
     font-size: 17px;
     font-weight: 400;
+    background-color: var(--color-pink);
+    border-radius: 50%;
 }
 .post-info__comments:empty::after {
     width: 200px;

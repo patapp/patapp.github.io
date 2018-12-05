@@ -28,7 +28,6 @@ const postElement = `
         <div class="post-info__description"></div>
         <p class="post-description-toggle"></p>
         <div class="post-info__comments"></div>
-                
         <div class="post-info__timestamp">
             <p></p><span></span>
         </div>
@@ -109,13 +108,15 @@ const renderPosts = (from, to) => {
           postmedia.classList.add('video');
           postmedia.innerHTML = '<video muted loop controls><source src="'+API_URL+res.post_data[postsDataArray[p]].url+'"></source></video>';
         }
-      if ( res.post_data[postsDataArray[p]].comments == 0 ) {
+        //POST COMMENTS REMOVED FOR TESTING
+      /*if ( res.post_data[postsDataArray[p]].comments == 0 ) {
           comments.innerHTML = '0 comments';
         }else{
-          /*comments.innerHTML = res.post_data[postsDataArray[p]].comments+' comments';
+          comments.innerHTML = res.post_data[postsDataArray[p]].comments+' comments';
           comments.innerHTML += ', sender: '+res.post_data[postsDataArray[p]].latest_comment.sender;
-          comments.innerHTML += ', at: '+res.post_data[postsDataArray[p]].latest_comment.added_ago;*/
-        }
+          comments.innerHTML += ', at: '+res.post_data[postsDataArray[p]].latest_comment.added_ago;
+        }*/
+        comments.innerHTML = res.post_data[postsDataArray[p]].comments;
       }
     });
   }
