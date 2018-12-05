@@ -14,27 +14,27 @@
 const postElement = `
 <li class="post" id="{id}">
 
-<div class="post-header">
-<div class="post-header__picture"></div>
-<div class="post-header__username"></div>
-</div>
+  <div class="post-header">
+    <div class="post-header__picture"></div>
+    <div class="post-header__username"></div>
+  </div>
 
-<div class="post-media"></div>
+  <div class="post-media"></div>
 
-<!-- TODO: add rating graphic -->
+  <!-- TODO: add rating graphic -->
 
-<div class="post-info">
-<ul class="post-info__tags"></ul>
-<div class="post-info__description"></div>
-<p class="post-description-toggle"></p>
-<div class="post-info__comments">
-<span></span><p></p>
-</div>
-<div class="post-info__timestamp">
-<p></p><span></span>
-</div>
+  <div class="post-info">
+  <ul class="post-info__tags"></ul>
+  <div class="post-info__description"></div>
+  <p class="post-description-toggle"></p>
+  <div class="post-info__comments">
+    <span></span><p></p>
+  </div>
+  <div class="post-info__timestamp">
+    <p></p><span></span>
+  </div>
 
-</div>
+  </div>
 
 </li>
 `;
@@ -106,12 +106,25 @@ const renderPosts = (from, to) => {
           tags.appendChild(tagItem);
         }
       }
+      // --------------------------- POST MEDIA ----------------------------------
       if ( res.post_data[postsDataArray[p]].media_type == 'i' ) { // Image
+        
         postmedia.innerHTML = '<img src="'+API_URL+res.post_data[postsDataArray[p]].url+'">';
+        const mediaImage = postmedia.children[0];
+        mediaImage.addEventListener('load', () => {
+          if (mediaImage.width >= mediaImage.height) {
+            mediaImage.classList.toggle('landscape');
+          }
+        });
+
       } else if ( res.post_data[postsDataArray[p]].media_type == 'v' ) { // Video
+        
         postmedia.classList.add('video');
         postmedia.innerHTML = '<video muted loop controls><source src="'+API_URL+res.post_data[postsDataArray[p]].url+'"></source></video>';
+        // const mediaVideo = postmedia.children[0];
+        // mediaVideo.addEventListener('')
       }
+
       //POST COMMENTS REMOVED FOR TESTING
       /*if ( res.post_data[postsDataArray[p]].comments == 0 ) {
         comments.innerHTML = '0 comments';
