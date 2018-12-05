@@ -61,7 +61,7 @@ const renderPosts = (from, to) => {
       const tags        = document.querySelector("#post-"+p+" .post-info__tags");
       const description = document.querySelector("#post-"+p+" .post-info__description");
       const showDesc    = document.querySelector("#post-"+p+" .post-description-toggle");
-      const comment     = document.querySelector('#post-'+p+" ,post-info__comments");
+      const comment     = document.querySelector('#post-'+p+" .post-info__comments");
       const commentCount= document.querySelector("#post-"+p+" .post-info__comments > span");
       const addComments = document.querySelector("#post-"+p+" .post-info__comments > p");
       const timestamp   = document.querySelector("#post-"+p+" .post-info__timestamp > p");
