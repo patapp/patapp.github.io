@@ -198,6 +198,7 @@ const appendPosts = (amount) => {
   for (let i=0; i<amount && i<maxAmount; i++) {
     const newLIElement = document.createElement('LI');
     newLIElement.innerHTML += postElement;
+    newLIElement.className = 'post';
     newLIElement.id = 'post-'+(i+postsInitialized);
     feedContainer.appendChild(newLIElement);
     //feedContainer.innerHTML += postElement.replace('{id}', 'post-'+(i+postsInitialized));
