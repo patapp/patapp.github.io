@@ -225,6 +225,120 @@ div:empty::after {
 }
 
 
+/* ---------- Rating slider---------- */
+
+.post-rating {
+    position: relative;
+    margin: 8px auto;
+    max-width: 300px;
+}
+
+.rating-line {
+   position: absolute;
+   width: 99%;
+   height: 9px;
+   margin-left: 3px;
+   top: 21px;
+   border-radius: 10px;
+   background-image: linear-gradient(to right, #EDD1B7, #EDD1B7);
+}
+.rating-dots {
+    --d-size: 28px;
+    background-image: linear-gradient(to right, #EDD1B7, #EDD1B7);
+    height: 50px;
+    -webkit-mask-image: 
+        url(../svg/circle.svg), 
+        url(../svg/circle.svg),
+        url(../svg/circle.svg),
+        url(../svg/circle.svg),
+        url(../svg/circle.svg);
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: var(--d-size) var(--d-size);
+    -webkit-mask-position-y: center;
+    -webkit-mask-position-x: 1%, 25%, 50%, 75%, 100%;
+    position: relative;
+}
+
+.rating-slider {
+    position: absolute;
+    -webkit-appearance: none;
+    width: 100%;
+    height: 10px;
+    top: 20px;
+    background-color: transparent;
+    outline: none;
+}
+.rating-slider::-webkit-slider-thumb {
+    --size: 45px;
+    -webkit-appearance: none;
+    background-image: none;
+    background-size: cover;
+    width: var(--size);
+    height: var(--size);
+    cursor: pointer;
+    transform: rotateZ(-90deg) scale(0,0);
+    transition: transform 200ms cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.value_1::-webkit-slider-thumb {
+    background-image: url("../icons/Rating_1.png") !important;
+    transform: rotateZ(0deg) scale(1,1);
+}
+.value_2::-webkit-slider-thumb {
+    background-image: url("../icons/Rating_2.png") !important;
+    transform: rotateZ(0deg) scale(1,1);
+}
+.value_3::-webkit-slider-thumb {
+    background-image: url("../icons/Rating_3.png") !important;
+    transform: rotateZ(0deg) scale(1,1);
+}
+.value_4::-webkit-slider-thumb {
+    background-image: url("../icons/Rating_4.png") !important;
+    transform: rotateZ(0deg) scale(1,1);
+}
+.value_5::-webkit-slider-thumb {
+    background-image: url("../icons/Rating_5.png") !important;
+    transform: rotateZ(0deg) scale(1,1);
+}
+
+.gradient_val-plus-2 {
+    background-image: linear-gradient(
+        to right, 
+        #EDD1B7, #EDD1B7 45%, 
+        #FFDD2B 47%, 
+        #FFDD2B 75%, 
+        #00FFA3 100%) !important;
+}
+.gradient_val-plus-1 {
+    background-image: linear-gradient(
+        to right, 
+        #EDD1B7, #EDD1B7 45%, 
+        #FFDD2B 47%, 
+        #8CEC61 75%,
+        #EDD1B7 78%, 
+        #EDD1B7 100%) !important;
+}
+.gradient_val-minus-1 {
+    background-image: linear-gradient(
+        to right,
+        #EDD1B7 23%, 
+        #FF9A56 24%, 
+        #FFDD2B 53%, 
+        #EDD1B7 54%, 
+        #EDD1B7 100%) !important;
+}
+.gradient_val-minus-2 {
+    background-image: linear-gradient(
+        to right,
+        #FF488A, 
+        #FFDD2B 53%, 
+        #EDD1B7 54%, 
+        #EDD1B7 100%) !important;
+}
+
+
+/* ---------------------------------- */
+
 
 @keyframes loading {
     from {opacity: 1;}

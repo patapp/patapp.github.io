@@ -11,9 +11,90 @@
 | https://github.com/joonasmkauppinen/pat-project-frontend |
 +-------------------------------------------------------- */
 
+// ************ HELPER FUNCTIONS **************
+
+// *** For rating slider ***
+const checkClassName = (className, line, dots) => {
+	if (line.classList.contains(className)) {
+		line.classList.toggle(className)
+	}
+	if (dots.classList.contains(className)) {
+		dots.classList.toggle(className);
+	}
+}
+
+const applyNewClass = (newClass, line, dots) => {
+	if (newClass === null) return;
+	line.classList.toggle(newClass);
+	dots.classList.toggle(newClass);
+}
+
+const switchSliderThumb = (newClass, slider) => {
+	thumbs.forEach(className => {
+		if (slider.classList.contains(className)) {
+			slider.classList.toggle(className);
+		}
+	});
+	setTimeout(() => {
+		slider.classList.toggle(newClass);
+	}, 200);
+}
+
+const switchSliderGradient = (newClass, line, dots) => {
+	setTimeout(() => {
+		gradients.forEach(className => {
+			checkClassName(className, line, dots);
+		});
+		applyNewClass(newClass, line, dots);
+	}, 250);
+}
+
+const setSliderVal = (value, slider, line, dots) => {
+	slider.value = value;
+	updateSlider(slider, line, dots);
+}
+
+const updateSlider = (slider, line, dots) => {
+	switch (slider.value) {
+		
+		case "1":
+		switchSliderThumb(thumbs[0], slider);
+		switchSliderGradient(gradients[0], line, dots);
+		break;
+		
+		case "2":
+		switchSliderThumb(thumbs[1], slider);
+		switchSliderGradient(gradients[1], line, dots);
+		break;
+		
+		case "3":
+		switchSliderThumb(thumbs[2], slider);
+		switchSliderGradient(gradients[2], line, dots);
+		break;
+		
+		case "4":
+		switchSliderThumb(thumbs[3], slider);
+		switchSliderGradient(gradients[3], line, dots);
+		break;
+		
+		case "5":
+		switchSliderThumb(thumbs[4], slider);
+		switchSliderGradient(gradients[4], line, dots);
+		break;
+	}
+}
+
+//*********************************************
+
+// Class names for rating slider gradients and slider thumb image
+const thumbs    = ["value_1", "value_2", "value_3", "value_4", "value_5"];
+const gradients = ["gradient_val-minus-2", "gradient_val-minus-1", null, "gradient_val-plus-1", "gradient_val-plus-2"];
+// **************************************************************
+
+
+
 // removed: <li class="post" id="{id}">
 const postElement = `
-
 
   <div class="post-header">
     <div class="post-header__picture"></div>
@@ -22,7 +103,12 @@ const postElement = `
 
   <div class="post-media"></div>
 
-  <!-- TODO: add rating graphic -->
+  <!-- rating graphic -->
+  <div class="post-rating">
+        <div class="rating-line"></div>
+        <div class="rating-dots"></div>
+        <input class="rating-slider" type="range" min="1" max="5" value="0">
+    </div>
 
   <div class="post-info">
   <ul class="post-info__tags"></ul>
@@ -48,19 +134,32 @@ let postsDataArray = [];
 let postsDataContentLoadedTo = 0;
 
 const renderPosts = (from, to) => {
+  
   conLog('[renderPosts] Rendering: ' + from + ' --> ' + to);  
   let renderItems = [];
-  for(let p=from;p<=to;p++){
+  
+  for (let p=from; p<=to; p++) {
     renderItems.push(postsDataArray[p]);
   }
+
   getJSON('POST','posts/getcontent', '', {items: renderItems.join('-')} ).then( (res) => {
-    for(let p=from;p<=to;p++){
+
+    for (let p=from; p<=to; p++) {
+
       const userpic     = document.querySelector("#post-"+p+" .post-header__picture");
       const username    = document.querySelector("#post-"+p+" .post-header__username");
+
       const postmedia   = document.querySelector("#post-"+p+" .post-media");
+
+      const ratingLine  = document.querySelector("#post-"+p+" .rating-line");
+      const ratingDots  = document.querySelector("#post-"+p+" .rating-dots");
+      const ratingSlider= document.querySelector("#post-"+p+" .rating-slider");
+
       const tags        = document.querySelector("#post-"+p+" .post-info__tags");
+
       const description = document.querySelector("#post-"+p+" .post-info__description");
       const showDesc    = document.querySelector("#post-"+p+" .post-description-toggle");
+
       const comment     = document.querySelector('#post-'+p+" .post-info__comments");
       const commentCount= document.querySelector("#post-"+p+" .post-info__comments > span");
       const addComments = document.querySelector("#post-"+p+" .post-info__comments > p");
@@ -106,6 +205,8 @@ const renderPosts = (from, to) => {
           tags.appendChild(tagItem);
         }
       }
+
+
       // --------------------------- POST MEDIA ----------------------------------
       if ( res.post_data[postsDataArray[p]].media_type == 'i' ) { // Image
         
@@ -128,6 +229,27 @@ const renderPosts = (from, to) => {
         // const mediaVideo = postmedia.children[0];
         // mediaVideo.addEventListener('')
       }
+      // ------------------------ END OF POST MEDIA --------------------------------
+
+
+      // --------------------- POST RATING ------------------------------------
+      // Set slider value if user has already rated post
+      //if ( some check to see if there is value from db) {
+        //const dbValue = ...
+        //setSliderVal(dbValue, ratingSlider, ratingLine, ratingDots);
+      //}
+
+      // Triggered when slider value changes
+      ratingSlider.addEventListener('input', () => {
+        updateSlider(ratingSlider.value, ratingSlider, ratingLine, ratingDots);
+      });
+
+      // Triggered when user lets go of slider
+      ratingSlider.addEventListener('change', () => {
+        // Do database updating here
+        console.log(`TEST LOG! post_id: ${p}, new_rating_value: ${ratingSlider.value}`);
+      });
+      // -------------------- END OF POST RATING -----------------------------------
 
       //POST COMMENTS REMOVED FOR TESTING
       /*if ( res.post_data[postsDataArray[p]].comments == 0 ) {
