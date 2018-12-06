@@ -15,6 +15,7 @@
 
 // *** For rating slider ***
 const checkClassName = (className, line, dots) => {
+  console.log('[checkClassName] function called');
 	if (line.classList.contains(className)) {
 		line.classList.toggle(className)
 	}
@@ -24,12 +25,14 @@ const checkClassName = (className, line, dots) => {
 }
 
 const applyNewClass = (newClass, line, dots) => {
-	if (newClass === null) return;
+  console.log('[applyNewClass] function called');
+  if (newClass === null) return;
 	line.classList.toggle(newClass);
 	dots.classList.toggle(newClass);
 }
 
 const switchSliderThumb = (newClass, slider) => {
+  console.log('[switchSliderThumb] function called');
 	thumbs.forEach(className => {
 		if (slider.classList.contains(className)) {
 			slider.classList.toggle(className);
@@ -41,6 +44,7 @@ const switchSliderThumb = (newClass, slider) => {
 }
 
 const switchSliderGradient = (newClass, line, dots) => {
+  console.log('[switchSliderGradient] function called');
 	setTimeout(() => {
 		gradients.forEach(className => {
 			checkClassName(className, line, dots);
@@ -55,6 +59,7 @@ const setSliderVal = (value, slider, line, dots) => {
 }
 
 const updateSlider = (slider, line, dots) => {
+  console.log('[updateSlider] function called');
 	switch (slider.value) {
 		
 		case "1":
@@ -241,6 +246,7 @@ const renderPosts = (from, to) => {
 
       // Triggered when slider value changes
       ratingSlider.addEventListener('input', () => {
+        console.log('Slider INPUT event called.');
         updateSlider(ratingSlider.value, ratingSlider, ratingLine, ratingDots);
       });
 
