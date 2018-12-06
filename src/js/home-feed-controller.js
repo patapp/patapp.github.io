@@ -215,7 +215,12 @@ const renderPosts = (from, to) => {
       // --------------------------- POST MEDIA ----------------------------------
       if ( res.post_data[postsDataArray[p]].media_type == 'i' ) { // Image
         
-        //postmedia.innerHTML = '<img src="'+API_URL+res.post_data[postsDataArray[p]].url+'">';
+        // Set media background color based on post colors
+        const mediaColor = res.post_data[postsDataArray[p]].color;
+        postmedia.style.backgroundColor = `#${mediaColor}`;
+        
+        // Create img element, set src attribute and append to media element.
+        // Also check if image size is landscape and add appropriate class.
         const img = document.createElement('img');
         img.setAttribute('src', `${API_URL}${res.post_data[postsDataArray[p]].url}`);
         img.addEventListener('load', () => {
@@ -239,10 +244,11 @@ const renderPosts = (from, to) => {
 
       // --------------------- POST RATING ------------------------------------
       // Set slider value if user has already rated post
-      //if ( some check to see if there is value from db) {
-        //const dbValue = ...
-        //setSliderVal(dbValue, ratingSlider, ratingLine, ratingDots);
-      //}
+      const dbValue = res.post_data[postsDataArray[p]].my_rate;
+      if (dbValue != 0) {
+        console.log(`post_id${p} setting rating to ${dbValue}`);
+        setSliderVal(dbValue, ratingSlider, ratingLine, ratingDots);
+      }
 
       // Triggered when slider value changes
       ratingSlider.addEventListener('input', () => {
