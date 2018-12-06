@@ -247,7 +247,7 @@ const renderPosts = (from, to) => {
       // Triggered when slider value changes
       ratingSlider.addEventListener('input', () => {
         console.log('Slider INPUT event called.');
-        updateSlider(ratingSlider.value, ratingSlider, ratingLine, ratingDots);
+        updateSlider(ratingSlider, ratingLine, ratingDots);
       });
 
       // Triggered when user lets go of slider
