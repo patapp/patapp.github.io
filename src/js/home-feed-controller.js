@@ -87,28 +87,28 @@ const updateSlider = (slider, line, dots) => {
 		switchSliderGradient(gradients[4], line, dots);
 		break;
   }
-  
-  const setSlilderStylesToRated = () => {
-    slider.max = 5;
-    slider.classList.remove('unrated__slider');
-    sliderParent.classList.remove('unrated__wrapper');
-    isRated = true;
-  }
+    
+}
 
-  const updatePostRating = (post, value) => {
-    getJSON('POST', 'ratings', '', 
-    {
-      post_id: post,
-      rating: value
-    }, 0).then( res => {
-      if (res.success) {
-        console.log(`[SUCCESS] post-id: ${post}, new-rating-value: ${value}`);
-      } else {
-        console.error(`[ERROR UPDATING POST RATING] ${res.error}`);
-      }
-    });
-  }
+const setSlilderStylesToRated = (slider, parent) => {
+  slider.max = 5;
+  slider.classList.remove('unrated__slider');
+  parent.classList.remove('unrated__wrapper');
+  isRated = true;
+}
 
+const updatePostRating = (post, value) => {
+  getJSON('POST', 'ratings', '', 
+  {
+    post_id: post,
+    rating: value
+  }, 0).then( res => {
+    if (res.success) {
+      console.log(`[SUCCESS] post-id: ${post}, new-rating-value: ${value}`);
+    } else {
+      console.error(`[ERROR UPDATING POST RATING] ${res.error}`);
+    }
+  });
 }
 
 //*********************************************
@@ -123,33 +123,33 @@ const gradients = ["gradient_val-minus-2", "gradient_val-minus-1", null, "gradie
 // removed: <li class="post" id="{id}">
 const postElement = `
 
-  <div class="post-header">
-    <div class="post-header__picture"></div>
-    <div class="post-header__username"></div>
-  </div>
+<div class="post-header">
+<div class="post-header__picture"></div>
+<div class="post-header__username"></div>
+</div>
 
-  <div class="post-media"></div>
+<div class="post-media"></div>
 
-  <!-- rating graphic -->
-  <div class="post-rating unrated__wrapper">
-        <div class="rating-line"></div>
-        <div class="rating-dots"></div>
-        <input class="rating-slider unrated__slider" type="range" min="1" max="5" value="0">
-    </div>
+<!-- rating graphic -->
+<div class="post-rating unrated__wrapper">
+<div class="rating-line"></div>
+<div class="rating-dots"></div>
+<input class="rating-slider unrated__slider" type="range" min="1" max="5" value="0">
+</div>
 
-  <div class="post-info">
-  <ul class="post-info__tags"></ul>
-  <div class="post-info__description"></div>
-  <p class="post-description-toggle"></p>
-  <div class="post-info__comments">
-    <img src="../src/svg/comment_ic.svg" alt="comment_ic"></img>
-    <span></span><p></p>
-  </div>
-  <div class="post-info__timestamp">
-    <p></p><span></span>
-  </div>
+<div class="post-info">
+<ul class="post-info__tags"></ul>
+<div class="post-info__description"></div>
+<p class="post-description-toggle"></p>
+<div class="post-info__comments">
+<img src="../src/svg/comment_ic.svg" alt="comment_ic"></img>
+<span></span><p></p>
+</div>
+<div class="post-info__timestamp">
+<p></p><span></span>
+</div>
 
-  </div>
+</div>
 
 `;
 
@@ -169,25 +169,26 @@ const renderPosts = (from, to) => {
   for (let p=from; p<=to; p++) {
     renderItems.push(postsDataArray[p]);
   }
-
+  
   getJSON('POST','posts/getcontent', '', {items: renderItems.join('-')} ).then( (res) => {
-
+    
     for (let p=from; p<=to; p++) {
-
+      
       const userpic     = document.querySelector("#post-"+p+" .post-header__picture");
       const username    = document.querySelector("#post-"+p+" .post-header__username");
-
+      
       const postmedia   = document.querySelector("#post-"+p+" .post-media");
-
+      
+      const ratingParent= document.querySelector("#post-"+p+" .post-rating")
       const ratingLine  = document.querySelector("#post-"+p+" .rating-line");
       const ratingDots  = document.querySelector("#post-"+p+" .rating-dots");
       const ratingSlider= document.querySelector("#post-"+p+" .rating-slider");
       let   isRated     = false;
       const tags        = document.querySelector("#post-"+p+" .post-info__tags");
-
+      
       const description = document.querySelector("#post-"+p+" .post-info__description");
       const showDesc    = document.querySelector("#post-"+p+" .post-description-toggle");
-
+      
       const comment     = document.querySelector("#post-"+p+" .post-info__comments");
       const commentCount= document.querySelector("#post-"+p+" .post-info__comments > span");
       const commentIcon = document.querySelector("#post-"+p+" .post-info__comments > img");
@@ -234,8 +235,8 @@ const renderPosts = (from, to) => {
           tags.appendChild(tagItem);
         }
       }
-
-
+      
+      
       // --------------------------- POST MEDIA ----------------------------------
       if ( res.post_data[postsDataArray[p]].media_type == 'i' ) { // Image
         
@@ -264,34 +265,34 @@ const renderPosts = (from, to) => {
         // mediaVideo.addEventListener('')
       }
       // ------------------------ END OF POST MEDIA --------------------------------
-
-
+      
+      
       // --------------------- POST RATING ------------------------------------
       // Set slider value if user has already rated post
       const dbValue = res.post_data[postsDataArray[p]].my_rate;
       if (dbValue != 0) {
         console.log(`post_id${p} setting rating to ${dbValue}`);
-        setSlilderStylesToRated();
+        setSlilderStylesToRated(ratingSlider, ratingParent);
         setSliderVal(dbValue, ratingSlider, ratingLine, ratingDots);
       }
-
+      
       // Triggered when slider value changes
       ratingSlider.addEventListener('input', () => {
         console.log('Slider INPUT event called.');
-        if (!isRated) setSlilderStylesToRated();
+        if (!isRated) setSlilderStylesToRated(ratingSlider, ratingParent);
         updateSlider(ratingSlider, ratingLine, ratingDots);
       });
-
+      
       // Triggered when user lets go of slider
       ratingSlider.addEventListener('change', () => {
         // Do database updating here
         const id = p;
         const value = ratingSlider.value;
         updatePostRating(id, value);
-
+        
       });
       // -------------------- END OF POST RATING -----------------------------------
-
+      
       addComments.innerHTML = "Add comment...";
       /*
       if (res.post_data[postsDataArray[p]].comments > 999) {
