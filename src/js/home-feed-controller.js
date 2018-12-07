@@ -90,11 +90,10 @@ const updateSlider = (slider, line, dots) => {
     
 }
 
-const setSlilderStylesToRated = (slider, parent, isRated) => {
+const setSlilderStylesToRated = (slider, parent) => {
   slider.max = 5;
   slider.classList.remove('unrated__slider');
   parent.classList.remove('unrated__wrapper');
-  isRated = true;
 }
 
 const updatePostRating = (post, value) => {
@@ -102,7 +101,7 @@ const updatePostRating = (post, value) => {
   {
     post_id: post,
     rating: value
-  }, 0).then( res => {
+  }).then( res => {
     if (res.success) {
       console.log(`[SUCCESS] post-id: ${post}, new-rating-value: ${value}`);
     } else {
@@ -184,6 +183,7 @@ const renderPosts = (from, to) => {
       const ratingDots  = document.querySelector("#post-"+p+" .rating-dots");
       const ratingSlider= document.querySelector("#post-"+p+" .rating-slider");
       let   isRated     = false;
+      
       const tags        = document.querySelector("#post-"+p+" .post-info__tags");
       
       const description = document.querySelector("#post-"+p+" .post-info__description");
@@ -272,14 +272,18 @@ const renderPosts = (from, to) => {
       const dbValue = res.post_data[postsDataArray[p]].my_rate;
       if (dbValue != 0) {
         console.log(`post_id${p} setting rating to ${dbValue}`);
-        setSlilderStylesToRated(ratingSlider, ratingParent, isRated);
+        setSlilderStylesToRated(ratingSlider, ratingParent);
+        isRated = true;
         setSliderVal(dbValue, ratingSlider, ratingLine, ratingDots);
       }
       
       // Triggered when slider value changes
       ratingSlider.addEventListener('input', () => {
         console.log('Slider INPUT event called.');
-        if (!isRated) setSlilderStylesToRated(ratingSlider, ratingParent, isRated);
+        if (!isRated) {
+          setSlilderStylesToRated(ratingSlider, ratingParent);
+          isRated = true;
+        } 
         updateSlider(ratingSlider, ratingLine, ratingDots);
       });
       
