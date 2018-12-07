@@ -290,7 +290,7 @@ const renderPosts = (from, to) => {
       // Triggered when user lets go of slider
       ratingSlider.addEventListener('change', () => {
         // Do database updating here
-        const id = p;
+        const id = postsDataArray[p];
         const value = ratingSlider.value;
         updatePostRating(id, value);
         
