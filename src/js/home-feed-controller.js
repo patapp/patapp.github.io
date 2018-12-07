@@ -133,7 +133,7 @@ const postElement = `
 <div class="post-rating unrated__wrapper">
 <div class="rating-line"></div>
 <div class="rating-dots"></div>
-<input class="rating-slider unrated__slider" type="range" min="1" max="5" value="0">
+<input class="rating-slider unrated__slider" type="range" min="1" max="6" value="6">
 </div>
 
 <div class="post-info">
