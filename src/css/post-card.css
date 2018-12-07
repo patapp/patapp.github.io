@@ -265,6 +265,12 @@ div:empty::after {
     position: relative;
 }
 
+.unrated__slider {
+    width: 120% !important;
+}
+.unrated__wrapper {
+    overflow: hidden;
+}
 .rating-slider {
     position: absolute;
     -webkit-appearance: none;

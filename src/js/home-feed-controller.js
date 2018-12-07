@@ -86,7 +86,15 @@ const updateSlider = (slider, line, dots) => {
 		switchSliderThumb(thumbs[4], slider);
 		switchSliderGradient(gradients[4], line, dots);
 		break;
-	}
+  }
+  
+  const setSlilderStylesToRated = () => {
+    slider.max = 5;
+    slider.classList.remove('unrated__slider');
+    sliderParent.classList.remove('unrated__wrapper');
+    isRated = true;
+  }
+
 }
 
 //*********************************************
@@ -109,10 +117,10 @@ const postElement = `
   <div class="post-media"></div>
 
   <!-- rating graphic -->
-  <div class="post-rating">
+  <div class="post-rating unrated__wrapper">
         <div class="rating-line"></div>
         <div class="rating-dots"></div>
-        <input class="rating-slider" type="range" min="1" max="5" value="0">
+        <input class="rating-slider unrated__slider" type="range" min="1" max="5" value="0">
     </div>
 
   <div class="post-info">
@@ -160,7 +168,7 @@ const renderPosts = (from, to) => {
       const ratingLine  = document.querySelector("#post-"+p+" .rating-line");
       const ratingDots  = document.querySelector("#post-"+p+" .rating-dots");
       const ratingSlider= document.querySelector("#post-"+p+" .rating-slider");
-
+      let   isRated     = false;
       const tags        = document.querySelector("#post-"+p+" .post-info__tags");
 
       const description = document.querySelector("#post-"+p+" .post-info__description");
@@ -255,6 +263,7 @@ const renderPosts = (from, to) => {
       // Triggered when slider value changes
       ratingSlider.addEventListener('input', () => {
         console.log('Slider INPUT event called.');
+        if (!isRated) setSlilderStylesToRated();
         updateSlider(ratingSlider, ratingLine, ratingDots);
       });
 
