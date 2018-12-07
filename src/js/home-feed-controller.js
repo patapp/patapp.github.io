@@ -133,7 +133,7 @@ const postElement = `
 <div class="post-rating unrated__wrapper">
 <div class="rating-line"></div>
 <div class="rating-dots"></div>
-<input class="rating-slider unrated__slider" type="range" min="1" max="5" value="0">
+<input class="rating-slider unrated__slider" type="range" min="1" max="6" value="6">
 </div>
 
 <div class="post-info">
@@ -290,7 +290,7 @@ const renderPosts = (from, to) => {
       // Triggered when user lets go of slider
       ratingSlider.addEventListener('change', () => {
         // Do database updating here
-        const id = p;
+        const id = postsDataArray[p];
         const value = ratingSlider.value;
         updatePostRating(id, value);
         
