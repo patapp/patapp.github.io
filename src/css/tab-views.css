@@ -16,12 +16,6 @@
   display: block;
 }
 
-.tab h1 {
-  font-family: 'Dosis', serif;
-  font-weight: 700;
-  font-size: 28px;
-}
-
 .tab-views {
   height: calc(100vh - 101px);
   /* overflow: scroll;  REMOVED BY Samppa 2018-11-29 17:50 */
@@ -29,25 +23,15 @@
   background-color: var(--color-background);
 }
 .hidden {
-  display: none;
+  display: none !important;
 }
-/* .tab-views::after {
-  content: '';
-  width: 100vw;
-  height: 100px;
-  background-color: red;
-} */
 
-/* .tab-views__tab-search {
-  background-color: var(--color-background);
-  height: 500vh;
-} */
 .tab-views__tab-home > ul {
   max-width: 635px;
   margin: 0 auto;
 }
 .tab-views__tab-profile {
-  height: 400vh;
+  /* height: 400vh; */
 }
 
 .load-trigger {
