@@ -18,11 +18,12 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<meta name="theme-color" content="#ffffff">
 		
-		<link href="https://fonts.googleapis.com/css?family=Dosis:400,500,700|Patrick+Hand|Roboto:400,500,700" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Dosis:400,500,700|Patrick+Hand|Roboto:300,400,500,700" rel="stylesheet">
 		<link href="../src/css/main.css" rel="stylesheet" type="text/css">
 		<link href="../src/css/nav-bars.css" rel="stylesheet" type="text/css">
 		<link href="../src/css/tab-views.css" rel="stylesheet" type="text/css">
 		<link href="../src/css/search-tab.css" rel="stylesheet" type="text/css">
+		<link href="../src/css/profile-tab.css" rel="stylesheet" type="text/css">
 		<link href="../src/css/pat-global.css" rel="stylesheet" type="text/css">
 		<link href="../src/css/post-card.css" rel="stylesheet" type="text/css">
 		<link href="../src/css/new-post.css" rel="stylesheet" type="text/css">
@@ -74,9 +75,67 @@
 			
 			<!-- Profile tab -->
 			<div id="profile-tab" class="tab-views__tab-profile tab">
-				<h1>Profile</h1>
-				<button onclick="alert('hello profile')">Click Me!</button>
-				<p>Truffaut portland keytar 3 wolf moon, normcore salvia brooklyn. Dreamcatcher gentrify officia, try-hard air plant celiac squid knausgaard ethical plaid glossier williamsburg helvetica bitters aliqua. Cold-pressed in mlkshk, copper mug kickstarter kale chips four loko disrupt try-hard iceland portland authentic salvia cillum. Slow-carb culpa et sint laboris velit aute helvetica taiyaki tempor woke forage cupidatat. Actually minim est freegan disrupt locavore skateboard. Blog pork belly before they sold out velit authentic. Mustache roof party aesthetic anim, sint cold-pressed tattooed letterpress chambray quinoa consectetur veniam affogato.</p>
+				
+				<div class="profile-tab__detail-wrapper">
+					<div class="profile-tab__details">
+						
+						<div class="profile-tab__pic"></div>
+						
+						<div class="profile-tab__username">
+							<img src="../src/svg/sign_up_profile_ic.svg">
+							<span>patuser</span>
+						</div>
+						
+						<div class="proflie-tab__bio">
+							<p contenteditable="true">Chillwave palo santo skateboard vice. Hoodie shaman coloring book, art party wayfarers fixie af 8-bit tbh whatever iPhone mixtape truffaut. Irony tbh iPhone</p>
+						</div>
+						
+					</div>
+					
+					<div class="profile-tab__stats-wrapper">
+						<div class="profile-tab__stats">
+							
+							<div class="stats__followers">
+								<p>followers</p>
+								<p>1337</p>
+							</div>
+							
+							<div class="stats__following">
+								<p>following</p>
+								<p>15</p>
+							</div>
+							
+						</div>
+						
+						<button class="follow-btn">
+							<p class="follow-btn-text">
+								<img class="follow-btn__check-ic hidden" src="../src/svg/check_ic.svg">
+								<span>FOLLOW</span>
+							</p>
+						</button>
+						
+					</div>
+					
+					<p class="profile-tab__posts-header">POSTS</p>
+
+				</div>
+
+				<ul class="profile-tab__posts-grid">
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+				
 			</div>
 			
 		</div>
@@ -98,7 +157,7 @@
 			<div class="input-field new-post-form__tags-input">
 				
 				<p class="new-post-form__tags-input__current-tags-amount"><span id="current-tags-amount">0</span>/8</p>
-
+				
 				<ul id="current-tags">
 					
 					<input id="new-post-tags" type="text" placeholder="+ add tag" autocapitalize="off">
@@ -179,6 +238,7 @@
 	<script src="../src/js/home-first.js"></script>
 	<script src="../src/js/search-controller.js"></script>
 	<script src="../src/js/home.js"></script>
+	<script src="../src/js/profile-controller.js"></script>
 	
 </body>
 </html>
