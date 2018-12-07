@@ -90,7 +90,7 @@ const updateSlider = (slider, line, dots) => {
     
 }
 
-const setSlilderStylesToRated = (slider, parent) => {
+const setSlilderStylesToRated = (slider, parent, isRated) => {
   slider.max = 5;
   slider.classList.remove('unrated__slider');
   parent.classList.remove('unrated__wrapper');
@@ -272,14 +272,14 @@ const renderPosts = (from, to) => {
       const dbValue = res.post_data[postsDataArray[p]].my_rate;
       if (dbValue != 0) {
         console.log(`post_id${p} setting rating to ${dbValue}`);
-        setSlilderStylesToRated(ratingSlider, ratingParent);
+        setSlilderStylesToRated(ratingSlider, ratingParent, isRated);
         setSliderVal(dbValue, ratingSlider, ratingLine, ratingDots);
       }
       
       // Triggered when slider value changes
       ratingSlider.addEventListener('input', () => {
         console.log('Slider INPUT event called.');
-        if (!isRated) setSlilderStylesToRated(ratingSlider, ratingParent);
+        if (!isRated) setSlilderStylesToRated(ratingSlider, ratingParent, isRated);
         updateSlider(ratingSlider, ratingLine, ratingDots);
       });
       
