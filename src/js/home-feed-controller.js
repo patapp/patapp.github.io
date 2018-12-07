@@ -294,15 +294,12 @@ const renderPosts = (from, to) => {
       // -------------------- END OF POST RATING -----------------------------------
       
       addComments.innerHTML = "Add comment...";
-      /*
       if (res.post_data[postsDataArray[p]].comments > 999) {
         commentCount.insertAdjacentHTML('beforeend',"999+");
       }
       else {
-        //REMOVED COMMENT COUNT WHILE SERVER IS NOT WORKING
-        //commentCount.insertAdjacentHTML('beforeend',res.post_data[postsDataArray[p]].comments);
-      }*/
-      commentCount.insertAdjacentHTML('beforeend',"50");
+        commentCount.insertAdjacentHTML('beforeend',res.post_data[postsDataArray[p]].comments);
+      }
       comment.addEventListener('click', () =>{
         if (VIEW_PAGE == 'home'){
           conLog("YOU CAN COMMENT ON STUFF");

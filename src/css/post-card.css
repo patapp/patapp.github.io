@@ -183,8 +183,8 @@ div:empty::after {
     color: white;
     font-size: 10px;
     padding: 2px 3px 2px 3px;
-    position: absolute;
-    left: 15.3rem;
+    position: relative;
+    margin-bottom: 40px;
 }
 
 .post-info__comments > p {
@@ -197,7 +197,7 @@ div:empty::after {
 }
 
 .post_info__comments > img {
-
+    
 }
 .post-info__comments:empty::after {
     width: 200px;
