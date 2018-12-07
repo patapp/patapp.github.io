@@ -120,6 +120,7 @@ const postElement = `
   <div class="post-info__description"></div>
   <p class="post-description-toggle"></p>
   <div class="post-info__comments">
+    <img src="../src/svg/comment_ic.svg" alt="comment_ic"></img>
     <span></span><p></p>
   </div>
   <div class="post-info__timestamp">
@@ -165,8 +166,9 @@ const renderPosts = (from, to) => {
       const description = document.querySelector("#post-"+p+" .post-info__description");
       const showDesc    = document.querySelector("#post-"+p+" .post-description-toggle");
 
-      const comment     = document.querySelector('#post-'+p+" .post-info__comments");
+      const comment     = document.querySelector("#post-"+p+" .post-info__comments");
       const commentCount= document.querySelector("#post-"+p+" .post-info__comments > span");
+      const commentIcon = document.querySelector("#post-"+p+" .post-info__comments > img");
       const addComments = document.querySelector("#post-"+p+" .post-info__comments > p");
       const timestamp   = document.querySelector("#post-"+p+" .post-info__timestamp > p");
       
@@ -263,21 +265,16 @@ const renderPosts = (from, to) => {
       });
       // -------------------- END OF POST RATING -----------------------------------
 
-      //POST COMMENTS REMOVED FOR TESTING
-      /*if ( res.post_data[postsDataArray[p]].comments == 0 ) {
-        comments.innerHTML = '0 comments';
-      }else{
-        comments.innerHTML = res.post_data[postsDataArray[p]].comments+' comments';
-        comments.innerHTML += ', sender: '+res.post_data[postsDataArray[p]].latest_comment.sender;
-        comments.innerHTML += ', at: '+res.post_data[postsDataArray[p]].latest_comment.added_ago;
-      }*/
       addComments.innerHTML = "Add comment...";
+      /*
       if (res.post_data[postsDataArray[p]].comments > 999) {
-        commentCount.innerHTML = "999+";
+        commentCount.insertAdjacentHTML('beforeend',"999+");
       }
       else {
-        commentCount.innerHTML = res.post_data[postsDataArray[p]].comments;
-      }
+        //REMOVED COMMENT COUNT WHILE SERVER IS NOT WORKING
+        //commentCount.insertAdjacentHTML('beforeend',res.post_data[postsDataArray[p]].comments);
+      }*/
+      commentCount.insertAdjacentHTML('beforeend',"50");
       comment.addEventListener('click', () =>{
         if (VIEW_PAGE == 'home'){
           conLog("YOU CAN COMMENT ON STUFF");
