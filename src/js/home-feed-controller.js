@@ -95,6 +95,20 @@ const updateSlider = (slider, line, dots) => {
     isRated = true;
   }
 
+  const updatePostRating = (post, value) => {
+    getJSON('POST', 'ratings', '', 
+    {
+      post_id: post,
+      rating: value
+    }, 0).then( res => {
+      if (res.success) {
+        console.log(`[SUCCESS] post-id: ${post}, new-rating-value: ${value}`);
+      } else {
+        console.error(`[ERROR UPDATING POST RATING] ${res.error}`);
+      }
+    });
+  }
+
 }
 
 //*********************************************
@@ -257,6 +271,7 @@ const renderPosts = (from, to) => {
       const dbValue = res.post_data[postsDataArray[p]].my_rate;
       if (dbValue != 0) {
         console.log(`post_id${p} setting rating to ${dbValue}`);
+        setSlilderStylesToRated();
         setSliderVal(dbValue, ratingSlider, ratingLine, ratingDots);
       }
 
@@ -270,7 +285,10 @@ const renderPosts = (from, to) => {
       // Triggered when user lets go of slider
       ratingSlider.addEventListener('change', () => {
         // Do database updating here
-        console.log(`TEST LOG! post_id: ${p}, new_rating_value: ${ratingSlider.value}`);
+        const id = p;
+        const value = ratingSlider.value;
+        updatePostRating(id, value);
+
       });
       // -------------------- END OF POST RATING -----------------------------------
 
