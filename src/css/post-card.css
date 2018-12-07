@@ -175,6 +175,7 @@ div:empty::after {
     font-size: 17px;
     font-weight: 400;
     display: block;
+    position: relative;
 }
 
 .post-info__comments > span {
@@ -183,8 +184,9 @@ div:empty::after {
     color: white;
     font-size: 10px;
     padding: 2px 3px 2px 3px;
-    position: relative;
-    margin-bottom: 40px;
+    position: absolute;
+    bottom: 15px;
+    left: 19px;
 }
 
 .post-info__comments > p {
@@ -196,9 +198,6 @@ div:empty::after {
     text-decoration: underline;
 }
 
-.post_info__comments > img {
-    
-}
 .post-info__comments:empty::after {
     width: 200px;
     height: 16px;
