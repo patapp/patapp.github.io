@@ -87,7 +87,7 @@ const updateSlider = (slider, line, dots) => {
 		switchSliderGradient(gradients[4], line, dots);
 		break;
   }
-    
+  
 }
 
 const setSlilderStylesToRated = (slider, parent) => {
@@ -108,6 +108,21 @@ const updatePostRating = (post, value) => {
       console.error(`[ERROR UPDATING POST RATING] ${res.error}`);
     }
   });
+}
+
+
+// *** For post element click listener ***
+
+const checkTarget = (id, target) => {
+  
+  if (target.className === "post-header__username" || target.className === "post-header__picture") {
+    const username = document.querySelector("#post-"+id+" .post-header__username > p").innerHTML;
+    console.log('You clicked on user: ', username);
+    
+  } else if (target.closest('ul').className === "post-info__tags") {
+    console.log('You clicked on tag: ', target.innerHTML);
+  }
+  
 }
 
 //*********************************************
@@ -173,6 +188,8 @@ const renderPosts = (from, to) => {
     
     for (let p=from; p<=to; p++) {
       
+      const parent      = document.querySelector("#post-"+p);
+      
       const userpic     = document.querySelector("#post-"+p+" .post-header__picture");
       const username    = document.querySelector("#post-"+p+" .post-header__username");
       
@@ -194,6 +211,11 @@ const renderPosts = (from, to) => {
       const commentIcon = document.querySelector("#post-"+p+" .post-info__comments > img");
       const addComments = document.querySelector("#post-"+p+" .post-info__comments > p");
       const timestamp   = document.querySelector("#post-"+p+" .post-info__timestamp > p");
+      
+      // Check what was clicked and do action based on that
+      parent.addEventListener('click', (e) => {
+        checkTarget(p, e.target);
+      });
       
       userpic.innerHTML = '<img height="45" width="45" src="'+API_URL+res.post_data[postsDataArray[p]].user_pic+'">';
       
