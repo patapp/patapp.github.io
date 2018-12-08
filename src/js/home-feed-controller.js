@@ -137,7 +137,9 @@ const checkTarget = (id, target) => {
 
     case "LI":
       if (target.closest('ul').className === "post-info__tags") {
-        console.log('You clicked on tag: ', target.innerHTML);
+        const tagValue = target.innerHTML;
+        console.log('You clicked on tag: ', tagValue);
+        makeSearch(tagVal);
       }
     break;
     

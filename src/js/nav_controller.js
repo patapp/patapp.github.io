@@ -12,7 +12,8 @@
   +-------------------------------------------------------- */
 
 const menu = document.getElementById('menu');
-const radioButtons = document.querySelectorAll('input[type="radio"] ~ label');
+const radioLabels = document.querySelectorAll('input[type="radio"] ~ label');
+const radioButtons = document.querySelectorAll('input[type="radio"]');
 
 const tabsWrapper = document.querySelector('.tab-views');
 const newPostView = document.querySelector('.new-post-form-wrapper');
@@ -46,6 +47,7 @@ const showTabWithTransition = (tab) => {
 }
 
 const changeToTab = (tab) => {
+  radioButtons[tab].checked = true;
   hideTabWithTransition(currentTab);
   currentTab = tab;
   setTimeout(() => {
@@ -86,7 +88,7 @@ newPostCancelButton.addEventListener('click', () => {
 menu.addEventListener('change', ()=> {
 	bottomNav.classList.toggle('visible');
   newPostButton.classList.toggle('btn-hidden');
-  radioButtons.forEach(element => {
+  radioLabels.forEach(element => {
     element.classList.toggle('btn-hidden');
   });
 });
