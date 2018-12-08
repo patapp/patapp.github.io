@@ -296,7 +296,7 @@ const renderPosts = (from, to) => {
 
         image.addEventListener('load', () => {
           const width  = image.width;
-          const height = image.heigh;
+          const height = image.height;
           console.log('LOAD event on image');
           console.log(`Width: ${width}, Height: ${height}`);
           if (width >= height) {
