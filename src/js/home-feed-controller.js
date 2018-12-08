@@ -160,8 +160,8 @@ const gradients = ["gradient_val-minus-2", "gradient_val-minus-1", null, "gradie
 const postElement = `
 
 <div class="post-header">
-<div class="post-header__picture"></div>
-<div class="post-header__username"></div>
+<div class="post-header__picture clickable"></div>
+<div class="post-header__username clickable"></div>
 </div>
 
 <div class="post-media"></div>
@@ -275,6 +275,7 @@ const renderPosts = (from, to) => {
         for (let i=0; i<res.post_data[postsDataArray[p]].tags.length; i++){
           //tags.innerHTML += '<span class="post-tag__item">'+res.post_data[postsDataArray[p]].tags[i]+'</span>';
           let tagItem = document.createElement('li');
+          tagItem.classList.add('clickable');
           tagItem.innerHTML = res.post_data[postsDataArray[p]].tags[i];
           tags.appendChild(tagItem);
         }
