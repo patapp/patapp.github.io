@@ -65,6 +65,74 @@ const deletePost = (id) => {
   });
 };
 
+// NEW FUNCTIONS BY SAMULI ************************************************************************************************************************************************************
+// NEW FUNCTIONS BY SAMULI ************************************************************************************************************************************************************
+// NEW FUNCTIONS BY SAMULI ************************************************************************************************************************************************************
+// NEW FUNCTIONS BY SAMULI ************************************************************************************************************************************************************
+// NEW FUNCTIONS BY SAMULI ************************************************************************************************************************************************************
+
+const setFollowUser = ( userID, followOrNot ) => {
+  getJSON( (followOrNot ? 'POST' : 'DELETE'), 'follow', '', {user_id: userID}).then( (r) => {
+    if ( r.success ) {
+      console.log( '[setFollowUser] You are now ' + (followOrNot?'FOLLOWING':'NOT FOLLOWING') + ' user ' + userID );
+      // data is set ok - update the button state here!
+      }else{
+      console.log('[setFollowUser] ERROR: ' + r.error);
+      }
+    // here you should disable loading or enable button operation again!
+  });
+};
+
+const addComment = ( postID, commentText ) => {
+  getJSON( 'POST', 'comments/add', '', {post_id: postID, comment : commentText}).then( (r) => {
+    if ( r.success ) {
+      console.log( '[addComment] Comment added.' );
+      }else{
+      console.log('[addComment] ERROR: ' + r.error);
+      }
+  });
+};
+
+const deleteMyProfile = () => {
+  // FORCE DELETE!!! You should ask confirmation before calling this function !!!!
+  deleteUser ( sessionLoggedInUserID, true );
+  }
+
+const deleteUser = ( userID, confirmed = false ) => {
+  if ( sessionLoggedInUserID != userID || (sessionLoggedInUserID == userID && confirmed) ) {
+    getJSON( 'DELETE', 'users', '', {user_id: userID} ).then( (r) => {
+      if ( r.success ) {
+        console.log( '[deleteUser] User is Deleted.' );
+        }else{
+        console.log('[deleteUser] ERROR: ' + r.error);
+        }
+    });
+  }else{
+    console.log('[deleteUser] ERROR: You are trying to delete own account.');
+  }
+};
+
+const deleteUser = ( userID, confirmed = false ) => {
+  if ( sessionLoggedInUserID != userID || (sessionLoggedInUserID == userID && confirmed) ) {
+    getJSON( 'DELETE', 'users', '', {user_id: userID} ).then( (r) => {
+      if ( r.success ) {
+        console.log( '[deleteUser] User is Deleted.' );
+        }else{
+        console.log('[deleteUser] ERROR: ' + r.error);
+        }
+    });
+  }else{
+    console.log('[deleteUser] ERROR: You are trying to delete own account.');
+  }
+};	
+
+
+// NEW FUNCTIONS BY SAMULI ************************************************************************************************************************************************************
+// NEW FUNCTIONS BY SAMULI ************************************************************************************************************************************************************
+// NEW FUNCTIONS BY SAMULI ************************************************************************************************************************************************************
+// NEW FUNCTIONS BY SAMULI ************************************************************************************************************************************************************
+// NEW FUNCTIONS BY SAMULI ************************************************************************************************************************************************************
+
 
 
 // const homeTab = document.getElementById('home-tab');
