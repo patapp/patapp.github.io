@@ -126,12 +126,14 @@ const checkTarget = (id, target) => {
     case "IMG":
       if (target.closest('div').className === "post-header__picture") {
         getUsernameFromDocument(id);
+        toggleVisitingProfile();
       }
     break;
     
     case "P":
       if (target.closest('div').className === "post-header__username") {
         getUsernameFromDocument(id);
+        toggleVisitingProfile();
       }
     break;
 

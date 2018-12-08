@@ -1,5 +1,21 @@
+.visiting-profile {
+	z-index: 10;
+	display: block;
+	position: fixed;
+	top: 50px;
+	width: 100vw;
+	height: calc(100vh - 100px);
+	overflow: scroll;
+	background-color: var(--color-background);
+}
+
 .profile-tab__detail-wrapper {
 	background-color: white;
+}
+
+.profile-tab__details {
+	background-color: white;
+	padding-top: 24px;
 }
 
 .tab-views__tab-profile {
@@ -13,7 +29,6 @@
 	border: 2px solid #EDD1B7;
 	border-radius: 50%;
 	margin: 0 auto;
-	margin-top: 24px;
 	overflow: hidden;
 	background-color: lightgrey;
 }
@@ -59,6 +74,7 @@
 	display: flex;
 	justify-content: center;
 	margin-top: 8px;
+	margin-bottom: 8px;
 }
 .profile-tab__stats p {
 	font-family: 'Dosis', serif;
@@ -96,7 +112,6 @@
 	border-radius: 12px;
 	width: 260px;
 	height: 36px;
-	margin-top: 8px;
 	margin-bottom: 16px;
 	box-sizing: border-box;
 }

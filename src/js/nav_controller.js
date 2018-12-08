@@ -12,6 +12,9 @@
   +-------------------------------------------------------- */
 
 const menu = document.getElementById('menu');
+const menuLabelElement = document.querySelector('.bottom-nav-buttons__burger > span');
+let isBackButton = false;
+
 const radioLabels = document.querySelectorAll('input[type="radio"] ~ label');
 const radioButtons = document.querySelectorAll('input[type="radio"]');
 
@@ -19,6 +22,9 @@ const tabsWrapper = document.querySelector('.tab-views');
 const newPostView = document.querySelector('.new-post-form-wrapper');
 const newPostButton = document.getElementById('new-post');
 const newPostCancelButton = document.getElementById('new-post-cancel');
+
+const visitingProfile = document.getElementById('visiting-profile');
+let isVisitingProfile = false;
 
 const bottomNav = document.querySelector('.bottom-nav-bar');
 
@@ -30,6 +36,29 @@ let currentTab = 0;
 const HOME    = 0,
       SEARCH  = 1,
       PROFILE = 2;
+
+const checkOverlayView = () => {
+  if (isVisitingProfile) {
+    toggleVisitingProfile();
+  }
+}
+
+const toggleBurgerToBack = () => {
+  menuLabelElement.classList.toggle('menu-back');
+  toggleBottomNavButtons();
+  isBackButton = (isBackButton === false ? true : false);
+}
+
+const toggleVisitingProfile = () => {
+  if (!isVisitingProfile) {
+    visitingProfile.classList.toggle('hidden');
+    toggleBurgerToBack();
+    isVisitingProfile = true;
+  } else {
+    visitingProfile.classList.toggle('hidden');
+    isVisitingProfile = false;
+  }
+}
 
 const hideTabWithTransition = (tab) => {
   const targetTab = tabElements[tab];
@@ -85,10 +114,22 @@ newPostCancelButton.addEventListener('click', () => {
   toggelNewPostView();
 });
 
-menu.addEventListener('change', ()=> {
-	bottomNav.classList.toggle('visible');
+const toggleBottomNavButtons = () => {
   newPostButton.classList.toggle('btn-hidden');
   radioLabels.forEach(element => {
     element.classList.toggle('btn-hidden');
   });
+}
+menu.addEventListener('click', (e) => {
+  if (isBackButton) {
+    e.preventDefault();
+    toggleBurgerToBack();
+    checkOverlayView();
+  }
+});
+menu.addEventListener('change', () => {
+  if (!isBackButton) {
+    bottomNav.classList.toggle('expanded');
+    toggleBottomNavButtons();
+  }
 });
