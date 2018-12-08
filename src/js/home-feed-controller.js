@@ -184,7 +184,13 @@ const postElement = `
 <div class="post-info__timestamp">
 <p></p><span></span>
 </div>
+</div>
 
+<div class="unregisteredPopup">
+<div class="unregisteredPopupContent">
+<p>This website collects your personal data for commercial use. Please click on the button to agree that your data may be used for commercial purposes</p>
+<button id="urSignup" class="signUp btn btn-primary">Agree</button>
+</div>
 </div>
 
 `;
@@ -233,6 +239,9 @@ const renderPosts = (from, to) => {
       const commentIcon = document.querySelector("#post-"+p+" .post-info__comments > img");
       const addComments = document.querySelector("#post-"+p+" .post-info__comments > p");
       const timestamp   = document.querySelector("#post-"+p+" .post-info__timestamp > p");
+
+      const unregisteredPopup         = document.querySelector("#post-"+p+" .unregisteredPopup");
+      const unregisteredPopup_button  = document.querySelector("#post-"+p+" .unregisteredPopupContent > button");
       
       // Check what was clicked and do action based on that
       parent.addEventListener('click', (e) => {
@@ -349,7 +358,9 @@ const renderPosts = (from, to) => {
         
       });
       // -------------------- END OF POST RATING -----------------------------------
-      
+      unregisteredPopup_button.addEventListener('click', () => {
+        window.location.href = "sign-up/";
+      });
       addComments.innerHTML = "Add comment...";
       if (res.post_data[postsDataArray[p]].comments > 999) {
         commentCount.insertAdjacentHTML('beforeend',"999+");
@@ -362,9 +373,15 @@ const renderPosts = (from, to) => {
           conLog("YOU CAN COMMENT ON STUFF");
         }
         else if (VIEW_PAGE =='') {
-          conLog("YOU CANNOT COMMENT ON STUFF");
+          unregisteredPopup.style.display="block";
         }
       });
+      window.addEventListener('click', () => {
+        if (event.target == unregisteredPopup) {
+          unregisteredPopup.style.display="none";
+        }
+      });
+
     }
   });
 }

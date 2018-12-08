@@ -154,6 +154,7 @@ div:empty::after {
     background-size: 320px 16px, 290px 16px;
     background-position-y: 0px, 24px;
     background-repeat: no-repeat;
+    position: relative;
 }
 .post-description-toggle:empty {
     display: none;
@@ -174,8 +175,8 @@ div:empty::after {
     font-family: 'Roboto', serif;
     font-size: 17px;
     font-weight: 400;
-    display: block;
     position: relative;
+
 }
 
 .post-info__comments > span {
@@ -191,11 +192,43 @@ div:empty::after {
 
 .post-info__comments > p {
     display: inline-block;
-    margin-left: 3px;
     color: var(--color-brown);
     font-size: 13px;
-    margin-left: 20px;
+    margin-left: 30px;
     text-decoration: underline;
+}
+
+.unregisteredPopup {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.unregisteredPopupContent {
+    text-align: center;
+    background-color: white;
+    margin: 50px auto;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 40%;
+}
+.unregisteredPopupContent > p {
+    font-family: 'Roboto', serif;
+    
+}
+
+.unregisteredPopupContent > #urSignup {
+    width: 100%;
 }
 
 .post-info__comments:empty::after {
