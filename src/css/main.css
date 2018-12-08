@@ -58,7 +58,7 @@ input, label {
 /* -------- home loading screen ------ */
 .loading-screen {
   position: fixed;
-  z-index: 100;
+  z-index: 1000;
   display: flex;
   background-color: white;
   width: 100vw;
