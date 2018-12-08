@@ -139,7 +139,7 @@ const checkTarget = (id, target) => {
       if (target.closest('ul').className === "post-info__tags") {
         const tagValue = target.innerHTML;
         console.log('You clicked on tag: ', tagValue);
-        makeSearch(tagVal);
+        makeSearch(tagValue);
       }
     break;
     
