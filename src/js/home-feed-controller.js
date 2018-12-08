@@ -243,7 +243,7 @@ const renderPosts = (from, to) => {
       const unregisteredPopup         = document.querySelector("#post-"+p+" .unregisteredPopup");
       const unregisteredPopup_button  = document.querySelector("#post-"+p+" .unregisteredPopupContent > button");
       
-      // Check what was clicked and do action based on that
+      // Check if username, profilepic or any tag was clicked
       parent.addEventListener('click', (e) => {
         checkTarget(p, e.target);
       });
