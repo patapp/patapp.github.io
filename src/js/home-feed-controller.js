@@ -292,13 +292,19 @@ const renderPosts = (from, to) => {
         // Also check if image size is landscape and add appropriate class.
         const img = document.createElement('img');
         img.setAttribute('src', `${API_URL}${res.post_data[postsDataArray[p]].url}`);
+        
         img.addEventListener('load', () => {
           console.log('LOAD event on IMG tag');
-          if (img.width >= img.height) {
+          
+          const width = this.naturalWidth;
+          const height = this.naturalHeight;
+
+          if (width >= height) {
             console.log('landscape image');
             img.classList.add('landscape');
           }
         });
+
         postmedia.appendChild(img);
         
       } else if ( res.post_data[postsDataArray[p]].media_type == 'v' ) { // Video
