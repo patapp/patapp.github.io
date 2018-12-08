@@ -119,6 +119,8 @@ const getUsernameFromDocument = (id) => {
 
 const checkTarget = (id, target) => {
   
+  console.log(target);
+
   switch (target.tagName) {
     
     case "IMG":
