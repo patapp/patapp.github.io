@@ -112,15 +112,33 @@ const updatePostRating = (post, value) => {
 
 
 // *** For post element click listener ***
+const getUsernameFromDocument = (id) => {
+  const username = document.querySelector("#post-"+id+" .post-header__username > p").innerHTML;
+  console.log('You clicked on user: ', username);
+}
 
 const checkTarget = (id, target) => {
   
-  if (target.className === "post-header__username" || target.className === "post-header__picture") {
-    const username = document.querySelector("#post-"+id+" .post-header__username > p").innerHTML;
-    console.log('You clicked on user: ', username);
+  switch (target.tagName) {
     
-  } else if (target.closest('ul').className === "post-info__tags") {
-    console.log('You clicked on tag: ', target.innerHTML);
+    case "IMG":
+      if (target.closest('div').className === "post-header__picture") {
+        getUsernameFromDocument(id);
+      }
+    break;
+    
+    case "P":
+      if (target.closest('div').className === "post-header__username") {
+        getUsernameFromDocument(id);
+      }
+    break;
+
+    case "LI":
+      if (target.closest('ul').className === "post-info__tags") {
+        console.log('You clicked on tag: ', target.innerHTML);
+      }
+    break;
+    
   }
   
 }
