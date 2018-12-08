@@ -37,9 +37,9 @@
 	color: var(--color-brown-dark);
 }
 
-.proflie-tab__bio {
+/* .proflie-tab__bio {
 	
-}
+} */
 .proflie-tab__bio > p {
 	text-align: justify;
 	margin: 16px;

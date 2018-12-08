@@ -11,12 +11,15 @@
   | https://github.com/joonasmkauppinen/pat-project-frontend |
   +-------------------------------------------------------- */
 
+const loadingScreen = document.querySelector('.loading-screen');
+
 /* This function is called only, if the session exists and user is logged in. */
 const appIsReady = () => {
 
   // Hide the loading / waiting screen here, and do the tricks....
   conLog('[APP_IS_READY] Called.');
-  
+  loadingScreen.classList.add('hidden');
+
   loadPosts(); // Load TRENDING PAGE posts / post content
 
   /* Modify app here to meet the permissions

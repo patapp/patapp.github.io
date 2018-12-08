@@ -54,3 +54,19 @@ input, label {
 .clickable {
   cursor: pointer;
 }
+
+/* -------- home loading screen ------ */
+.loading-screen {
+  position: fixed;
+  z-index: 100;
+  display: flex;
+  background-color: white;
+  width: 100vw;
+  height: 100vh;
+}
+.loading-screen > img {
+  width: 100px;
+  margin: auto;
+  animation: loading 2s infinite;
+}
+
