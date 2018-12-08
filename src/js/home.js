@@ -112,21 +112,6 @@ const deleteUser = ( userID, confirmed = false ) => {
   }
 };
 
-const deleteUser = ( userID, confirmed = false ) => {
-  if ( sessionLoggedInUserID != userID || (sessionLoggedInUserID == userID && confirmed) ) {
-    getJSON( 'DELETE', 'users', '', {user_id: userID} ).then( (r) => {
-      if ( r.success ) {
-        console.log( '[deleteUser] User is Deleted.' );
-        }else{
-        console.log('[deleteUser] ERROR: ' + r.error);
-        }
-    });
-  }else{
-    console.log('[deleteUser] ERROR: You are trying to delete own account.');
-  }
-};	
-
-
 // NEW FUNCTIONS BY SAMULI ************************************************************************************************************************************************************
 // NEW FUNCTIONS BY SAMULI ************************************************************************************************************************************************************
 // NEW FUNCTIONS BY SAMULI ************************************************************************************************************************************************************
