@@ -290,22 +290,24 @@ const renderPosts = (from, to) => {
         
         // Create img element, set src attribute and append to media element.
         // Also check if image size is landscape and add appropriate class.
-        const img = document.createElement('img');
-        img.setAttribute('src', `${API_URL}${res.post_data[postsDataArray[p]].url}`);
-        
-        img.addEventListener('load', () => {
-          console.log('LOAD event on IMG tag');
-          
-          const width = this.naturalWidth;
-          const height = this.naturalHeight;
+        const imgSrc = API_URL + res.post_data[postsDataArray[p]].url;
+        const image = new Image();
+        const imgElem = document.createElement('img');
 
+        image.addEventListener('load', () => {
+          const width  = this.width;
+          const height = this.heigh;
+          console.log('LOAD event on image');
+          console.log(`Width: ${width}, Height: ${height}`);
           if (width >= height) {
             console.log('landscape image');
-            img.classList.add('landscape');
+            imgElem.classList.add('landscape');
           }
         });
 
-        postmedia.appendChild(img);
+        image.src = imgSrc;
+        imgElem.setAttribute('src', imgSrc);
+        postmedia.appendChild(imgElem);
         
       } else if ( res.post_data[postsDataArray[p]].media_type == 'v' ) { // Video
         
