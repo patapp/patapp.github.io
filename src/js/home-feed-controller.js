@@ -234,7 +234,7 @@ const renderPosts = (from, to) => {
       const addComments = document.querySelector("#post-"+p+" .post-info__comments > p");
       const timestamp   = document.querySelector("#post-"+p+" .post-info__timestamp > p");
       
-      // Check what was clicked and do action based on that
+      // Check if username, profilepic or any tag was clicked
       parent.addEventListener('click', (e) => {
         checkTarget(p, e.target);
       });
