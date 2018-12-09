@@ -87,8 +87,7 @@ class gridFiller {
     }
     
     getJSON('POST','posts/getcontent', '', {items: renderItems.join('-')} ).then( (res) => {
-      console.log('THIS IS WHAT I GOT: ');
-      console.log(res);
+      if ( res.success == false ) conLog('errori');
       for (let p=from; p<=to; p++) {
         const liElem = document.getElementById(this.elementID + '-item-' + p);
         const newImg = document.createElement('IMG');
@@ -102,11 +101,6 @@ class gridFiller {
         liElem.addEventListener('click', () => {
           gridItemClicked ( this.elementID, this.postsDataArray[p] );
         });
-        //newImg.src = console.log(this.elementID + '-item-' + p + ' value: ' + this.postsDataArray[p]);
-        //newImg.src = API_URL + res.post_data[this.postsDataArray[p]].thumbnail;
-        //newImg.height = 100;
-        //newImg.width = 100 ;
-        //liElem.appendChild(newImg);
       }
     });
   }
@@ -120,6 +114,7 @@ class gridFiller {
           destroyObject.remove();
           }
         }
+        this.postsInitialized = this.postsDataCount;
       }
    }
   
@@ -141,8 +136,6 @@ class gridFiller {
     getJSON('POST', 'posts', '', {filter_by: this.searchType, filter_string: this.searchTerm} ).then((res) => {
       conLog('[gridFiller] loadPosts() : Total number of posts: ' + res.posts_count);
       this.postsDataArray = res.posts;
-      console.log('OBJ ARRAY DUMP');
-      console.log(this.postsDataArray);
       this.postsDataLoaded = 1;
       this.postsDataCount = res.posts_count;
       this.destroyUnneeded();

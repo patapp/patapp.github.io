@@ -111,9 +111,13 @@ const userItemClicked = ( userID, userName ) => {
       
       if ( searchValue.substring(0,1) == '=' ) {
         searchValue = searchValue.substring(1);
-        gridSearch.setSearchTypeAndTerm('Tag', searchValue);
+        if ( searchValue != "" ) {
+          gridSearch.setSearchTypeAndTerm('Tag', searchValue);
+          }
         }else{
-        gridSearch.setSearchTypeAndTerm('TagSearch', searchValue);
+        if ( searchValue != "" ) {
+          gridSearch.setSearchTypeAndTerm('TagSearch', searchValue);
+          }
         }
       
       
