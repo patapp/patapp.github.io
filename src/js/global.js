@@ -29,7 +29,8 @@ const AUTO_REDIRECT = true;
 let sessionExists = false;
 let sessionID = '';
 let sessionToken = '';
-let sessionPermissions = []
+let sessionPermissions = [];
+let sessionLoggedInUserID = -1;
 
 const conLog = ( m ) => {
   // Print debug messages to the Console, if DEBUG_MODE is ACTIVE (TRUE).
@@ -131,6 +132,7 @@ const sessionCheck = async () => {
       sessionExists = true;
       sessionID = cookieID;
       sessionToken = cookieToken;
+      sessionLoggedInUserID = r.user_id;
       }else{
       setCookie('pat_session_id', '');
       setCookie('pat_session_token', '');
@@ -223,3 +225,7 @@ const confirmDialog = async ( text ) => {
       }
     });
   }
+
+const alertDialog = ( text ) => {
+  alert ( text );
+};
