@@ -83,7 +83,6 @@ input, label {
   animation: loading 2s infinite;
 }
 
-
 /* -------- sign-up and login ------- */
 
 .screen-fade {
@@ -199,3 +198,8 @@ input, label {
     max-height: 430px;
   }
 }
+
+.hide {
+ display:none !important;
+ }
+
