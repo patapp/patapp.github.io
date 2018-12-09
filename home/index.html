@@ -68,10 +68,18 @@
 					<input id="search-bar" type="text" placeholder="search">
 				</div>
 				
+				<div class="searc-tab__input" style="height:40px;display:block;width:100%;">
+				<ul id="search-for-options">
+          <li style="float:left;width:100px;" id="search-for-item-post" class="clickable selected">Post<span id="result-count-post" class="result-count"></span></li>
+          <li style="float:left;width:100px;" id="search-for-item-tag" class="clickable">Tag<span  id="result-count-tag" class="result-count"></span></li>
+          <li style="float:left;width:100px;" id="search-for-item-user" class="clickable">User<span  id="result-count-user" class="result-count"></span></li>
+				</ul>
+				</div>
+				
 				<div class="search-tab__feed">
-					<ul>
-						
-					</ul>
+					<ul id="grid-search"></ul>
+					<ul id="list-search-tags" class="hide"><li>Tags!</li></ul>
+					<ul id="list-search-users" class="hide"><li>Users!</li></ul>
 					<span id="search-load-trigger"></span>
 				</div>
 				
@@ -124,20 +132,7 @@
 
 				</div>
 
-				<ul class="profile-tab__posts-grid">
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
+				<ul id="grid-userposts" class="profile-tab__posts-grid">
 				</ul>
 				
 			</div>
@@ -313,6 +308,7 @@
 	<!--<script src="../pwa.js"></script>-->
 	<script> const VIEW_PAGE = 'home'; </script>
 	<script src="../src/js/global.js"></script>
+	<script src="../src/js/grid-filler.js"></script>
 	<script src="../src/js/home-feed-controller.js"></script>
 	<script src="../src/js/nav_controller.js"></script>
 	<script src="../src/js/new-post-controller.js"></script>
