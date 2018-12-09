@@ -86,7 +86,7 @@ document.getElementById('formLogin')
     
   }, 2000);
 
-  logIn(user, pass)
+  logIn(user.value, pass.value)
   .then( res => {
     if ( res.success == 1 ) {
       // we've logged in successfully
