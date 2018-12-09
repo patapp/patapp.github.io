@@ -19,51 +19,62 @@
   <meta name="theme-color" content="#ffffff">
   
   <link href="https://fonts.googleapis.com/css?family=Dosis:400,500,700|Patrick+Hand|Roboto:400,500,700" rel="stylesheet">
-  <link href="../src/css/styles__signup.css" rel="stylesheet" type="text/css">
-  <link href="../src/css/pat-global.css" rel="stylesheet" type="text/css">
-  <link rel="manifest" href="../manifest.json">
+  <!-- <link href="../src/css/styles__signup.css" rel="stylesheet" type="text/css"> -->
+  <!-- <link href="../src/css/pat-global.css" rel="stylesheet" type="text/css"> -->
+  <link href="../src/css/main.css" rel="stylesheet" type="text/css">
 
+  <link rel="manifest" href="../manifest.json">
   <link rel="icon" href="../src/icons/pat_tab_icon_32x32.png">
 
   <title>PAT. - Sign Up</title>
 
 </head>
-<body>
+<body class="center-form">
   
   <section class="sign-up">
 
     <figure class="sign-up__logo">
+
       <img src="../src/svg/pat_ic.svg">
-    </figure>
-
-    <form class="sign-up__form" id="sign-up__form">
-
-      <div class="sign-up__input-field">
-        <img src="../src/svg/sign_up_profile_ic.svg">
-        <input id="username" placeholder="username" type="text" maxlength="32">
+      
+      <div class="sign-up__form-error error-hidden">
+        <img src="../src/svg/error_ic.svg">
+        <p></p>
       </div>
 
-      <div class="sign-up__input-field">
+    </figure>
+
+    <form novalidate class="sign-up__form" id="sign-up__form">
+
+
+      <div class="form-input">
+        <img src="../src/svg/sign_up_profile_ic.svg">
+        <input id="username" placeholder="username" type="text" maxlength="16">
+      </div>
+
+      <div class="form-input">
         <img src="../src/svg/sign_up_envelope_ic.svg">
         <input id="email" placeholder="email" type="email" maxlength="255">
       </div>
 
-      <div class="sign-up__input-field">
+      <div class="form-input">
         <img src="../src/svg/sign_up_lock_ic.svg">
         <input id="pass" placeholder="password" type="password">
       </div>
 
-      <div class="sign-up__input-field">
+      <div class="form-input">
           <img src="../src/svg/sign_up_lock_ic.svg">
         <input id="confirmpass" placeholder="confirm password" type="password">
       </div>
 
-      <input type="submit" value="CREATE ACCOUNT">
+      <div class="button-wrapper">
+        <button disabled id="sign-up-btn" class="btn btn-primary" type="submit">SIGN UP</button>
+      </div>
+      
+      <p>Already have an account?<br><a href="../login/">Log In</a></p>
 
     </form>
 
-    <p>Already have an account?<br><a href="../login/">Log In</a></p>
-    
   </section>
 
 
