@@ -93,6 +93,14 @@ const addComment = ( postID, commentText ) => {
   });
 };
 
+const getComments = async (postID) => {
+  return new Promise((resolve, reject) => {
+    getJSON( 'POST', 'comments', '', {post_id: postID} ).then( (r) => {
+      resolve(r);
+    });
+  });
+};
+
 const deleteMyProfile = () => {
   // FORCE DELETE!!! You should ask confirmation before calling this function !!!!
   deleteUser ( sessionLoggedInUserID, true );
