@@ -69,3 +69,56 @@
     50%  { opacity: 0.5 }
     100% { opacity: 1 }
 }
+
+#search-for-options {
+    display: table;
+    width: 100%;
+}
+
+#search-for-options li {
+    width: 33.33%;
+    font-family: Dosis, Serif;
+    font-size:20px;
+    display:table-cell;
+    color: #ff145b;
+    font-weight:700;
+    text-transform: uppercase;
+    text-align:center;
+}
+
+#search-for-options li.selected {
+    border-bottom: 2px solid #ccc;
+}
+
+#list-search-tags,
+#list-search-users {
+    display: block;
+}
+
+#list-search-tags li,
+#list-search-users li {
+    background: none;
+    padding: 10px;
+    display: inline-block;
+    font-family: Dosis, Serif;
+    font-weight: 700;
+    color: #ff145b;
+    text-transform: uppercase;
+    font-size:20px;    
+}
+
+.result-count {
+    background: #ff145b;
+    padding: 3px 10px 3px 10px;
+    margin-left:8px;
+    border-radius: 3px;
+    display: inline-block;
+    font-family: Dosis, Serif;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    font-size:10px;    
+}
+.result-count:empty {
+    display:none;
+}

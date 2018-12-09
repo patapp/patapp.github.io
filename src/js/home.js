@@ -121,12 +121,36 @@ const deleteUser = ( userID, confirmed = false ) => {
 };
 
 const getUserProfileData = ( userID ) => {
-  getJSON( 'POST', 'users/profile', '', {user_id: userID} ).then( (r) => {
-    if ( r.success ) {
-      console.log(r);
-      }
+  return new Promise((resolve, reject) => {
+    getJSON( 'POST', 'users/profile', '', {user_id: userID} ).then( (r) => {
+      resolve(r);
+    });
   });
 };
+
+const renderUserProfileData = ( userID ) => {
+  getUserProfileData(userID).then((r) => {
+    if ( r.success ) {
+      const username    = document.getElementById('user_name');
+      const followers   = document.getElementById('user_followers_amount');
+      const following   = document.getElementById('user_following_amount');
+      const description = document.getElementById('user_description');
+      //const img         = document.getElementById('user_img');
+console.log(r);
+      username.textContent = r.user_name;
+      followers.textContent = r.followers;
+      following.textContent = r.following;
+      description.textContent = r.user_description;
+      
+      gridUserPosts.setSearchTerm(userID);
+      gridUserPosts.reset();
+
+      // r.
+      // last_seen_time last_seen_time_ago, posts, profile_create_time, profile_pic_uri, success, user_description, user_name
+      
+    }
+  });
+}
 
 
 // NEW FUNCTIONS BY SAMULI ************************************************************************************************************************************************************

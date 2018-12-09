@@ -70,9 +70,9 @@
 				
 				<div class="searc-tab__input" style="height:40px;display:block;width:100%;">
 				<ul id="search-for-options">
-          <li style="float:left;width:100px;" id="search-for-item-post" class="clickable selected">Post<span id="result-count-post" class="result-count"></span></li>
-          <li style="float:left;width:100px;" id="search-for-item-tag" class="clickable">Tag<span  id="result-count-tag" class="result-count"></span></li>
-          <li style="float:left;width:100px;" id="search-for-item-user" class="clickable">User<span  id="result-count-user" class="result-count"></span></li>
+          <li id="search-for-item-post" class="clickable selected">Post<span id="result-count-post" class="result-count"></span></li>
+          <li id="search-for-item-tag" class="clickable">Tag<span  id="result-count-tag" class="result-count"></span></li>
+          <li id="search-for-item-user" class="clickable">User<span  id="result-count-user" class="result-count"></span></li>
 				</ul>
 				</div>
 				
@@ -95,11 +95,11 @@
 						
 						<div class="profile-tab__username">
 							<img src="../src/svg/sign_up_profile_ic.svg">
-							<span>patuser</span>
+							<span id="user_name">#</span>
 						</div>
 						
 						<div class="proflie-tab__bio">
-							<p contenteditable="true">Chillwave palo santo skateboard vice. Hoodie shaman coloring book, art party wayfarers fixie af 8-bit tbh whatever iPhone mixtape truffaut. Irony tbh iPhone</p>
+							<p id="user_description" contenteditable="true">#</p>
 						</div>
 						
 					</div>
@@ -109,12 +109,12 @@
 							
 							<div class="stats__followers">
 								<p>followers</p>
-								<p>1337</p>
+								<p id="user_followers_amount">#</p>
 							</div>
 							
 							<div class="stats__following">
 								<p>following</p>
-								<p>15</p>
+								<p id="user_following_amount">#</p>
 							</div>
 							
 						</div>
