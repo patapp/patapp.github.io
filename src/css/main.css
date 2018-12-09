@@ -70,3 +70,6 @@ input, label {
   animation: loading 2s infinite;
 }
 
+.hide {
+ display:none !important;
+ }
