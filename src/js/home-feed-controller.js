@@ -376,9 +376,12 @@ const renderPosts = (from, to) => {
           commentPopup.style.display="block";
           toggleBurgerToBack();
           if (isBackButton) {
-            menuLabelElement.addEventListener('click', () => {
+            menu.addEventListener('click', () => {
               commentPopup.style.display="none";
             });
+          }
+          if (bottomNav.classList.contains("expanded")) {
+            toggleBottomNavButtons();
           }
         }
         else if (VIEW_PAGE =='') {
