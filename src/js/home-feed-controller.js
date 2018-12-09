@@ -178,7 +178,7 @@ const postElement = `
 <div class="post-info__description"></div>
 <p class="post-description-toggle"></p>
 <div class="post-info__comments">
-<img src="../src/svg/comment_ic.svg" alt="comment_ic"></img>
+<img class="post-info__comments-logo"></img>
 <span></span><p></p>
 </div>
 <div class="post-info__timestamp">
@@ -186,17 +186,19 @@ const postElement = `
 </div>
 </div>
 
+<!-- POPUP FOR UNREGISTERED USERS ON WELCOME PAGE -->
 <div class="unregisteredPopup">
 <div class="unregisteredPopupContent">
-<p>This website collects your personal data for commercial use. Please click on the button to agree that your data may be used for commercial purposes</p>
-<button id="urSignup" class="signUp btn btn-primary">Agree</button>
+<p>This feature is only available for registered users. </p>
+<button id="urSignup" class="signUp btn btn-primary">SIGN UP</button>
 </div>
 </div>
-
+<!-- POPUP FOR UNREGISTERED USERS ON WELCOME PAGE -->
 `;
 
 const feedContainer = document.getElementById('home-feed');
 const loadTrigger = document.getElementById('load-trigger');
+const commentPopup = document.getElementsByClassName("commentPopup")[0];
 let postsInitialized = 0;
 let postsDataLoaded = 0;
 let postsDataCount = -1;
@@ -216,29 +218,30 @@ const renderPosts = (from, to) => {
     
     for (let p=from; p<=to; p++) {
       
-      const parent      = document.querySelector("#post-"+p);
+      const parent                    = document.querySelector("#post-"+p);
       
-      const userpic     = document.querySelector("#post-"+p+" .post-header__picture");
-      const username    = document.querySelector("#post-"+p+" .post-header__username");
+      const userpic                   = document.querySelector("#post-"+p+" .post-header__picture");
+      const username                  = document.querySelector("#post-"+p+" .post-header__username");
       
-      const postmedia   = document.querySelector("#post-"+p+" .post-media");
+      const postmedia                 = document.querySelector("#post-"+p+" .post-media");
       
-      const ratingParent= document.querySelector("#post-"+p+" .post-rating")
-      const ratingLine  = document.querySelector("#post-"+p+" .rating-line");
-      const ratingDots  = document.querySelector("#post-"+p+" .rating-dots");
-      const ratingSlider= document.querySelector("#post-"+p+" .rating-slider");
-      let   isRated     = false;
+      const ratingParent              = document.querySelector("#post-"+p+" .post-rating")
+      const ratingLine                = document.querySelector("#post-"+p+" .rating-line");
+      const ratingDots                = document.querySelector("#post-"+p+" .rating-dots");
+      const ratingSlider              = document.querySelector("#post-"+p+" .rating-slider");
+      let   isRated                   = false;
       
-      const tags        = document.querySelector("#post-"+p+" .post-info__tags");
+      const tags                      = document.querySelector("#post-"+p+" .post-info__tags");
       
-      const description = document.querySelector("#post-"+p+" .post-info__description");
-      const showDesc    = document.querySelector("#post-"+p+" .post-description-toggle");
+      const description               = document.querySelector("#post-"+p+" .post-info__description");
+      const showDesc                  = document.querySelector("#post-"+p+" .post-description-toggle");
       
-      const comment     = document.querySelector("#post-"+p+" .post-info__comments");
-      const commentCount= document.querySelector("#post-"+p+" .post-info__comments > span");
-      const commentIcon = document.querySelector("#post-"+p+" .post-info__comments > img");
-      const addComments = document.querySelector("#post-"+p+" .post-info__comments > p");
-      const timestamp   = document.querySelector("#post-"+p+" .post-info__timestamp > p");
+      const comment                   = document.querySelector("#post-"+p+" .post-info__comments");
+      const commentCount              = document.querySelector("#post-"+p+" .post-info__comments > span");
+      const commentIcon               = document.querySelector("#post-"+p+" .post-info__comments > img");
+      const addComments               = document.querySelector("#post-"+p+" .post-info__comments > p");
+
+      const timestamp                 = document.querySelector("#post-"+p+" .post-info__timestamp > p");
 
       const unregisteredPopup         = document.querySelector("#post-"+p+" .unregisteredPopup");
       const unregisteredPopup_button  = document.querySelector("#post-"+p+" .unregisteredPopupContent > button");
@@ -370,7 +373,13 @@ const renderPosts = (from, to) => {
       }
       comment.addEventListener('click', () =>{
         if (VIEW_PAGE == 'home'){
-          conLog("YOU CAN COMMENT ON STUFF");
+          commentPopup.style.display="block";
+          toggleBurgerToBack();
+          if (isBackButton) {
+            menuLabelElement.addEventListener('click', () => {
+              commentPopup.style.display="none";
+            });
+          }
         }
         else if (VIEW_PAGE =='') {
           unregisteredPopup.style.display="block";
