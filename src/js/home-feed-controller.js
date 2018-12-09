@@ -380,9 +380,6 @@ const renderPosts = (from, to) => {
               commentPopup.style.display="none";
             });
           }
-          if (bottomNav.classList.contains("expanded")) {
-            toggleBottomNavButtons();
-          }
         }
         else if (VIEW_PAGE =='') {
           unregisteredPopup.style.display="block";
