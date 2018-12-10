@@ -463,6 +463,8 @@ const isVisibleOnScreen = (element) => {
   }
 };
 
+if ( VIEW_PAGE == 'home' ) {
+
 const homeTab         = document.getElementById('home-tab');
 const homeLoadTrigger = document.getElementById('home-load-trigger');
 homeTab.addEventListener('scroll', () => {
@@ -474,3 +476,5 @@ homeTab.addEventListener('scroll', () => {
   
 });
 appendPosts(5);
+
+}
