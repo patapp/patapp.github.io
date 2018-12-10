@@ -349,10 +349,17 @@ const clearNewPostInputs = () => {
 	description.value = "";
 	tagsAmount.innerText = "0";
 	currentTagsArr = [];
-	const currentTagsElements = document.querySelectorAll('.new-post-tag');
+	
+	const currentTagsElements = document.querySelectorAll('#current-tags > .new-post-tag');
 	currentTagsElements.forEach(tag => {
 		currentTags.removeChild(tag);
 	});
+
+	const topTagsElements = document.querySelectorAll('#top-tags > .new-post-tag');
+	topTagsElements.forEach(tag => {
+		topTagsList.removeChild(tag);
+	});
+
 	console.log('IMPLEMENT CLEAR POST INPUTS!!!');
 }
 
