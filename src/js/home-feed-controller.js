@@ -118,17 +118,19 @@ const getUsernameFromDocument = (id) => {
   console.log('You clicked on user: ', username);
   
   getJSON('POST','users/get-user-id', '', {user_name: username} ).then( (res) => {
+    
     if ( res.success ) {
       const userId = res.user_id;
       console.log('SUCCESS: user id is: ' + userId );
+      
       getUserProfileData(userId).then( res => {
-        return res.json();
-      }).then( data => {
-        setVisitingProfileInfo(data);
+        setVisitingProfileInfo(res); 
       });
+
     } else {
       alert('user not found');
     }
+
   });
 }
 
