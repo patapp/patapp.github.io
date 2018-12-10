@@ -1,15 +1,15 @@
 'use strict';
 
-  /* ------------------------+-------------------------------+
-  |   .----.  .--.  .---.    |  CREATED BY TEAM JJS          |
-  |   | {}  }/ {} \{_   _}   +-------------------------------+
-  |   | .--'/  /\  \ | |     |  Joonas Kauppinen             |
-  |   `-'   `-'  `-' `-'     |  "Jamie" GeonHui Yoon         |
-  |   - a place for pets -   |  Samuli Virtanen              |
-  +--------------------------+-------------------------------+
-  | https://github.com/joonasmkauppinen/pat-project-backend  |
-  | https://github.com/joonasmkauppinen/pat-project-frontend |
-  +-------------------------------------------------------- */
+/* ------------------------+-------------------------------+
+|   .----.  .--.  .---.    |  CREATED BY TEAM JJS          |
+|   | {}  }/ {} \{_   _}   +-------------------------------+
+|   | .--'/  /\  \ | |     |  Joonas Kauppinen             |
+|   `-'   `-'  `-' `-'     |  "Jamie" GeonHui Yoon         |
+|   - a place for pets -   |  Samuli Virtanen              |
++--------------------------+-------------------------------+
+| https://github.com/joonasmkauppinen/pat-project-backend  |
+| https://github.com/joonasmkauppinen/pat-project-frontend |
++-------------------------------------------------------- */
 
 const logOut = async (u,p) => {
   return new Promise((resolve, reject) => {
@@ -55,13 +55,16 @@ btnLogOut.addEventListener('click', (e) => {
   });
 });
 
-const deletePost = (id) => {
-  getJSON('DELETE', 'posts/' + id, '').then( (r) => {
+const deletePost = (id, element=null) => {
+  getJSON('DELETE', 'posts', '', {post_id: id}).then( (r) => {
     if ( r.success ) {
-      alert ( 'Delete post succeeded !' );
-      }else{
-      alert ( 'Error: ' + r.error );
+      //alert ( 'Delete post succeeded !' );
+      if (element !== null) {
+        element.parentNode.removeChild(element);
       }
+    } else {
+      alert ( 'Error: ' + r.error );
+    }
   });
 };
 
@@ -76,9 +79,9 @@ const setFollowUser = ( userID, followOrNot ) => {
     if ( r.success ) {
       console.log( '[setFollowUser] You are now ' + (followOrNot?'FOLLOWING':'NOT FOLLOWING') + ' user ' + userID );
       // data is set ok - update the button state here!
-      }else{
+    }else{
       console.log('[setFollowUser] ERROR: ' + r.error);
-      }
+    }
     // here you should disable loading or enable button operation again!
   });
 };
@@ -87,9 +90,9 @@ const addComment = ( postID, commentText ) => {
   getJSON( 'POST', 'comments/add', '', {post_id: postID, comment : commentText}).then( (r) => {
     if ( r.success ) {
       console.log( '[addComment] Comment added.' );
-      }else{
+    }else{
       console.log('[addComment] ERROR: ' + r.error);
-      }
+    }
   });
 };
 
@@ -104,16 +107,16 @@ const getComments = async (postID) => {
 const deleteMyProfile = () => {
   // FORCE DELETE!!! You should ask confirmation before calling this function !!!!
   deleteUser ( sessionLoggedInUserID, true );
-  }
+}
 
 const deleteUser = ( userID, confirmed = false ) => {
   if ( sessionLoggedInUserID != userID || (sessionLoggedInUserID == userID && confirmed) ) {
     getJSON( 'DELETE', 'users', '', {user_id: userID} ).then( (r) => {
       if ( r.success ) {
         console.log( '[deleteUser] User is Deleted.' );
-        }else{
+      }else{
         console.log('[deleteUser] ERROR: ' + r.error);
-        }
+      }
     });
   }else{
     console.log('[deleteUser] ERROR: You are trying to delete own account.');
@@ -136,7 +139,7 @@ const renderUserProfileData = ( userID ) => {
       const following   = document.getElementById('user_following_amount');
       const description = document.getElementById('user_description');
       const img         = document.getElementById('profile-tab__pic');
-console.log(r);
+      console.log(r);
       username.textContent = r.user_name;
       followers.textContent = r.followers;
       following.textContent = r.following;
@@ -150,7 +153,7 @@ console.log(r);
       
       gridUserPosts.setSearchTerm(userID);
       gridUserPosts.reset();
-
+      
       // r.
       // last_seen_time last_seen_time_ago, posts, profile_create_time, profile_pic_uri, success, user_description, user_name
       
@@ -175,7 +178,7 @@ console.log(r);
 //     console.log('Current tab HOME adding 5 new posts to home feed')
 //     appendPosts(5);
 //   }
-  
+
 // });
 
 // const searchTab = document.getElementById('search-tab');

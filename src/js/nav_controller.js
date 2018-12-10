@@ -14,7 +14,7 @@
 const editProfileElement = document.querySelector('.top-nav-bar__edit');
 const editIcon = document.querySelector('.top-nav-bar__edit-icon');
 const saveIcon = document.querySelector('.top-nav-bar__edit-save');
-
+let isEditMode = false;
 
 const menu = document.getElementById('menu');
 const menuLabelElement = document.querySelector('.bottom-nav-buttons__burger > span');
@@ -142,12 +142,13 @@ const toggelNewPostView = () => {
 }
 
 newPostButton.addEventListener('click', () => {
-  location.href = "#new-post";
+  updateTopTags();
   toggelNewPostView();
 });
 newPostCancelButton.addEventListener('click', () => {
   window.history.back();
   toggelNewPostView();
+  clearNewPostInputs();
 });
 
 const toggleBottomNavButtons = () => {
@@ -171,6 +172,7 @@ menu.addEventListener('change', () => {
 });
 
 editIcon.addEventListener('click', () => {
+  isEditMode = true;
   disableRadioButtons();
   enableProfieEditing();
   toggleEditToSave();
@@ -178,6 +180,7 @@ editIcon.addEventListener('click', () => {
 });
 
 saveIcon.addEventListener('click', () => {
+  isEditMode = false;
   enableRadioButtons();
   disableProfieEditing();
 

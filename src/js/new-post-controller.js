@@ -299,16 +299,23 @@ newPostForm.addEventListener('submit', (e) => {
 	
 	const options = { method: 'POST', "Content-Type": "application/x-www-form-urlencoded", body: data };
 	
-	fetch(API_URL + 'posts/upload', options).then( res => {
+	fetch(API_URL + 'posts/upload', options)
+	.then( (res) => {
+		console.log('This log is before window.location.reload()');
+		document.location.reload();
+		console.log('This log is after window.location.reload()');
 		return res.json();
-	}).then((json) => {
-		console.log(json);
+	}).then( (json) => {
+		console.log('New post upload json', json);
+	})
+	.catch(err => {
+		console.error('New post upload fetch', err);
 	});
 	
 	
 });
 
-setTimeout(() => {
+const updateTopTags = () => {
 	getJSON('POST', 'tags').then( res => {
 		if (res.success) {
 			topTagsArr = res.tags;
@@ -319,7 +326,11 @@ setTimeout(() => {
 	})
 	.catch( err => {
 		console.log('[getJSON] error: ', err);
-	});	
-}, 100);
+	});
+}
+
+const clearNewPostInputs = () => {
+	console.log('IMPLEMENT CLEAR POST INPUTS!!!');
+}
 
 updateCurrentTagsAmount();
