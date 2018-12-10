@@ -39,19 +39,29 @@ const updateProfileInfo = () => {
         const data = new FormData();
         if (profilePicInput.files[0]) {
             console.log('New profile pic');
-            data.append('new_profile_pic', profilePicInput.files[0]);
+
+            data.append('upload_file', profilePicInput.files[0]);
+
             profilePicInput.value = "";
         }
         if (currentBio !== bio.innerText) {
             console.log('New bio');
-            data.append('bio', bio.innerText);
+
+            data.append('description', bio.innerText);
+
             currentBio = bio.innerText;
         }
         data.append( 'session_id', sessionID );
         data.append( 'session_token', sessionToken );
         
-        const options = { method: 'POST', "Content-Type": "application/x-www-form-urlencoded", body: data };
-        console.log(options);
+        const options = { method: 'PATCH', "Content-Type": "application/x-www-form-urlencoded", body: data };
+        
+        fetch(API_URL + 'users', options).then( res => {
+            return res.json();
+        }).then((json) => {
+            console.log(json);
+        });
+        
     } else {
         console.log('No changes to profile');
     }
