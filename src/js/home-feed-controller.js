@@ -376,14 +376,13 @@ const renderPosts = (from, to) => {
           commentPopup.style.display="block";
           toggleBurgerToBack();
 
-          const commentPopup__comments = document.getElementsByClassName("commentPopup__comments")[0];
           loadComment(postsDataArray[p]);
           sendComment(postsDataArray[p]);
 
           if (isBackButton) {
             menu.addEventListener('click', () => {
               commentPopup.style.display="none";
-              commentPopup__comments.innerHTML='';
+              clearContent();
             });
           }
         }

@@ -431,15 +431,14 @@ div:empty::after {
     justify-content: space-between;
 }
 
-.commentInput__send {
-
-}
-
 .commentInput__message {
     padding-left: 25px;
     font-family: 'Roboto',serif;
     font-size: 15px;
     letter-spacing: 1px;
+    background-color: #00FFA3;
+    width: 90%;
+    display: inline-block;
 }
  
 .commentInput__message::placeholder{
@@ -447,6 +446,12 @@ div:empty::after {
     font-size: 15px;
     letter-spacing: 1px;
     color: var(--color-brown);
+}
+
+.contentWrapper {
+    display: flex;
+    flex-direction: column;
+
 }
 
 /* ---------------------------------- */
