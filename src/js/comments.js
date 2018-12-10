@@ -19,6 +19,10 @@ getComments(postsDataArray).then( (r) => {
           //TextNodes created with the data (comment,date and username) from the database
           const comment   = document.createTextNode(c.comment);
           const added_ago = document.createTextNode(" - "+c.added_ago);
+          //Sets added_ago to "now" if time is undefined
+          if (c.added_ago === undefined) {
+            added_ago.nodeValue=" - now";
+          }
           const user_name = document.createTextNode(c.user_name);
           //Appends TextNodes to p elements
           p1.appendChild(user_name);

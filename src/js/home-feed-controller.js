@@ -416,8 +416,6 @@ const renderPosts = (from, to) => {
               commentPopup.style.display="none";
               //Clears the loaded comments
               clearContent();
-              commentCount.innerHTML='';
-              commentCount.insertAdjacentHTML('beforeend',res.post_data[postsDataArray[p]].comments);
             });
           }
         }
