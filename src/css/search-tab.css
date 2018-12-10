@@ -41,7 +41,7 @@
     grid-row: 1 / 1;
     grid-column: 1 / 1;
 }
-.search-tab__feed > ul > *:first-child {
+.search-tab__feed > ul > li:first-child {
     grid-row: 1 / 1;
     grid-column: 1 / 1;
 }
