@@ -127,7 +127,7 @@ const checkTarget = (id, target) => {
     
     case "IMG":
       console.log('case IMG');
-      if (target.closest('div').className === "post-header__picture") {
+      if (target.closest('div').classList.contains("post-header__picture")) {
         getUsernameFromDocument(id);
         toggleVisitingProfile();
       }
@@ -135,7 +135,7 @@ const checkTarget = (id, target) => {
     
     case "P":
       console.log('case P');
-      if (target.closest('div').className === "post-header__username") {
+      if (target.closest('div').classList.contains("post-header__username")) {
         getUsernameFromDocument(id);
         toggleVisitingProfile();
       }
