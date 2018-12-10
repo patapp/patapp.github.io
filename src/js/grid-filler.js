@@ -108,7 +108,14 @@ class gridFiller {
         liElem.appendChild(deleteIcon);
 
         liElem.addEventListener('click', (e) => {
-          const item = e.target;
+          //const item = e.target;
+          let item = null;
+          if (e.target.tagName == "IMG") {
+            item = e.target.parentNode;
+          } else {
+            item = e.target;
+          }
+          
           gridItemClicked ( this.elementID, this.postsDataArray[p], item );
         });
       }
