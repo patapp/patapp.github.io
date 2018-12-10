@@ -13,7 +13,7 @@
 
 
 
-const regex = /^[a-zA-Z0-9-_., ]$/;
+const regex = /^[a-zA-Z0-9-_., ]/;
 
 let topTagsArr      = [];
 let currentTagsArr  = [];
@@ -359,7 +359,7 @@ const clearNewPostInputs = () => {
 	topTagsElements.forEach(tag => {
 		topTagsList.removeChild(tag);
 	});
-	
+
 }
 
 updateCurrentTagsAmount();
