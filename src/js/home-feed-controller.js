@@ -362,35 +362,53 @@ const renderPosts = (from, to) => {
         
       });
       // -------------------- END OF POST RATING -----------------------------------
+
+      //Redirects to the sign-up page when button is clicked on the unregistered popup on the welcome page
       unregisteredPopup_button.addEventListener('click', () => {
         window.location.href = "sign-up/";
       });
+      
       addComments.innerHTML = "Add comment...";
       if (res.post_data[postsDataArray[p]].comments > 999) {
+        //Prevents a long comment counter with a cap of 999
         commentCount.insertAdjacentHTML('beforeend',"999+");
       }
       else {
+        //Gets the number of comments for each post
         commentCount.insertAdjacentHTML('beforeend',res.post_data[postsDataArray[p]].comments);
       }
+      //When the entire comment div("Add comment..." and comment icon) is clicked
       comment.addEventListener('click', () =>{
+        //VIEW_PAGE checked to ensure comment window does not show for unregistered users
         if (VIEW_PAGE == 'home'){
+          //Shows comment window
           commentPopup.style.display="block";
+          //Burger button transitions into a back button and hides all other nav bar buttons
           toggleBurgerToBack();
-
+          //Determines ID of current post
+          setOpenID(postsDataArray[p]);
+          //Loads comments for current post
           loadComment(postsDataArray[p]);
-          sendComment(postsDataArray[p]);
 
+          //When there is a back button being displayed
           if (isBackButton) {
             menu.addEventListener('click', () => {
+              //Hides comment window when back button is pressed
               commentPopup.style.display="none";
+              //Clears the loaded comments
               clearContent();
+              commentCount.innerHTML='';
+              console.log("RESET COUNT : "+res.post_data[postsDataArray[p]].comments)
+              commentCount.insertAdjacentHTML('beforeend',res.post_data[postsDataArray[p]].comments);
             });
           }
         }
+        //Different popup shown for unregistered users on welcome page
         else if (VIEW_PAGE =='') {
           unregisteredPopup.style.display="block";
         }
       });
+      //Dismisses popup when grey areas are clicked
       window.addEventListener('click', () => {
         if (event.target == unregisteredPopup) {
           unregisteredPopup.style.display="none";
