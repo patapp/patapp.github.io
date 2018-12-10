@@ -63,6 +63,8 @@ const setSearchType = (searchType) => {
   }
 };
 
+  const searchLoadTriggerUserPosts = document.getElementById('search-load-trigger-userposts');
+  const profileTab = document.getElementById('profile-tab');
 
 
 /* This function is called only, if the session exists and user is logged in. */
@@ -97,6 +99,12 @@ const appIsReady = () => {
       gridSearch.append();
     }
   });
+  
+  profileTab.addEventListener('scroll', () => {
+    if (isVisibleOnScreen(searchLoadTriggerUserPosts)) {
+      gridUserPosts.append();
+    }
+  });  
   
   const doSearch = () => {
     const searchBar = document.getElementById('search-bar');
