@@ -398,7 +398,6 @@ const renderPosts = (from, to) => {
               //Clears the loaded comments
               clearContent();
               commentCount.innerHTML='';
-              console.log("RESET COUNT : "+res.post_data[postsDataArray[p]].comments)
               commentCount.insertAdjacentHTML('beforeend',res.post_data[postsDataArray[p]].comments);
             });
           }
