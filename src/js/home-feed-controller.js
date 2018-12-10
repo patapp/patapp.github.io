@@ -178,7 +178,7 @@ const postElement = `
 <div class="post-info__description"></div>
 <p class="post-description-toggle"></p>
 <div class="post-info__comments">
-<img class="post-info__comments-logo"></img>
+<img class="post-info__comments-logo" src="../src/svg/comment_ic.svg"></img>
 <span></span><p></p>
 </div>
 <div class="post-info__timestamp">
@@ -375,9 +375,15 @@ const renderPosts = (from, to) => {
         if (VIEW_PAGE == 'home'){
           commentPopup.style.display="block";
           toggleBurgerToBack();
+
+          const commentPopup__comments = document.getElementsByClassName("commentPopup__comments")[0];
+          loadComment(postsDataArray[p]);
+          sendComment(postsDataArray[p]);
+
           if (isBackButton) {
             menu.addEventListener('click', () => {
               commentPopup.style.display="none";
+              commentPopup__comments.innerHTML='';
             });
           }
         }
@@ -468,5 +474,4 @@ homeTab.addEventListener('scroll', () => {
   }
   
 });
-
 appendPosts(5);

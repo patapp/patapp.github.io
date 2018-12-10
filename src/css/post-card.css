@@ -200,7 +200,7 @@ div:empty::after {
 }
 
 .post-info__comments-image {
-    background-image: url(../svg/comment_ic.svg);
+    content: url(../svg/comment_ic.svg);
 }
 
 .unregisteredPopupContent > #urSignup {
@@ -417,6 +417,10 @@ div:empty::after {
     background-color: var(--color-background);
 }
 
+.commentPopup__comments {
+    display: inline-block;
+    font-family: 'Roboto',serif;
+}
 
 .commentInput__wrapper{
     position: fixed;
