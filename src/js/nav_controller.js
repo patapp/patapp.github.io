@@ -28,8 +28,15 @@ const newPostView = document.querySelector('.new-post-form-wrapper');
 const newPostButton = document.getElementById('new-post');
 const newPostCancelButton = document.getElementById('new-post-cancel');
 
-const visitingProfile = document.getElementById('visiting-profile');
 let isVisitingProfile = false;
+const visitingProfile = document.getElementById('visiting-profile');
+const visitingProfilePic = document.getElementById('visiting-profile_pic');
+const visitingProfileUsername = document.getElementById('visiting-profile_username');
+const visitingProfileBio = document.getElementById('visiting-profile_bio');
+const visitingProfileFollowers = document.getElementById('visiting-profile_followers');
+const visitingProfileFollowing = document.getElementById('visiting-profile_following');
+const visitingProfileFollowBtn = document.getElementById('visiting-profile_follow-btn');
+const visitingProfilePosts = document.getElementById('visiting-profile_posts');
 
 const bottomNav = document.querySelector('.bottom-nav-bar');
 
@@ -80,6 +87,15 @@ const toggleBurgerToBack = () => {
   menuLabelElement.classList.toggle('menu-back');
   toggleBottomNavButtons();
   isBackButton = (isBackButton === false ? true : false);
+}
+
+const setVisitingProfileInfo = (data) => {
+  visitingProfilePic.style.backgroundImage = `url(${API_URL}${data.profile_pic_uri})`;
+  visitingProfileUsername.innerText = `${data.user_name}` ;
+  visitingProfileBio.innerText = `${data.user_description}`;
+  visitingProfileFollowers.innerText = `${data.followers}`;
+  visitingProfileFollowing.innerText = `${data.following}`;
+  
 }
 
 const toggleVisitingProfile = () => {

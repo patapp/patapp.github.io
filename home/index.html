@@ -165,15 +165,15 @@
 				<div class="profile-tab__detail-wrapper">
 					<div class="profile-tab__details">
 						
-						<div class="profile-tab__pic"></div>
+						<div id="visiting-profile_pic" class="profile-tab__pic"></div>
 						
 						<div class="profile-tab__username">
 							<img src="../src/svg/sign_up_profile_ic.svg">
-							<span>patuser</span>
+							<span id="visiting-profile_username"></span>
 						</div>
 						
 						<div class="proflie-tab__bio">
-							<p>Chillwave palo santo skateboard vice. Hoodie shaman coloring book, art party wayfarers fixie af 8-bit tbh whatever iPhone mixtape truffaut. Irony tbh iPhone</p>
+							<p id="visiting-profile__bio"></p>
 						</div>
 						
 					</div>
@@ -183,17 +183,17 @@
 							
 							<div class="stats__followers">
 								<p>followers</p>
-								<p>1337</p>
+								<p id="visiting-profile_followers">1337</p>
 							</div>
 							
 							<div class="stats__following">
 								<p>following</p>
-								<p>15</p>
+								<p id="visiting-profile_following">15</p>
 							</div>
 							
 						</div>
 						
-						<button class="follow-btn">
+						<button id="visiting-profile_follow-btn" class="follow-btn">
 							<p class="follow-btn-text">
 								<img class="follow-btn__check-ic hidden" src="../src/svg/check_ic.svg">
 								<span>FOLLOW</span>
@@ -206,7 +206,9 @@
 
 				</div>
 
-				<ul class="profile-tab__posts-grid"></ul>
+				<ul id="visiting-profile_posts" class="profile-tab__posts-grid">
+
+				</ul>
 				
 			</div>
 

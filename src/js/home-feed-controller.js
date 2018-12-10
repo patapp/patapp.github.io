@@ -116,37 +116,51 @@ const updatePostRating = (post, value) => {
 const getUsernameFromDocument = (id) => {
   const username = document.querySelector("#post-"+id+" .post-header__username > p").innerHTML;
   console.log('You clicked on user: ', username);
+  
+  getJSON('POST','users/get-user-id', '', {user_name: username} ).then( (res) => {
+    if ( res.success ) {
+      const userId = res.user_id;
+      console.log('SUCCESS: user id is: ' + userId );
+      getUserProfileData(userId).then( res => {
+        return res.json();
+      }).then( data => {
+        setVisitingProfileInfo(data);
+      });
+    } else {
+      alert('user not found');
+    }
+  });
 }
 
 const checkTarget = (id, target) => {
-
+  
   console.log('[checkTarget] called');
   console.log('target', target);
-
+  
   switch (target.tagName) {
     
     case "IMG":
-      console.log('case IMG');
-      if (target.closest('div').classList.contains("post-header__picture")) {
-        getUsernameFromDocument(id);
-        toggleVisitingProfile();
-      }
+    console.log('case IMG');
+    if (target.closest('div').classList.contains("post-header__picture")) {
+      getUsernameFromDocument(id);
+      toggleVisitingProfile();
+    }
     break;
     
     case "P":
-      console.log('case P');
-      if (target.closest('div').classList.contains("post-header__username")) {
-        getUsernameFromDocument(id);
-        toggleVisitingProfile();
-      }
+    console.log('case P');
+    if (target.closest('div').classList.contains("post-header__username")) {
+      getUsernameFromDocument(id);
+      toggleVisitingProfile();
+    }
     break;
-
+    
     case "LI":
-      if (target.closest('ul').className === "post-info__tags") {
-        const tagValue = target.innerHTML;
-        console.log('You clicked on tag: ', tagValue);
-        makeSearch(tagValue);
-      }
+    if (target.closest('ul').className === "post-info__tags") {
+      const tagValue = target.innerHTML;
+      console.log('You clicked on tag: ', tagValue);
+      makeSearch(tagValue);
+    }
     break;
     
   }
@@ -246,9 +260,9 @@ const renderPosts = (from, to) => {
       const commentCount              = document.querySelector("#post-"+p+" .post-info__comments > span");
       const commentIcon               = document.querySelector("#post-"+p+" .post-info__comments > img");
       const addComments               = document.querySelector("#post-"+p+" .post-info__comments > p");
-
+      
       const timestamp                 = document.querySelector("#post-"+p+" .post-info__timestamp > p");
-
+      
       const unregisteredPopup         = document.querySelector("#post-"+p+" .unregisteredPopup");
       const unregisteredPopup_button  = document.querySelector("#post-"+p+" .unregisteredPopupContent > button");
       
@@ -312,7 +326,7 @@ const renderPosts = (from, to) => {
         const imgSrc = API_URL + res.post_data[postsDataArray[p]].url;
         const image = new Image();
         const imgElem = document.createElement('img');
-
+        
         image.addEventListener('load', () => {
           const width  = image.width;
           const height = image.height;
@@ -323,7 +337,7 @@ const renderPosts = (from, to) => {
             imgElem.classList.add('landscape');
           }
         });
-
+        
         image.src = imgSrc;
         imgElem.setAttribute('src', imgSrc);
         postmedia.appendChild(imgElem);
@@ -367,7 +381,7 @@ const renderPosts = (from, to) => {
         
       });
       // -------------------- END OF POST RATING -----------------------------------
-
+      
       //Redirects to the sign-up page when button is clicked on the unregistered popup on the welcome page
       unregisteredPopup_button.addEventListener('click', () => {
         window.location.href = "sign-up/";
@@ -394,7 +408,7 @@ const renderPosts = (from, to) => {
           setOpenID(postsDataArray[p]);
           //Loads comments for current post
           loadComment(postsDataArray[p]);
-
+          
           //When there is a back button being displayed
           if (isBackButton) {
             menu.addEventListener('click', () => {
@@ -418,7 +432,7 @@ const renderPosts = (from, to) => {
           unregisteredPopup.style.display="none";
         }
       });
-
+      
     }
   });
 }
@@ -437,19 +451,19 @@ const fetchPosts = () => {
 }
 
 const destroyUnneeded = () => {
-if ( postsInitialized > postsDataCount ) {
-  for ( let i = postsDataCount; i<postsInitialized; i++ ){
-    const destroyObject = document.getElementById('post-' + i);
-    if ( typeof destroyObject != 'undefined' ) {
-      destroyObject.remove();
+  if ( postsInitialized > postsDataCount ) {
+    for ( let i = postsDataCount; i<postsInitialized; i++ ){
+      const destroyObject = document.getElementById('post-' + i);
+      if ( typeof destroyObject != 'undefined' ) {
+        destroyObject.remove();
       }
     }
     postsInitialized = postsDataCount;
   }
-if ( postsDataCount == 0 ) {
-  // No media at all.
-  const hlt = document.getElementById('home-load-trigger');
-  hlt.innerHTML = 'No media to show. Maybe you should upload some, or start following someone =)';
+  if ( postsDataCount == 0 ) {
+    // No media at all.
+    const hlt = document.getElementById('home-load-trigger');
+    hlt.innerHTML = 'No media to show. Maybe you should upload some, or start following someone =)';
   }
 }
 
@@ -506,17 +520,17 @@ const isVisibleOnScreen = (element) => {
 };
 
 if ( VIEW_PAGE == 'home' ) {
-
-const homeTab         = document.getElementById('home-tab');
-const homeLoadTrigger = document.getElementById('home-load-trigger');
-homeTab.addEventListener('scroll', () => {
   
-  if (isVisibleOnScreen(homeLoadTrigger)) {
-    console.log('Current tab HOME adding 5 new posts to home feed')
-    appendPosts(5);
-  }
+  const homeTab         = document.getElementById('home-tab');
+  const homeLoadTrigger = document.getElementById('home-load-trigger');
+  homeTab.addEventListener('scroll', () => {
+    
+    if (isVisibleOnScreen(homeLoadTrigger)) {
+      console.log('Current tab HOME adding 5 new posts to home feed')
+      appendPosts(5);
+    }
+    
+  });
+  appendPosts(5);
   
-});
-appendPosts(5);
-
 }
