@@ -92,7 +92,7 @@ class gridFiller {
         const liElem = document.getElementById(this.elementID + '-item-' + p);
         
         const deleteIcon = document.createElement('img');
-        deleteIcon.setAttribute('src', '../icons/delete_ic_140x140.png')
+        deleteIcon.setAttribute('src', '../src/icons/delete_ic_140x140.png');
         deleteIcon.classList.add('delete-icon');
 
         liElem.style.position = 'relative';
