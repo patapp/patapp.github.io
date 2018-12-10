@@ -359,8 +359,7 @@ const clearNewPostInputs = () => {
 	topTagsElements.forEach(tag => {
 		topTagsList.removeChild(tag);
 	});
-
-	console.log('IMPLEMENT CLEAR POST INPUTS!!!');
+	
 }
 
 updateCurrentTagsAmount();

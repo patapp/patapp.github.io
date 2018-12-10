@@ -120,9 +120,13 @@ const getUsernameFromDocument = (id) => {
 
 const checkTarget = (id, target) => {
 
+  console.log('[checkTarget] called');
+  console.log('target', target);
+
   switch (target.tagName) {
     
     case "IMG":
+      console.log('case IMG');
       if (target.closest('div').className === "post-header__picture") {
         getUsernameFromDocument(id);
         toggleVisitingProfile();
@@ -130,6 +134,7 @@ const checkTarget = (id, target) => {
     break;
     
     case "P":
+      console.log('case P');
       if (target.closest('div').className === "post-header__username") {
         getUsernameFromDocument(id);
         toggleVisitingProfile();
