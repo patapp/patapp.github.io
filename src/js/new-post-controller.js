@@ -13,7 +13,7 @@
 
 
 
-const regex = /^[a-zA-Z0-9-_., ]$/;
+const regex = /^[a-zA-Z0-9-_., ]/;
 
 let topTagsArr      = [];
 let currentTagsArr  = [];
@@ -243,12 +243,12 @@ tagsInput.addEventListener('input', (e) => {
 	tagsInput.style.width = "70px";
 	tagsInput.style.width = (tagsInput.scrollWidth)+"px";
 	
-	if (tagsInput.value.length > 16 || ( !regex.test(e.data) && e.inputType !== "deleteContentBackward")) {
-		const currentInput = tagsInput.value;
-		const limitedInput = currentInput.substring(0, currentInput.length-1);
-		tagsInput.value = limitedInput;
-		return;
-	}
+	// if (tagsInput.value.length > 16 || ( !regex.test(e.data) && e.inputType !== "deleteContentBackward")) {
+	// 	const currentInput = tagsInput.value;
+	// 	const limitedInput = currentInput.substring(0, currentInput.length-1);
+	// 	tagsInput.value = limitedInput;
+	// 	return;
+	// }
 	
 	if (regex.test(e.data) || e.inputType === "deleteContentBackward") {
 		
@@ -359,7 +359,7 @@ const clearNewPostInputs = () => {
 	topTagsElements.forEach(tag => {
 		topTagsList.removeChild(tag);
 	});
-	
+
 }
 
 updateCurrentTagsAmount();
