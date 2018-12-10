@@ -290,6 +290,8 @@ newPostForm.addEventListener('submit', (e) => {
 	
 	e.preventDefault();
 	
+	submitNewPost.disabled = true;
+
 	const data = new FormData();
 	data.append ( 'upload_file', fileInput.files[0] );
 	data.append ( 'tags', getTagsAsString() );

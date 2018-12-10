@@ -142,6 +142,7 @@ const toggelNewPostView = () => {
 }
 
 newPostButton.addEventListener('click', () => {
+  submitNewPost.disabled = false;
   updateTopTags();
   toggelNewPostView();
 });
