@@ -35,13 +35,19 @@
 	</head>
 	<body>
 		
-		<div class="loading-screen">
+		<!-- <div class="loading-screen">
 			<img src="../src/svg/loading_paw.svg">
-		</div>
+		</div> -->
 
 		<!-- Header title -->
 		<nav class="top-nav-bar">
 			<img src="../src/svg/pat_ic.svg">
+
+			<div class="top-nav-bar__edit hidden">
+				<img class="top-nav-bar__edit-icon clickable" src="../src/svg/edit_ic.svg">
+				<span class="top-nav-bar__edit-save clickable hidden">SAVE</span>
+			</div>
+
 		</nav>
 		
 		<!-- Tab views wrapper -->
@@ -89,7 +95,12 @@
 			<div id="profile-tab" class="tab-views__tab-profile tab">
 				
 				<div class="profile-tab__detail-wrapper">
+
+					<input id="new-profile-pic" class="hidden" type="file" accept="image/*">
+					
 					<div class="profile-tab__details">
+							
+						<label class="profile-tab__change-pic clickable hidden" for="new-profile-pic">+ change picture</label>
 						
 						<div class="profile-tab__pic"></div>
 						
@@ -99,7 +110,7 @@
 						</div>
 						
 						<div class="proflie-tab__bio">
-							<p id="user_description" contenteditable="true">#</p>
+							<p id="user_description" contenteditable="false">#</p>
 						</div>
 						
 					</div>
@@ -151,7 +162,7 @@
 						</div>
 						
 						<div class="proflie-tab__bio">
-							<p contenteditable="true">Chillwave palo santo skateboard vice. Hoodie shaman coloring book, art party wayfarers fixie af 8-bit tbh whatever iPhone mixtape truffaut. Irony tbh iPhone</p>
+							<p>Chillwave palo santo skateboard vice. Hoodie shaman coloring book, art party wayfarers fixie af 8-bit tbh whatever iPhone mixtape truffaut. Irony tbh iPhone</p>
 						</div>
 						
 					</div>

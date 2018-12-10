@@ -11,6 +11,10 @@
   | https://github.com/joonasmkauppinen/pat-project-frontend |
   +-------------------------------------------------------- */
 
+const editProfileElement = document.querySelector('.top-nav-bar__edit');
+const editIcon = document.querySelector('.top-nav-bar__edit-icon');
+const saveIcon = document.querySelector('.top-nav-bar__edit-save');
+
 const menu = document.getElementById('menu');
 const menuLabelElement = document.querySelector('.bottom-nav-buttons__burger > span');
 let isBackButton = false;
@@ -36,6 +40,17 @@ let currentTab = 0;
 const HOME    = 0,
       SEARCH  = 1,
       PROFILE = 2;
+
+const showEditProfile = () => {
+  editProfileElement.classList.remove('hidden');
+}
+const hideEditProfile = () => {
+  editProfileElement.classList.add('hidden');
+}
+const toggleEditToSave = () => {
+  editIcon.classList.toggle('hidden');
+  saveIcon.classList.toggle('hidden');
+}
 
 const checkOverlayView = () => {
   if (isVisitingProfile) {
@@ -87,16 +102,19 @@ const changeToTab = (tab) => {
 document.getElementById('home-btn')
 .addEventListener('change', ()=> {
   changeToTab(HOME);
+  hideEditProfile();
 });
 
 document.getElementById('search-btn')
 .addEventListener('change', ()=> {
   changeToTab(SEARCH);
+  hideEditProfile();
 });
 
 document.getElementById('profile-btn')
 .addEventListener('change', ()=> {
   changeToTab(PROFILE);
+  showEditProfile()
 });
 
 const toggelNewPostView = () => {
@@ -132,4 +150,17 @@ menu.addEventListener('change', () => {
     bottomNav.classList.toggle('expanded');
     toggleBottomNavButtons();
   }
+});
+
+editIcon.addEventListener('click', () => {
+  enableProfieEditing();
+  toggleEditToSave();
+});
+
+saveIcon.addEventListener('click', () => {
+  disableProfieEditing();
+
+  updateProfileInfo();
+
+  toggleEditToSave();
 });

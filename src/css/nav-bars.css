@@ -30,6 +30,22 @@
 	background-color: white;
 	box-shadow: 0 0 5px 2px var(--dark-brown-shadow-color);
 }
+.top-nav-bar__edit {
+	position: absolute;
+    top: 14px;
+    right: 24px;
+    display: flex;
+    align-items: center;
+}
+.top-nav-bar__edit-icon {
+
+}
+.top-nav-bar__edit-save {
+	font-family: 'Dosis', serif;
+    font-weight: 700;
+    color: var(--color-pink);
+    font-size: 18px;
+}
 
 
 /* input {
