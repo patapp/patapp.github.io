@@ -86,6 +86,7 @@ const updateSlider = (slider, line, dots) => {
 		switchSliderThumb(thumbs[4], slider);
 		switchSliderGradient(gradients[4], line, dots);
 		break;
+		
   }
   
 }
@@ -251,7 +252,7 @@ const renderPosts = (from, to) => {
         checkTarget(p, e.target);
       });
       
-      userpic.innerHTML = '<img height="45" width="45" src="'+API_URL+res.post_data[postsDataArray[p]].user_pic+'">';
+      userpic.innerHTML = '<img height="45" width="45" src="'+(res.post_data[postsDataArray[p]].user_pic ? API_URL+res.post_data[postsDataArray[p]].user_pic : '.'+(VIEW_PAGE == 'home' ? '.' : '')+'/src/icons/default_profile_pic_250x250.png')+'">';
       
       //username.textContent    = res.post_data[postsDataArray[p]].addedby_user;
       let usernameP = document.createElement('p');
