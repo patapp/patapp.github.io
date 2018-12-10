@@ -90,7 +90,12 @@ class gridFiller {
       if ( res.success == false ) conLog('errori');
       for (let p=from; p<=to; p++) {
         const liElem = document.getElementById(this.elementID + '-item-' + p);
-        const newImg = document.createElement('IMG');
+        
+        const deleteIcon = document.createElement('img');
+        deleteIcon.setAttribute('src', '../icons/delete_ic_140x140.png')
+        deleteIcon.classList.add('delete-icon');
+
+        liElem.style.position = 'relative';
         liElem.style.backgroundColor = `#${res.post_data[this.postsDataArray[p]].color}`;
         liElem.style.backgroundImage = `url('${API_URL + res.post_data[this.postsDataArray[p]].thumbnail}')`;
         liElem.style.backgroundSize = 'cover';
