@@ -142,7 +142,6 @@ const toggelNewPostView = () => {
 }
 
 newPostButton.addEventListener('click', () => {
-  location.href = "#new-post";
   updateTopTags();
   toggelNewPostView();
 });

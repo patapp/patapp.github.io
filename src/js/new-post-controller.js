@@ -303,7 +303,7 @@ newPostForm.addEventListener('submit', (e) => {
 		return res.json();
 	}).then((json) => {
 		console.log(json);
-		window.location.reload(true);
+		window.location.reload();
 	});
 	
 	
