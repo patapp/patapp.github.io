@@ -46,8 +46,5 @@ const sendComment = (postsDataArray) => {
 }
 
 const clearContent = () => {
-  /*commentSender.innerHTML='';
-  commentContent.innerHTML='';
-  commentTime.innerHTML='';*/
   commentWrapper.innerHTML='';
 }
