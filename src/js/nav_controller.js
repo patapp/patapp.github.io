@@ -58,7 +58,7 @@ const toggleDeleteIcons = () => {
   });
 }
 
-const enableRadioButtons = () {
+const enableRadioButtons = () => {
   radioButtons.forEach(button => {
     button.disabled = false;
   });
