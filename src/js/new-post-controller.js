@@ -303,12 +303,13 @@ newPostForm.addEventListener('submit', (e) => {
 		return res.json();
 	}).then((json) => {
 		console.log(json);
+		location.reload();
 	});
 	
 	
 });
 
-setTimeout(() => {
+const updateTopTags = () => {
 	getJSON('POST', 'tags').then( res => {
 		if (res.success) {
 			topTagsArr = res.tags;
@@ -319,7 +320,11 @@ setTimeout(() => {
 	})
 	.catch( err => {
 		console.log('[getJSON] error: ', err);
-	});	
-}, 100);
+	});
+}
+
+const clearNewPostInputs = () => {
+	console.log('IMPLEMENT CLEAR POST INPUTS!!!');
+}
 
 updateCurrentTagsAmount();

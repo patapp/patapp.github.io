@@ -143,11 +143,13 @@ const toggelNewPostView = () => {
 
 newPostButton.addEventListener('click', () => {
   location.href = "#new-post";
+  updateTopTags();
   toggelNewPostView();
 });
 newPostCancelButton.addEventListener('click', () => {
   window.history.back();
   toggelNewPostView();
+  clearNewPostInputs();
 });
 
 const toggleBottomNavButtons = () => {
