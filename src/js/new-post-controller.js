@@ -27,7 +27,7 @@ const fileInput      = document.getElementById('media');
 const mediaElement   = document.querySelector('.new-post-form__add-media');
 const description    = document.getElementById('new-post-description');
 
-const tagsAmount		 = document.getElementById('current-tags-amount');
+const tagsAmount	 = document.getElementById('current-tags-amount');
 const currentTags    = document.getElementById('current-tags');
 const tagsInput      = document.getElementById('new-post-tags');
 const topTagsSection = document.querySelector('.new-post-form__tags-input__top-tags');
@@ -114,14 +114,19 @@ const getTagsAsString = () => {
 	}
 };
 
+const clearSelectedMedia = () => {
+	URL.revokeObjectURL(mediaElement.children[1]);
+	mediaElement.removeChild(mediaElement.children[1]);
+}
 
-fileInput.addEventListener('change', () => {
+const checkNewPostFileInput = () => {
+	
+	console.log('fileInput change event called');
 	
 	if (fileInput.files && fileInput.files[0]) {
 		
 		if (mediaElement.children[1] !== undefined) {
-			URL.revokeObjectURL(mediaElement.children[1]);
-			mediaElement.removeChild(mediaElement.children[1]);
+			clearSelectedMedia();		
 		} else {
 			mediaElement.children[0].classList.toggle('hidden');
 		}
@@ -202,11 +207,16 @@ fileInput.addEventListener('change', () => {
 		
 		submitNewPost.disabled = true;
 		
-		mediaElement.removeChild(mediaElement.children[1]);
-		mediaElement.children[0].classList.toggle('hidden');
+		if (mediaElement.children[1] !== undefined) {
+			mediaElement.removeChild(mediaElement.children[1]);
+			mediaElement.children[0].classList.toggle('hidden');
+		}
 		
 	}
-	
+}
+
+fileInput.addEventListener('change', () => {
+	checkNewPostFileInput()
 });
 
 tagsInput.addEventListener('focus', () => {
@@ -291,7 +301,7 @@ newPostForm.addEventListener('submit', (e) => {
 	e.preventDefault();
 	
 	submitNewPost.disabled = true;
-
+	
 	const data = new FormData();
 	data.append ( 'upload_file', fileInput.files[0] );
 	data.append ( 'tags', getTagsAsString() );
@@ -306,12 +316,10 @@ newPostForm.addEventListener('submit', (e) => {
 	
 	fetch(API_URL + 'posts/upload', options)
 	.then( (res) => {
-		console.log('This log is before window.location.reload()');
-		document.location.reload();
-		console.log('This log is after window.location.reload()');
 		return res.json();
 	}).then( (json) => {
 		console.log('New post upload json', json);
+		document.location.reload();
 	})
 	.catch(err => {
 		console.error('New post upload fetch', err);
@@ -336,6 +344,15 @@ const updateTopTags = () => {
 }
 
 const clearNewPostInputs = () => {
+	fileInput.value = "";
+	checkNewPostFileInput();
+	description.value = "";
+	tagsAmount.innerText = "0";
+	currentTagsArr = [];
+	const currentTagsElements = document.querySelectorAll('.new-post-tag');
+	currentTagsElements.forEach(tag => {
+		currentTags.removeChild(tag);
+	});
 	console.log('IMPLEMENT CLEAR POST INPUTS!!!');
 }
 
