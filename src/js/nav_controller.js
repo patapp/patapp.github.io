@@ -14,7 +14,7 @@
 const editProfileElement = document.querySelector('.top-nav-bar__edit');
 const editIcon = document.querySelector('.top-nav-bar__edit-icon');
 const saveIcon = document.querySelector('.top-nav-bar__edit-save');
-const deleteIcons = document.querySelectorAll('.delete-icon');
+
 
 const menu = document.getElementById('menu');
 const menuLabelElement = document.querySelector('.bottom-nav-buttons__burger > span');
@@ -53,6 +53,7 @@ const toggleEditToSave = () => {
   saveIcon.classList.toggle('hidden');
 }
 const toggleDeleteIcons = () => {
+  const deleteIcons = document.querySelectorAll('.delete-icon');
   deleteIcons.forEach(icon => {
     icon.classList.toggle('hidden');
   });
