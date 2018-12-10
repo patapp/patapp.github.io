@@ -307,6 +307,9 @@ newPostForm.addEventListener('submit', (e) => {
 		return res.json();
 	}).then( (json) => {
 		console.log('New post upload json', json);
+	})
+	.catch(err => {
+		console.error('New post upload fetch', err);
 	});
 	
 	
