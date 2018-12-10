@@ -434,10 +434,14 @@ div:empty::after {
     font-family: 'Roboto',serif;
     font-size: 15px;
     letter-spacing: 1px;
+    width: 100%;
     background-color: var(--color-background);
-    width: 90%;
     font-weight: 100;
     display: inline-block;
+}
+
+.commentInput__send {
+    margin-right: 20px;
 }
  
 .commentInput__message::placeholder{
@@ -448,12 +452,14 @@ div:empty::after {
 }
 
 .contentWrapper {
-    height: 92%;
+    height: calc(100% - 50px);
     overflow-y: scroll;
     padding-top: 20px;
     padding-left: 15px;
     padding-right: 10px;
     font-family: 'Roboto',serif;
+    display: flex;
+    flex-direction: column-reverse;
 }
 
 .contentWrapper > li {

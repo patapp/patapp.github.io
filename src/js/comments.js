@@ -10,7 +10,6 @@ const commentWrapper         = document.getElementsByClassName("contentWrapper")
 const loadComment = (postsDataArray) => {
 getComments(postsDataArray).then( (r) => {
     if ( r.success ) {
-      console.log ( r.amount );
       if ( r.amount > 0 ) {
         r.comments.forEach((c) => {
           const li = document.createElement("li");
@@ -33,12 +32,6 @@ getComments(postsDataArray).then( (r) => {
 
           li.append(p1,p2,p3);
           commentWrapper.appendChild(li);
-          //commentContent.insertAdjacentHTML('beforeend',c.comment); 
-          //commentSender.insertAdjacentHTML('beforeend',c.user_name);
-          //commentTime.insertAdjacentHTML('beforeend',c.added_ago);
-          console.log('username: ' + c.user_name);
-          console.log('added: ' + c.added_ago);
-          console.log('comment:' + c.comment);
           });
         }
       }
