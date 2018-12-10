@@ -145,7 +145,7 @@ const appIsReady = () => {
           }
         }
       });
-      getJSON('POST','tags', '', {search_term: searchValue} ).then( (res) => {
+      getJSON('POST','tags', '', {search_term: searchValue, order_by: 'alphabetical', amount: 100} ).then( (res) => {
         if ( res.success ) {
           tagsListView.innerHTML = '';
           console.log(res);
