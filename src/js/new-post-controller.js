@@ -290,6 +290,8 @@ newPostForm.addEventListener('submit', (e) => {
 	
 	e.preventDefault();
 	
+	submitNewPost.disabled = true;
+
 	const data = new FormData();
 	data.append ( 'upload_file', fileInput.files[0] );
 	data.append ( 'tags', getTagsAsString() );
@@ -297,7 +299,10 @@ newPostForm.addEventListener('submit', (e) => {
 	data.append ( 'session_id', sessionID );
 	data.append ( 'session_token', sessionToken );
 	
-	const options = { method: 'POST', "Content-Type": "application/x-www-form-urlencoded", body: data };
+	const options = { 
+		method: 'POST', "Content-Type": "application/x-www-form-urlencoded", 
+		body: data 
+	};
 	
 	fetch(API_URL + 'posts/upload', options)
 	.then( (res) => {
@@ -318,6 +323,7 @@ newPostForm.addEventListener('submit', (e) => {
 const updateTopTags = () => {
 	getJSON('POST', 'tags').then( res => {
 		if (res.success) {
+			console.log('Successfully updated top tags');
 			topTagsArr = res.tags;
 			topTagsArr.forEach(element => {
 				topTagsList.appendChild(newTag(element, true));
