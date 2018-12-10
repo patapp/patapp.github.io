@@ -51,8 +51,9 @@ const updateProfileInfo = () => {
 
             currentBio = bio.innerText;
         }
-        data.append( 'session_id', sessionID );
-        data.append( 'session_token', sessionToken );
+        data.append('user_id', sessionLoggedInUserID);
+        data.append('session_id', sessionID);
+        data.append('session_token', sessionToken);
         
         const options = { method: 'PATCH', "Content-Type": "application/x-www-form-urlencoded", body: data };
         
@@ -61,7 +62,7 @@ const updateProfileInfo = () => {
         }).then((json) => {
             console.log(json);
         });
-        
+
     } else {
         console.log('No changes to profile');
     }
