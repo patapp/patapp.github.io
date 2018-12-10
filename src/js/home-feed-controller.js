@@ -121,6 +121,7 @@ const getUsernameFromDocument = (id) => {
 const checkTarget = (id, target) => {
 
   console.log('[checkTarget] called');
+  console.log('target', target);
 
   switch (target.tagName) {
     
