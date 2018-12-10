@@ -178,7 +178,7 @@ const postElement = `
 <div class="post-info__description"></div>
 <p class="post-description-toggle"></p>
 <div class="post-info__comments">
-<img class="post-info__comments-logo" src="../src/svg/comment_ic.svg" onerror="this.onerror=null;this.src="./src/svg/comment_ic.svg";"></img>
+<img class="post-info__comments-logo" src="../src/svg/comment_ic.svg" onerror="this.onerror=null;this.src='./src/svg/comment_ic.svg';">
 <span></span><p></p>
 </div>
 <div class="post-info__timestamp">
