@@ -28,7 +28,6 @@
 body {
     display: flex;
     flex-direction: column;
-    background-color: var(--color-background);
 }
 
 #button__container {
@@ -164,4 +163,5 @@ span {
 #home-feed {
     max-width: 635px;
     margin: 0 auto;
+    background-color: var(--color-background);
 }
