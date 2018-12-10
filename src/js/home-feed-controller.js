@@ -413,6 +413,24 @@ const fetchPosts = () => {
   }
 }
 
+const destroyUnneeded = () => {
+if ( postsInitialized > postsDataCount ) {
+  for ( let i = postsDataCount; i<postsInitialized; i++ ){
+    const destroyObject = document.getElementById('post-' + i);
+    if ( typeof destroyObject != 'undefined' ) {
+      destroyObject.remove();
+      }
+    }
+    postsInitialized = postsDataCount;
+  }
+if ( postsDataCount == 0 ) {
+  // No media at all.
+  const hlt = document.getElementById('home-load-trigger');
+  hlt.innerHTML = 'No media to show. Maybe you should upload some, or start following someone =)';
+  }
+}
+
+
 const loadPosts = () => {
   conLog('[loadPosts] Called.');
   getJSON('POST', 'posts').then((res) => {
@@ -421,6 +439,7 @@ const loadPosts = () => {
     postsDataArray = res.posts;
     postsDataLoaded = 1;
     postsDataCount = res.posts_count;
+    destroyUnneeded();
     fetchPosts();
   });
 }
