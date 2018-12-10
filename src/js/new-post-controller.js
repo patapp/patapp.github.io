@@ -300,10 +300,12 @@ newPostForm.addEventListener('submit', (e) => {
 	const options = { method: 'POST', "Content-Type": "application/x-www-form-urlencoded", body: data };
 	
 	fetch(API_URL + 'posts/upload', options).then( res => {
+		console.log('This log is before window.location.reload()');
 		window.location.reload();
+		console.log('This log is after window.location.reload()');
 		return res.json();
 	}).then((json) => {
-		console.log(json);
+		console.log('New post upload json', json);
 	});
 	
 	
