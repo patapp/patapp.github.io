@@ -14,6 +14,7 @@
 const editProfileElement = document.querySelector('.top-nav-bar__edit');
 const editIcon = document.querySelector('.top-nav-bar__edit-icon');
 const saveIcon = document.querySelector('.top-nav-bar__edit-save');
+const deleteIcons = document.querySelectorAll('.delete-icon');
 
 const menu = document.getElementById('menu');
 const menuLabelElement = document.querySelector('.bottom-nav-buttons__burger > span');
@@ -50,6 +51,22 @@ const hideEditProfile = () => {
 const toggleEditToSave = () => {
   editIcon.classList.toggle('hidden');
   saveIcon.classList.toggle('hidden');
+}
+const toggleDeleteIcons = () => {
+  deleteIcons.forEach(icon => {
+    icon.classList.toggle('hidden');
+  });
+}
+
+const enableRadioButtons = () {
+  radioButtons.forEach(button => {
+    button.disabled = false;
+  });
+}
+const disableRadioButtons = () => {
+  radioButtons.forEach(button => {
+    button.disabled = true;
+  });
 }
 
 const checkOverlayView = () => {
@@ -153,14 +170,18 @@ menu.addEventListener('change', () => {
 });
 
 editIcon.addEventListener('click', () => {
+  disableRadioButtons();
   enableProfieEditing();
   toggleEditToSave();
+  toggleDeleteIcons();
 });
 
 saveIcon.addEventListener('click', () => {
+  enableRadioButtons();
   disableProfieEditing();
 
   updateProfileInfo();
 
+  toggleDeleteIcons();
   toggleEditToSave();
 });
