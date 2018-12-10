@@ -94,6 +94,7 @@ class gridFiller {
         const deleteIcon = document.createElement('img');
         deleteIcon.setAttribute('src', '../src/icons/delete_ic_140x140.png');
         deleteIcon.classList.add('delete-icon');
+        deleteIcon.classList.add('hidden');
 
         liElem.style.position = 'relative';
         liElem.style.backgroundColor = `#${res.post_data[this.postsDataArray[p]].color}`;
