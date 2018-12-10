@@ -1,64 +1,40 @@
 'use strict';
 
-  /*-------------------------+---------------------------+
-  |   .----.  .--.  .---.    |  CREATED BY TEAM JJS      |
-  |   | {}  }/ {} \{_   _}   +---------------------------+
-  |   | .--'/  /\  \ | |     |  Joonas Kauppinen         |
-  |   `-'   `-'  `-' `-'     |  "Jamie" GeonHui Yoon     |
-  |   - a place for pets -   |  Samuli Virtanen          |
-  +--------------------------+--------------------------*/
-
-const VIEW_PAGE = 'home';
-
-/* This function is called only, if the session exists and user is logged in. */
-const appIsReady = () => {
-
-  // Hide the loading / waiting screen here, and do the tricks....
-  conLog('[APP_IS_READY] Called.');
-  
-  loadPosts(); // Load TRENDING PAGE posts / post content
-
-  /* Modify app here to meet the permissions
-    
-    To check is PERMISSION:
-    isPermission('POST_UPLOAD')
-    TRUE = permission exists, FALSE = no permission
-    
-    USER_DELETE	              Allows to delete ANY user.
-    POST_DELETE	              Allows to delete ANY post.
-    POST_UPLOAD	              Allows to UPLOAD / MODIFY OWN / DELETE OWN post.
-    CONTENT_REPORTS_HANDLER	  Allows to view and handle content reports sent by users.
-    COMMENT_DELETE	          Allows to delete ANY comment.
-    USER_PERMISSION_CHANGE	  Allows to change user permissions.
-  
-  */
-
-  }
+  /* ------------------------+-------------------------------+
+  |   .----.  .--.  .---.    |  CREATED BY TEAM JJS          |
+  |   | {}  }/ {} \{_   _}   +-------------------------------+
+  |   | .--'/  /\  \ | |     |  Joonas Kauppinen             |
+  |   `-'   `-'  `-' `-'     |  "Jamie" GeonHui Yoon         |
+  |   - a place for pets -   |  Samuli Virtanen              |
+  +--------------------------+-------------------------------+
+  | https://github.com/joonasmkauppinen/pat-project-backend  |
+  | https://github.com/joonasmkauppinen/pat-project-frontend |
+  +-------------------------------------------------------- */
 
 const logOut = async (u,p) => {
   return new Promise((resolve, reject) => {
-  if ( isSession () ) {
-    let response = '';
-    getJSON('POST', 'session/logout').then( (r) => {
-      if ( r.success == 1 ) {
-        sessionExists = 0;
-        sessionID = '';
-        sessionToken = ''   ;
-        setCookie ( 'pat_session_id', sessionID, 60 );
-        setCookie ( 'pat_session_token', sessionToken, 60 );
+    if ( isSession () ) {
+      let response = '';
+      getJSON('POST', 'session/logout').then( (r) => {
+        if ( r.success == 1 ) {
+          sessionExists = 0;
+          sessionID = '';
+          sessionToken = ''   ;
+          setCookie ( 'pat_session_id', sessionID, 60 );
+          setCookie ( 'pat_session_token', sessionToken, 60 );
         }else{
-        response = r;
-        console.log(r);
+          response = r;
+          console.log(r);
         }
-      response = r;
-      resolve( response );      
+        response = r;
+        resolve( response );      
       });
-  }else{
-    resolve ({ success: 0 });
+    }else{
+      resolve ({ success: 0 });
     }
   });
-  }
-  
+}
+
 const btnLogOut = document.getElementById('btnLogOut');
 
 btnLogOut.addEventListener('click', (e) => {
@@ -70,11 +46,137 @@ btnLogOut.addEventListener('click', (e) => {
           // Successfully logged out
           window.location.href='../';
           console.log(res);
-          }else{
+        }else{
           console.log('*** ERROR LOGGING OUT ***');
           console.log(res);
-          }
-        });
-      }
+        }
+      });
+    }
   });
 });
+
+const deletePost = (id) => {
+  getJSON('DELETE', 'posts/' + id, '').then( (r) => {
+    if ( r.success ) {
+      alert ( 'Delete post succeeded !' );
+      }else{
+      alert ( 'Error: ' + r.error );
+      }
+  });
+};
+
+// NEW FUNCTIONS BY SAMULI ************************************************************************************************************************************************************
+// NEW FUNCTIONS BY SAMULI ************************************************************************************************************************************************************
+// NEW FUNCTIONS BY SAMULI ************************************************************************************************************************************************************
+// NEW FUNCTIONS BY SAMULI ************************************************************************************************************************************************************
+// NEW FUNCTIONS BY SAMULI ************************************************************************************************************************************************************
+
+const setFollowUser = ( userID, followOrNot ) => {
+  getJSON( (followOrNot ? 'POST' : 'DELETE'), 'follow', '', {user_id: userID}).then( (r) => {
+    if ( r.success ) {
+      console.log( '[setFollowUser] You are now ' + (followOrNot?'FOLLOWING':'NOT FOLLOWING') + ' user ' + userID );
+      // data is set ok - update the button state here!
+      }else{
+      console.log('[setFollowUser] ERROR: ' + r.error);
+      }
+    // here you should disable loading or enable button operation again!
+  });
+};
+
+const addComment = ( postID, commentText ) => {
+  getJSON( 'POST', 'comments/add', '', {post_id: postID, comment : commentText}).then( (r) => {
+    if ( r.success ) {
+      console.log( '[addComment] Comment added.' );
+      }else{
+      console.log('[addComment] ERROR: ' + r.error);
+      }
+  });
+};
+
+const getComments = async (postID) => {
+  return new Promise((resolve, reject) => {
+    getJSON( 'POST', 'comments', '', {post_id: postID} ).then( (r) => {
+      resolve(r);
+    });
+  });
+};
+
+const deleteMyProfile = () => {
+  // FORCE DELETE!!! You should ask confirmation before calling this function !!!!
+  deleteUser ( sessionLoggedInUserID, true );
+  }
+
+const deleteUser = ( userID, confirmed = false ) => {
+  if ( sessionLoggedInUserID != userID || (sessionLoggedInUserID == userID && confirmed) ) {
+    getJSON( 'DELETE', 'users', '', {user_id: userID} ).then( (r) => {
+      if ( r.success ) {
+        console.log( '[deleteUser] User is Deleted.' );
+        }else{
+        console.log('[deleteUser] ERROR: ' + r.error);
+        }
+    });
+  }else{
+    console.log('[deleteUser] ERROR: You are trying to delete own account.');
+  }
+};
+
+const getUserProfileData = ( userID ) => {
+  return new Promise((resolve, reject) => {
+    getJSON( 'POST', 'users/profile', '', {user_id: userID} ).then( (r) => {
+      resolve(r);
+    });
+  });
+};
+
+const renderUserProfileData = ( userID ) => {
+  getUserProfileData(userID).then((r) => {
+    if ( r.success ) {
+      const username    = document.getElementById('user_name');
+      const followers   = document.getElementById('user_followers_amount');
+      const following   = document.getElementById('user_following_amount');
+      const description = document.getElementById('user_description');
+      //const img         = document.getElementById('user_img');
+console.log(r);
+      username.textContent = r.user_name;
+      followers.textContent = r.followers;
+      following.textContent = r.following;
+      description.textContent = r.user_description;
+      
+      gridUserPosts.setSearchTerm(userID);
+      gridUserPosts.reset();
+
+      // r.
+      // last_seen_time last_seen_time_ago, posts, profile_create_time, profile_pic_uri, success, user_description, user_name
+      
+    }
+  });
+}
+
+
+// NEW FUNCTIONS BY SAMULI ************************************************************************************************************************************************************
+// NEW FUNCTIONS BY SAMULI ************************************************************************************************************************************************************
+// NEW FUNCTIONS BY SAMULI ************************************************************************************************************************************************************
+// NEW FUNCTIONS BY SAMULI ************************************************************************************************************************************************************
+// NEW FUNCTIONS BY SAMULI ************************************************************************************************************************************************************
+
+
+
+// const homeTab = document.getElementById('home-tab');
+// const homeLoadTrigger = document.getElementById('home-load-trigger');
+// homeTab.addEventListener('scroll', () => {
+
+//   if (isVisibleOnScreen(homeLoadTrigger)) {
+//     console.log('Current tab HOME adding 5 new posts to home feed')
+//     appendPosts(5);
+//   }
+  
+// });
+
+// const searchTab = document.getElementById('search-tab');
+
+
+// if (currentTab === SEARCH && isVisibleOnScreen(searchFeedLoadTrigger)) {
+//   appendItems();
+// }
+
+// appendPosts(5);

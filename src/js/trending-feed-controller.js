@@ -1,3 +1,17 @@
+'use strict';
+
+  /* ------------------------+-------------------------------+
+  |   .----.  .--.  .---.    |  CREATED BY TEAM JJS          |
+  |   | {}  }/ {} \{_   _}   +-------------------------------+
+  |   | .--'/  /\  \ | |     |  Joonas Kauppinen             |
+  |   `-'   `-'  `-' `-'     |  "Jamie" GeonHui Yoon         |
+  |   - a place for pets -   |  Samuli Virtanen              |
+  +--------------------------+-------------------------------+
+  | https://github.com/joonasmkauppinen/pat-project-backend  |
+  | https://github.com/joonasmkauppinen/pat-project-frontend |
+  +-------------------------------------------------------- */
+
+
 const postElement = `
 <li class="post" id="{id}">
             

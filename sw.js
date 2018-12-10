@@ -12,7 +12,7 @@ self.addEventListener('install', (event) => {
       cache.addAll([
         // general
         'https://fonts.googleapis.com/css?family=Dosis:400,500,700|Patrick+Hand|Roboto:400,500,700',
-        './src/js/pwa.js',
+        './pwa.js',
         './src/js/global.js',
         './src/js/landing.js',
         './src/js/*',

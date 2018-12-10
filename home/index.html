@@ -1,35 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- ----------------------+---------------------------+
-	|   .----.  .--.  .---.    |  CREATED BY TEAM JJS      |
-	|   | {}  }/ {} \{_   _}   +---------------------------+
-	|   | .--'/  /\  \ | |     |  Joonas Kauppinen         |
-	|   `-'   `-'  `-' `-'     |  "Jamie" GeonHui Yoon     |
-	|   - a place for pets -   |  Samuli Virtanen          |
-	+--------------------------+------------------------ -->
+<!-- ----------------------+-------------------------------+
+	|   .----.  .--.  .---.    |  CREATED BY TEAM JJS          |
+	|   | {}  }/ {} \{_   _}   +-------------------------------+
+	|   | .--'/  /\  \ | |     |  Joonas Kauppinen             |
+	|   `-'   `-'  `-' `-'     |  "Jamie" GeonHui Yoon         |
+	|   - a place for pets -   |  Samuli Virtanen              |
+	+--------------------------+-------------------------------+
+	| https://github.com/joonasmkauppinen/pat-project-backend  |
+	| https://github.com/joonasmkauppinen/pat-project-frontend |
+	+------------------------------------------------------- -->
 	
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<meta name="theme-color" content="#ffffff">
 		
-		<link href="https://fonts.googleapis.com/css?family=Dosis:400,500,700|Patrick+Hand|Roboto:400,500,700" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Dosis:400,500,700|Patrick+Hand|Roboto:300,400,500,700" rel="stylesheet">
+		<link href="../src/css/main.css" rel="stylesheet" type="text/css">
 		<link href="../src/css/nav-bars.css" rel="stylesheet" type="text/css">
 		<link href="../src/css/tab-views.css" rel="stylesheet" type="text/css">
+		<link href="../src/css/search-tab.css" rel="stylesheet" type="text/css">
+		<link href="../src/css/profile-tab.css" rel="stylesheet" type="text/css">
 		<link href="../src/css/pat-global.css" rel="stylesheet" type="text/css">
 		<link href="../src/css/post-card.css" rel="stylesheet" type="text/css">
+		<link href="../src/css/new-post.css" rel="stylesheet" type="text/css">
 		<link rel="manifest" href="../manifest.json">
 		
 		<link rel="icon" href="../src/icons/pat_tab_icon_32x32.png">
-
+		
 		<title>PAT. - Home</title>
 	</head>
 	<body>
 		
+		<div class="loading-screen">
+			<img src="../src/svg/loading_paw.svg">
+		</div>
+
 		<!-- Header title -->
 		<nav class="top-nav-bar">
 			<img src="../src/svg/pat_ic.svg">
+
+			<div class="top-nav-bar__edit hidden">
+				<img class="top-nav-bar__edit-icon clickable" src="../src/svg/edit_ic.svg">
+				<span class="top-nav-bar__edit-save clickable hidden">SAVE</span>
+			</div>
+
 		</nav>
 		
 		<!-- Tab views wrapper -->
@@ -42,7 +60,7 @@
 					
 				</ul>
 				
-				<div id="load-trigger" class="load-trigger">
+				<div id="home-load-trigger" class="load-trigger">
 					<span></span>
 				</div>
 				
@@ -50,64 +68,251 @@
 			
 			<!-- Search/trending tab -->
 			<div id="search-tab" class="tab-views__tab-search tab">
-				<h1>Search</h1>
-				<button onclick="alert('hello search')">Click Me!</button>
-				<p>Glossier air plant blue bottle seitan snackwave put a bird on it chicharrones meh pork belly austin af. Hell of neutra live-edge pinterest typewriter chia knausgaard bitters etsy direct trade marfa iceland edison bulb. Twee franzen lo-fi tacos farm-to-table mustache drinking vinegar scenester. Pour-over edison bulb aesthetic authentic umami kombucha. Cray portland coloring book heirloom twee. Banjo vegan direct trade, butcher whatever disrupt tattooed selfies pork belly. Actually williamsburg butcher yuccie cray master cleanse hashtag hoodie, unicorn polaroid vegan four loko.</p>
-				<p>Disrupt bicycle rights live-edge ethical mixtape palo santo 3 wolf moon schlitz. Waistcoat vice franzen polaroid tacos viral. Cliche ramps echo park selvage. Food truck messenger bag skateboard seitan, fingerstache salvia vexillologist VHS ethical shoreditch tacos intelligentsia helvetica. Forage venmo disrupt aesthetic vape, kombucha etsy post-ironic flannel umami cred master cleanse.</p>
-				<p>Raclette cornhole tilde, bicycle rights XOXO vexillologist paleo skateboard organic lumbersexual poke hashtag. Neutra craft beer waistcoat semiotics single-origin coffee. Subway tile XOXO coloring book yr slow-carb messenger bag waistcoat hoodie selfies adaptogen farm-to-table iPhone actually neutra glossier. Photo booth blue bottle tousled austin jianbing sustainable. La croix flannel sriracha, tote bag freegan synth trust fund ennui meditation vinyl cold-pressed heirloom. Forage gochujang vinyl vegan. Bitters try-hard craft beer polaroid, mlkshk you probably haven't heard of them before they sold out pop-up.</p>
+				
+				<div class="search-tab__input">
+					<img src="../src/svg/search_input_ic.svg">
+					<input id="search-bar" type="text" placeholder="search">
+				</div>
+				
+				<div class="searc-tab__input" style="height:40px;display:block;width:100%;">
+				<ul id="search-for-options">
+          <li id="search-for-item-post" class="clickable selected">Post<span id="result-count-post" class="result-count"></span></li>
+          <li id="search-for-item-tag" class="clickable">Tag<span  id="result-count-tag" class="result-count"></span></li>
+          <li id="search-for-item-user" class="clickable">User<span  id="result-count-user" class="result-count"></span></li>
+				</ul>
+				</div>
+				
+				<div class="search-tab__feed">
+					<ul id="grid-search"></ul>
+					<ul id="list-search-tags" class="hide"></ul>
+					<ul id="list-search-users" class="hide"></ul>
+					<span id="search-load-trigger"></span>
+				</div>
+				
 			</div>
 			
 			<!-- Profile tab -->
 			<div id="profile-tab" class="tab-views__tab-profile tab">
-				<h1>Profile</h1>
-				<button onclick="alert('hello profile')">Click Me!</button>
-				<p>Truffaut portland keytar 3 wolf moon, normcore salvia brooklyn. Dreamcatcher gentrify officia, try-hard air plant celiac squid knausgaard ethical plaid glossier williamsburg helvetica bitters aliqua. Cold-pressed in mlkshk, copper mug kickstarter kale chips four loko disrupt try-hard iceland portland authentic salvia cillum. Slow-carb culpa et sint laboris velit aute helvetica taiyaki tempor woke forage cupidatat. Actually minim est freegan disrupt locavore skateboard. Blog pork belly before they sold out velit authentic. Mustache roof party aesthetic anim, sint cold-pressed tattooed letterpress chambray quinoa consectetur veniam affogato.</p>
+				
+				<div class="profile-tab__detail-wrapper">
+
+					<input id="new-profile-pic" class="hidden" type="file" accept="image/*">
+					
+					<div class="profile-tab__details">
+							
+						<label class="profile-tab__change-pic clickable hidden" for="new-profile-pic">+ change picture</label>
+						
+						<div class="profile-tab__pic"></div>
+						
+						<div class="profile-tab__username">
+							<img src="../src/svg/sign_up_profile_ic.svg">
+							<span id="user_name">#</span>
+						</div>
+						
+						<div class="proflie-tab__bio">
+							<p id="user_description" contenteditable="false">#</p>
+						</div>
+						
+					</div>
+					
+					<div class="profile-tab__stats-wrapper">
+						<div class="profile-tab__stats">
+							
+							<div class="stats__followers">
+								<p>followers</p>
+								<p id="user_followers_amount">#</p>
+							</div>
+							
+							<div class="stats__following">
+								<p>following</p>
+								<p id="user_following_amount">#</p>
+							</div>
+							
+						</div>
+						
+						<!-- <button class="follow-btn">
+							<p class="follow-btn-text">
+								<img class="follow-btn__check-ic hidden" src="../src/svg/check_ic.svg">
+								<span>FOLLOW</span>
+							</p>
+						</button> -->
+						
+					</div>
+					
+					<p class="profile-tab__posts-header">POSTS</p>
+
+				</div>
+
+				<ul id="grid-userposts" class="profile-tab__posts-grid">
+				</ul>
+				
 			</div>
+
+			<!-- Shown when user visits someone else's profile -->
+			<div id="visiting-profile" class="visiting-profile hidden">
+				
+				<div class="profile-tab__detail-wrapper">
+					<div class="profile-tab__details">
+						
+						<div class="profile-tab__pic"></div>
+						
+						<div class="profile-tab__username">
+							<img src="../src/svg/sign_up_profile_ic.svg">
+							<span>patuser</span>
+						</div>
+						
+						<div class="proflie-tab__bio">
+							<p>Chillwave palo santo skateboard vice. Hoodie shaman coloring book, art party wayfarers fixie af 8-bit tbh whatever iPhone mixtape truffaut. Irony tbh iPhone</p>
+						</div>
+						
+					</div>
+					
+					<div class="profile-tab__stats-wrapper">
+						<div class="profile-tab__stats">
+							
+							<div class="stats__followers">
+								<p>followers</p>
+								<p>1337</p>
+							</div>
+							
+							<div class="stats__following">
+								<p>following</p>
+								<p>15</p>
+							</div>
+							
+						</div>
+						
+						<button class="follow-btn">
+							<p class="follow-btn-text">
+								<img class="follow-btn__check-ic hidden" src="../src/svg/check_ic.svg">
+								<span>FOLLOW</span>
+							</p>
+						</button>
+						
+					</div>
+					
+					<p class="profile-tab__posts-header">POSTS</p>
+
+				</div>
+
+				<ul class="profile-tab__posts-grid"></ul>
+				
+			</div>
+
+			<div class="commentPopup">
+				<ul class="contentWrapper">
+				</ul>
+				
+				<div class="commentInput__wrapper">
+					<input type="text" class="commentInput__message" placeholder="Type something...">
+					<button class="commentInput__send"><img src="../src/svg/send_ic.svg"></button>
+				</div>
+			</div>
+
 			
 		</div>
 		
-		<!-- Bottom navigation bar -->
-		<nav class="bottom-nav-bar">
+		<!-- New post view -->
+		<div class="new-post-form-wrapper new-post-hidden">
 			
-			<ul class="bottom-nav-buttons">
-				<li>
-					<input id="menu" class="menu-btn" type="checkbox">
-					<label for="menu" class="bottom-nav-buttons__burger"><span></span></label>
-				</li>
-				
-				<li>
-					<input checked name="bottom-nav" id="home-btn" class="nav-btn" type="radio">
-					<label class="btn-visible" for="home-btn"><img src="../src/svg/home_ic.svg"></label>
-				</li>
-				
-				<li>
-					<a id="new-post" class="btn-visible" href="#"><img src="../src/svg/new_ic.svg"></a>
-				</li>
-				
-				<li>
-					<input name="bottom-nav" id="search-btn" class="nav-btn" type="radio">
-					<label class="btn-visible" for="search-btn"><img src="../src/svg/search_ic.svg"></label>
-				</li>
-				
-				<li>
-					<input name="bottom-nav" id="profile-btn" class="nav-btn" type="radio">
-					<label class="btn-visible" for="profile-btn"><img src="../src/svg/profile_ic.svg"></label>
-				</li>
-			</ul>
+			<form id="new-post-form" class="new-post-form"
+			novalidate action="" method="POST" enctype="multipart/form-data">
 			
-			<ul class="bottom-nav-menu">
-				<li id="btnLogOut"><a href="#">LOG OUT</a></li>
-				<li id="btnManageAccount"><a href="#">MANAGE ACCOUNT</a></li>
-				
-			</ul>
+			<!-- Media input -->
+			<input id="media" name="media" type="file" accept="image/*, video/*">
+			<label class="new-post-form__add-media" for="media">
+				<span class="bold-dosis">+ ADD MEDIA</span>
+			</label>
 			
-	</nav>
+			<!-- Tags for post -->
+			<label class="new-post-form__label"><span class="bold-dosis new-post-title">TAGS</span></label>
+			<div class="input-field new-post-form__tags-input">
+				
+				<p class="new-post-form__tags-input__current-tags-amount"><span id="current-tags-amount">0</span>/8</p>
+				
+				<ul id="current-tags">
+					
+					<input id="new-post-tags" type="text" placeholder="+ add tag" autocapitalize="off">
+				</ul>
+				
+				<div class="new-post-form__tags-input__top-tags top-tags-hidden">
+					
+					<div class="top-tags__header">
+						<span class="header__text">top tags</span>
+						<span class="header__decoration"></span>
+					</div>
+					
+					<ul id="top-tags">
+						
+					</ul>
+					
+				</div>
+				
+			</div>
+			
+			<!-- Description for post -->
+			<label class="new-post-form__label"><span class="bold-dosis new-post-title">DESCRIPTION</span></label>
+			<div  class="new-post-form__desc-input input-field">
+				<textarea id="new-post-description" placeholder="Type something..." rows="1" textarea autocapitalize="sentences"></textarea>
+			</div>
+			
+			<!-- Form buttons -->
+			<button disabled id="submit-new-post" class="btn btn-primary" type="submit">POST</button>
+			<button type="button" id="new-post-cancel" class="btn btn-secondary">CANCEL</button>
+			
+		</form>
+		
+	</div> 
 	
-  	<script src="../src/js/pwa.js"></script>
-	<script src="../src/js/home.js"></script>
+	<!-- Bottom navigation bar -->
+	<nav class="bottom-nav-bar">
+		
+		<ul class="bottom-nav-buttons">
+			<li>
+				<input id="menu" class="menu-btn" type="checkbox">
+				<label for="menu" class="bottom-nav-buttons__burger clickable"><span></span></label>
+			</li>
+			
+			<li>
+				<input checked name="bottom-nav" id="home-btn" class="nav-btn" type="radio">
+				<label class="nav-label btn-visible clickable" for="home-btn"><img src="../src/svg/home_ic.svg"></label>
+			</li>
+			
+			<li>
+				<button id="new-post" class="btn-visible"><img src="../src/svg/new_ic.svg"></button>
+			</li>
+			
+			<li>
+				<input name="bottom-nav" id="search-btn" class="nav-btn" type="radio">
+				<label class="nav-label btn-visible clickable" for="search-btn"><img src="../src/svg/search_ic.svg"></label>
+			</li>
+			
+			<li>
+				<input name="bottom-nav" id="profile-btn" class="nav-btn" type="radio">
+				<label class="nav-label btn-visible clickable" for="profile-btn"><img src="../src/svg/profile_ic.svg"></label>
+			</li>
+		</ul>
+		
+		<ul class="bottom-nav-menu">
+			<li id="btnLogOut"><a href="#">LOG OUT</a></li>
+			<li id="btnManageAccount"><a href="#">MANAGE ACCOUNT</a></li>
+		</ul>
+		
+	</nav>
+
+	<!--<script src="../pwa.js"></script>-->
+	<script> const VIEW_PAGE = 'home'; </script>
 	<script src="../src/js/global.js"></script>
-	<script src="../src/js/nav_controller.js"></script>
+	<script src="../src/js/grid-filler.js"></script>
 	<script src="../src/js/home-feed-controller.js"></script>
+	<script src="../src/js/nav_controller.js"></script>
+	<script src="../src/js/new-post-controller.js"></script>
+	<script src="../src/js/home-first.js"></script>
+	<script src="../src/js/search-controller.js"></script>
+	<script src="../src/js/home.js"></script>
+	<script src="../src/js/comments.js"></script>
+	<script src="../src/js/profile-controller.js"></script>
+	<script src="../src/js/auto-session-check.js"></script>
 	
 </body>
 </html>

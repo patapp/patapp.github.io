@@ -1,27 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- ----------------------+---------------------------+
-  |   .----.  .--.  .---.    |  CREATED BY TEAM JJS      |
-  |   | {}  }/ {} \{_   _}   +---------------------------+
-  |   | .--'/  /\  \ | |     |  Joonas Kauppinen         |
-  |   `-'   `-'  `-' `-'     |  "Jamie" GeonHui Yoon     |
-  |   - a place for pets -   |  Samuli Virtanen          |
-  +--------------------------+------------------------ -->
+  <!-- ----------------------+-------------------------------+
+  |   .----.  .--.  .---.    |  CREATED BY TEAM JJS          |
+  |   | {}  }/ {} \{_   _}   +-------------------------------+
+  |   | .--'/  /\  \ | |     |  Joonas Kauppinen             |
+  |   `-'   `-'  `-' `-'     |  "Jamie" GeonHui Yoon         |
+  |   - a place for pets -   |  Samuli Virtanen              |
+  +--------------------------+-------------------------------+
+  | https://github.com/joonasmkauppinen/pat-project-backend  |
+  | https://github.com/joonasmkauppinen/pat-project-frontend |
+  +------------------------------------------------------- -->
   
   <head>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#ffffff">
     
-    <link href="https://fonts.googleapis.com/css?family=Dosis:400,500,700|Patrick+Hand|Roboto:400,500,700" rel="stylesheet">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    
+    <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500,700|Patrick+Hand|Roboto:400,500,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./src/css/landing.css">
     <link rel="stylesheet" type="text/css" href="./src/css/pat-global.css">
+    <link rel="stylesheet" type="text/css" href="./src/css/main.css">
     <link rel="manifest" href="manifest.json">
-
+    <link rel="stylesheet" type="text/css" href="./src/css/post-card.css">
     <link rel="icon" href="src/icons/pat_tab_icon_32x32.png">
-    
+    <link rel="apple-touch-icon" sizes="180x180" href="src/icons/iphone_pat_icon_180x180.png">
     <title>PAT. - Welcome</title>
     
   </head>
@@ -29,13 +36,13 @@
   <body>
     
     <section id="button__container">
-        <button id="button__login"><u>LOG IN</u></button>
+      <button id="button__login">LOG IN</button>
       <button id="button__signup">SIGN UP</button>
     </section>
     
     <section id="title__container">
       <figure id="title">
-        <img src="./src/svg/pat_main_ic.svg" alt="PAT." class="logo" height="60%" width="60%">
+        <img src="./src/svg/pat_main_ic.svg" alt="PAT." class="logo" height="90%" width="90%">
       </figure>
       <p id="title__text">
         A place for pets
@@ -52,12 +59,19 @@
     </section>
       
     <section id="trending">
-        <ul id="content"></ul>
+        <ul id="home-feed"></ul>
+
+        <div id="load-trigger" class="load-trigger">
+					<span></span>
+        </div>
     </section>
-    
-    <script src="./src/js/pwa.js"></script>
-    <script src="./src/js/landing.js"></script>
+    <script src="pwa.js"></script>
+    <script> const VIEW_PAGE = ''; </script>
     <script src="./src/js/global.js"></script>
+    <script src="./src/js/landing.js"></script>
+    <script src="./src/js/home-feed-controller.js"></script>
+    <script src="./src/js/trending-test.js"></script>
+    <script src="./src/js/auto-session-check.js"></script>
     
   </body>
   

@@ -1,12 +1,15 @@
 "use strict";
 
-  /* ------------------------+---------------------------+
-  |   .----.  .--.  .---.    |  CREATED BY TEAM JJS      |
-  |   | {}  }/ {} \{_   _}   +---------------------------+
-  |   | .--'/  /\  \ | |     |  Joonas Kauppinen         |
-  |   `-'   `-'  `-' `-'     |  "Jamie" GeonHui Yoon     |
-  |   - a place for pets -   |  Samuli Virtanen          |
-  +--------------------------+------------------------- */
+  /* ------------------------+-------------------------------+
+  |   .----.  .--.  .---.    |  CREATED BY TEAM JJS          |
+  |   | {}  }/ {} \{_   _}   +-------------------------------+
+  |   | .--'/  /\  \ | |     |  Joonas Kauppinen             |
+  |   `-'   `-'  `-' `-'     |  "Jamie" GeonHui Yoon         |
+  |   - a place for pets -   |  Samuli Virtanen              |
+  +--------------------------+-------------------------------+
+  | https://github.com/joonasmkauppinen/pat-project-backend  |
+  | https://github.com/joonasmkauppinen/pat-project-frontend |
+  +-------------------------------------------------------- */
 
 //const API_URL = 'http://127.0.0.1:3114/';   // local
 const API_URL = 'https://tucloud.fi/pat/';   // public-server
@@ -16,14 +19,18 @@ const BASE_ADDR = '/'; // if in root folder, set this to '/'
 // Display all the debug messages in the console
 const DEBUG_MODE = true;
 
+// Delay redirection for 2 seconds (only works in DEBUG_MODE
+const REDIRECT_DELAY = false;
+
 /* Redirect automatically from wrong page to right page if SESSION state is wrong. 
 Plase note: Does not make effect if DEBUG_MODE = false */
 const AUTO_REDIRECT = true;
 
-let sessionExists = 0;
+let sessionExists = false;
 let sessionID = '';
 let sessionToken = '';
-let sessionPermissions = []
+let sessionPermissions = [];
+let sessionLoggedInUserID = -1;
 
 const conLog = ( m ) => {
   // Print debug messages to the Console, if DEBUG_MODE is ACTIVE (TRUE).
@@ -113,97 +120,6 @@ const getCookie = (cname) => {
   return "";
   }
 
-// Session Check
-const cookieID    = getCookie ( 'pat_session_id' );
-const cookieToken = getCookie ( 'pat_session_token' );
-
-const sessionCheck = async () => {
-  let response = '';
-  // We need to pass the session id + token manually, because at this point session does not exists yet.
-  const j = await getJSON('POST', 'session/check', '', {session_id : cookieID, session_token : cookieToken}, 0).then( (r) => {
-    if ( r.success == 1 && r.session_exists == 1) {
-      sessionExists = 1;
-      sessionID = cookieID;
-      sessionToken = cookieToken;
-      }else{
-      setCookie('pat_session_id', '');
-      setCookie('pat_session_token', '');
-      }
-    response = r;
-    });
-  return response;
-  }
-
-conLog('[CHECK_SESSION] Checking session...');
-
-const redirectTo = (a) => {
-
-  conLog('[REDIRECT_TO] `' + a + '`');
-  if ( DEBUG_MODE ) {
-    if ( AUTO_REDIRECT ) {
-      conLog('[REDIRECT_TO] We are redirecting YOU to `' + a + '`...');
-      conLog('[REDIRECT_TO] 2 seconds delay because of DEBUG_MODE');
-      setTimeout( () => {
-        window.location.href = BASE_ADDR + a;
-        }, 2000);
-      }else{
-      conLog('[REDIRECT_TO] Redirection cancelled, because AUTO_REDIRECT is set to FALSE');
-      }
-    }else{
-    window.location.href = BASE_ADDR + a;
-    }
-  
-
-  }
-
-const autoRedirectCheck = () => {
-
-  var href = window.location.href;
-  var dir = href.substring(0, href.lastIndexOf('/')) + "/";
-  const currentPathName = window.location.pathname;
-  const pathSplit = currentPathName.split('/');
-  conLog('[AUTO_REDIRECT_CHECK] You are currently viewing PAGE: `' + VIEW_PAGE+'`');
-  conLog('[AUTO_REDIRECT_CHECK] Are you logged in? ' + (sessionExists ? 'YES' : 'NO' ) + '.');
-
-  if ( sessionExists == 0 ) {
-  
-    if (VIEW_PAGE != 'login' && VIEW_PAGE != 'sign-up' && VIEW_PAGE != '' ) {
-        conLog('[AUTO_REDIRECT_CHECK] You SHOULD NOT be on THIS PAGE.');
-        redirectTo('');
-      }else{
-        conLog('[AUTO_REDIRECT_CHECK] This page is ALLOWED for You =)');
-      }
-
-  }else{
-
-    if (VIEW_PAGE != 'home')  {
-        conLog('[AUTO_REDIRECT_CHECK] You SHOULD NOT be on THIS PAGE.');
-        redirectTo('home/');
-      }else{
-        conLog('[AUTO_REDIRECT_CHECK] This page is ALLOWED for You =)');
-        appIsReady();
-      }
-  
-  }
-
-}
-
-if ( typeof cookieID != 'undefined' && typeof cookieToken != 'undefined' && cookieID != "" && cookieToken != "" ) {
-conLog('[CHECK_SESSION] Cookie found, calling backend to check is the session still valid...');
-sessionCheck().then( (r) => {
-  if ( r.success ) {
-    conLog('[CHECK_SESSION] Response from BACKEND: Session is VALID.');
-    sessionPermissions = r.permissions;
-    }else{
-    conLog('[CHECK_SESSION] Response from BACKEND: Not valid session.');
-    }
-    autoRedirectCheck();
-});
-  }else{
-  conLog('[CHECK_SESSION] Cookie not found - or invalid. No session. Please Log In.');
-  autoRedirectCheck();
-  }
-
 const confirmDialog = async ( text ) => {
   return new Promise((resolve, reject) => {
     if ( confirm ( text ) ) {
@@ -213,3 +129,7 @@ const confirmDialog = async ( text ) => {
       }
     });
   }
+
+const alertDialog = ( text ) => {
+  alert ( text );
+};

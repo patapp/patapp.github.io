@@ -1,0 +1,124 @@
+.search-tab__input {
+    z-index: 10;
+    position: sticky;
+    top: 8px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: 2px solid var(--color-beige-light);
+    border-radius: 8px;
+    margin: 8px;
+}
+.search-tab__input > img {
+    margin: 0 16px;
+}
+.search-tab__input > input {
+    width: 100%;
+    font-size: 20px;
+    font-family: 'Roboto', serif;
+    font-weight: 400;
+}
+.search-tab__input > input::placeholder {
+    color: var(--color-brown);
+}
+
+
+.search-tab__feed {
+    margin: 8px;
+}
+.search-tab__feed > ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 1fr;
+    grid-auto-flow: dense;
+    grid-gap: 3px;
+}
+.search-tab__feed > ul::before {
+    content: '';
+    width: 0;
+    padding-bottom: 100%;
+    grid-row: 1 / 1;
+    grid-column: 1 / 1;
+}
+.search-tab__feed > ul > *:first-child {
+    grid-row: 1 / 1;
+    grid-column: 1 / 1;
+}
+.search-tab__feed > ul > li:nth-child(18n-2) {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+.search-tab__feed > ul > li:nth-child(18n-10) {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.search-tab__feed > ul > li {
+    list-style: none;
+    background-color:lightgrey;
+    border-radius: 5px;
+}
+
+.search-tab__feed > ul > li:empty {
+    animation: loading 2s infinite;
+}
+
+@keyframes loading {
+    0%   { opacity: 1 }
+    50%  { opacity: 0.5 }
+    100% { opacity: 1 }
+}
+
+#search-for-options {
+    display: table;
+    width: 100%;
+}
+
+#search-for-options li {
+    width: 33.33%;
+    font-family: Dosis, Serif;
+    font-size:20px;
+    display:table-cell;
+    color: #ff145b;
+    font-weight:700;
+    text-transform: uppercase;
+    text-align:center;
+}
+
+#search-for-options li.selected {
+    border-bottom: 2px solid #ccc;
+}
+
+#list-search-tags,
+#list-search-users {
+    display: block;
+}
+
+#list-search-tags li,
+#list-search-users li {
+    background: none;
+    padding: 10px;
+    display: inline-block;
+    font-family: Dosis, Serif;
+    font-weight: 700;
+    color: #ff145b;
+    text-transform: uppercase;
+    font-size:20px;    
+}
+
+.result-count {
+    background: #ff145b;
+    padding: 3px 10px 3px 10px;
+    margin-left:8px;
+    border-radius: 3px;
+    display: inline-block;
+    font-family: Dosis, Serif;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    font-size:10px;    
+}
+.result-count:empty {
+    display:none;
+}

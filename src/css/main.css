@@ -1,0 +1,222 @@
+:root {
+  --color-post-description-text: #60544A;
+  --color-background: #FCF8F6;
+  --color-beige-light: #FBF1EA;
+  --color-brown-light: #EDD1B7;
+  --color-brown: #D4B7A3;
+  --color-brown-dark: #7F6B5E;
+  --color-pink: #FF145B;
+  --color-pink-light: #FFD0DE;
+  --color-media-bg: #443B33;
+  --color-follow-green: #01EA7A;
+  --color-follow-text-green: #08c168;
+  --color-input-shadow: rgba(127, 107, 94, 0.1);
+  
+  --input-border-radius-dimen: 7px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  opacity: 1;
+  transition: opacity 200ms ease-in-out;
+}
+input, textarea, button {
+  all: unset;
+}
+input, label {
+  display: block;
+}
+
+.btn {
+  display: block;
+  box-sizing: border-box;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: 'Dosis', serif;
+  
+  text-align: center;
+  padding: 14px;
+  cursor: pointer;
+}
+.btn-primary {
+  color: white;
+  background-color: var(--color-pink);
+  border-radius: 8px;
+  width: 100%;
+  margin: 40px auto 0;
+  opacity: 1;
+  transition: opacity 200ms ease-in-out; 
+}
+.btn-primary:disabled {
+  opacity: 0.3;
+}
+.btn-secondary {
+  color: var(--color-pink);
+  margin: 8px auto;
+}
+
+.button-wrapper {
+  margin: 0 1rem;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.delete-icon {
+  --size: 53px;
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 2px 8px -1px var(--color-brown-dark);
+  border-radius: 50%;
+}
+
+/* -------- home loading screen ------ */
+.loading-screen {
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  background-color: white;
+  width: 100vw;
+  height: 100vh;
+}
+.loading-screen > img {
+  width: 100px;
+  margin: auto;
+  animation: loading 2s infinite;
+}
+
+/* -------- sign-up and login ------- */
+
+.sign-up-body {
+  overflow: scroll;
+}
+
+.screen-fade {
+  opacity: 0.4;
+}
+
+.sign-up {
+  position: relative;
+  height: 100vh;
+  max-height: 800px;
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.login-logo {
+  height: calc(100vh - 300px) !important;
+}
+.sign-up__logo {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 420px);
+  max-height: 580px;
+  min-height: 165px;
+}
+.sign-up__logo > img {
+  margin: auto;
+  width: 100%;
+  max-width: 400px;
+  padding: 0 100px;
+}
+
+.sign-up__form {
+  width: 100%;
+}
+
+.error-hidden {
+  opacity: 0;
+  max-height: 0 !important;
+}
+.sign-up__form-error {
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--color-pink);
+  border-radius: var(--input-border-radius-dimen);
+  background-color: var(--color-pink-light);
+  margin: 0 1rem;
+  margin-bottom: 1rem;
+  max-height: 200px;
+  box-shadow: 0 4px 20px var(--color-input-shadow);
+  transition:
+  max-height 300ms cubic-bezier(0.4, 0, 0.2, 1),
+  opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.sign-up__form-error > img {
+  margin: 0.5rem 0.8rem;
+}
+.sign-up__form-error > p {
+  font-family: 'Dosis', serif;
+  font-weight: 700;
+  color: var(--color-pink);
+  margin-right: .5rem;
+  padding: 8px 0;
+  font-size: 18px;
+}
+
+.form-input {
+  display: flex;
+  height: 2.7rem;
+  border: 2px solid var(--color-beige-light);
+  border-radius: var(--input-border-radius-dimen);
+  margin: 0 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 20px var(--color-input-shadow);
+}
+
+.form-input > img {
+  margin: 0 1rem;
+  width: 16px;
+}
+
+.form-input > input {
+  margin-right: 1rem;
+  font-family: 'Dosis', serif;
+  font-weight: 500;
+  font-size: 19px;
+  width: 100%;
+  color: var(--color-brown-dark);
+}
+.form-input > input::placeholder {
+  color: var(--color-brown);
+}
+.form-input > input::selection {
+  color: white; 
+  background: var(--color-pink);
+}
+
+.sign-up__form > p {
+  text-align: center;
+  color: var(--color-brown);
+  font-family: 'Dosis', serif;
+  font-weight: 500;
+  font-size: 22px;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+.sign-up__form > p > a {
+  color: var(--color-brown);
+  font-weight: 700;
+}
+
+/* styles for screen sizes 768px and up */
+@media only screen and (min-width: 768px) {
+  .sign-up__logo {
+    max-height: 430px;
+  }
+}
+
+.hide {
+  display:none !important;
+}
+

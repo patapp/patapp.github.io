@@ -4,6 +4,10 @@
   opacity: 0;
   width: 100vw;
   transition: opacity 130ms ease-in-out;
+  height: calc(100vh - 101px); /* ADDED BY Samppa 2018-11-29 17:50 */
+  overflow:auto;
+  overflow-x:hidden;
+  overflow-y:auto;
 }
 .visible {
   opacity: 1;
@@ -12,32 +16,22 @@
   display: block;
 }
 
-.tab h1 {
-  font-family: 'Dosis', serif;
-  font-weight: 700;
-  font-size: 28px;
-}
-.tab p {
-  font-family: 'Roboto', serif;
-  margin: 10px;
-}
-
 .tab-views {
-  margin-top: 50px;
+  height: calc(100vh - 101px);
+  /* overflow: scroll;  REMOVED BY Samppa 2018-11-29 17:50 */
+  overflow: hidden; /* ADDED BY Samppa 2018-11-29 17:50 */
+  background-color: var(--color-background);
+}
+.hidden {
+  display: none !important;
 }
 
-
-.tab-views__tab-home {
-  background-color: #FCF8F6;
-  padding-top: 1px;
-}
-.tab-views__tab-search {
-  background-color: lightcoral;
-  height: 500vh;
+.tab-views__tab-home > ul {
+  max-width: 635px;
+  margin: 0 auto;
 }
 .tab-views__tab-profile {
-  background-color: lightgreen;
-  height: 400vh;
+  /* height: 400vh; */
 }
 
 .load-trigger {
