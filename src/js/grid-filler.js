@@ -107,8 +107,9 @@ class gridFiller {
 
         liElem.appendChild(deleteIcon);
 
-        liElem.addEventListener('click', () => {
-          gridItemClicked ( this.elementID, this.postsDataArray[p] );
+        liElem.addEventListener('click', (e) => {
+          const item = e.target;
+          gridItemClicked ( this.elementID, this.postsDataArray[p], item );
         });
       }
     });

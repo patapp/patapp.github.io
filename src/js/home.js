@@ -55,10 +55,13 @@ btnLogOut.addEventListener('click', (e) => {
   });
 });
 
-const deletePost = (id) => {
+const deletePost = (id, element=null) => {
   getJSON('DELETE', 'posts', '', {post_id: id}).then( (r) => {
     if ( r.success ) {
-      alert ( 'Delete post succeeded !' );
+      //alert ( 'Delete post succeeded !' );
+      if (element !== null) {
+        element.parentNode.removeChild(element);
+      }
     } else {
       alert ( 'Error: ' + r.error );
     }

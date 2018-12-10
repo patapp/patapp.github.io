@@ -25,10 +25,10 @@ const tagsListView = document.getElementById('list-search-tags');
 const usersListView = document.getElementById('list-search-users');
 
 
-const gridItemClicked = ( grid, itemID ) => {
+const gridItemClicked = ( grid, itemID, element ) => {
   if (isEditMode) {
     if (window.confirm("Do you want to delete this post?")) {
-      deletePost(itemID);
+      deletePost(itemID, element);
     }
   } else {
     // show full image overlay
