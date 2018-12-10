@@ -103,6 +103,9 @@ class gridFiller {
         liElem.style.backgroundPosition = 'center';
         liElem.className = 'clickable';
         liElem.innerHTML = ' ';
+
+        liElem.appendChild(deleteIcon);
+
         liElem.addEventListener('click', () => {
           gridItemClicked ( this.elementID, this.postsDataArray[p] );
         });
