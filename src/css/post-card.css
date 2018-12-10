@@ -177,6 +177,7 @@ div:empty::after {
     font-weight: 400;
     position: relative;
     margin-top: 20px;
+    cursor: pointer;
 }
 
 .post-info__comments > span {
