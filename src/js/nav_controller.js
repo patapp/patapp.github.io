@@ -142,12 +142,10 @@ const toggelNewPostView = () => {
 }
 
 newPostButton.addEventListener('click', () => {
-  submitNewPost.disabled = false;
   updateTopTags();
   toggelNewPostView();
 });
 newPostCancelButton.addEventListener('click', () => {
-  window.history.back();
   toggelNewPostView();
   clearNewPostInputs();
 });

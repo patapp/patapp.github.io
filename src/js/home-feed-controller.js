@@ -91,10 +91,10 @@ const updateSlider = (slider, line, dots) => {
   
 }
 
-const setSlilderStylesToRated = (slider, parent) => {
+const setSlilderStylesToRated = (slider, postHeader) => {
   slider.max = 5;
   slider.classList.remove('unrated__slider');
-  parent.classList.remove('unrated__wrapper');
+  postHeader.classList.remove('unrated__wrapper');
 }
 
 const updatePostRating = (post, value) => {
@@ -219,7 +219,7 @@ const renderPosts = (from, to) => {
     
     for (let p=from; p<=to; p++) {
       
-      const parent                    = document.querySelector("#post-"+p);
+      const postHeader                    = document.querySelector("#post-"+p);
       
       const userpic                   = document.querySelector("#post-"+p+" .post-header__picture");
       const username                  = document.querySelector("#post-"+p+" .post-header__username");
@@ -248,7 +248,7 @@ const renderPosts = (from, to) => {
       const unregisteredPopup_button  = document.querySelector("#post-"+p+" .unregisteredPopupContent > button");
       
       // Check if username, profilepic or any tag was clicked
-      parent.addEventListener('click', (e) => {
+      postHeader.addEventListener('click', (e) => {
         checkTarget(p, e.target);
       });
       
