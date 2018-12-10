@@ -68,11 +68,10 @@ const appIsReady = () => {
   loadPosts(); // Load TRENDING PAGE posts / post content
 
   gridUserPosts.setSearchTerm(sessionLoggedInUserID);
-
-
-
   gridSearch.init();
-  gridUserPosts.init();
+  renderUserProfileData(sessionLoggedInUserID);
+  
+  
 
 const tagItemClicked = ( tag ) => {
   const searchBar = document.getElementById('search-bar');

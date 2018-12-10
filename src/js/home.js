@@ -135,12 +135,18 @@ const renderUserProfileData = ( userID ) => {
       const followers   = document.getElementById('user_followers_amount');
       const following   = document.getElementById('user_following_amount');
       const description = document.getElementById('user_description');
-      //const img         = document.getElementById('user_img');
+      const img         = document.getElementById('profile-tab__pic');
 console.log(r);
       username.textContent = r.user_name;
       followers.textContent = r.followers;
       following.textContent = r.following;
       description.textContent = r.user_description;
+      console.log(r.profile_pic_uri);
+      img.style.backgroundImage = `url(${(r.profile_pic_uri ? API_URL + r.profile_pic_uri : '../src/icons/default_profile_pic_250x250.png')})`;
+      img.style.backgroundSize = 'cover';
+      img.style.backgroundRepeat = 'none';
+      img.style.backgroundPosition = 'center';
+      
       
       gridUserPosts.setSearchTerm(userID);
       gridUserPosts.reset();
