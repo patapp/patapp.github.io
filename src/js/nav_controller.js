@@ -38,6 +38,10 @@ const visitingProfileFollowing = document.getElementById('visiting-profile_follo
 const visitingProfileFollowBtn = document.getElementById('visiting-profile_follow-btn');
 const visitingProfilePosts = document.getElementById('visiting-profile_posts');
 
+console.log(visitingProfileBio);
+console.log(visitingProfileFollowers);
+console.log(visitingProfileFollowing);
+
 const bottomNav = document.querySelector('.bottom-nav-bar');
 
 const tabElements = document.querySelectorAll('.tab');
@@ -90,6 +94,7 @@ const toggleBurgerToBack = () => {
 }
 
 const setVisitingProfileInfo = (data) => {
+  console.log(data);
   visitingProfilePic.style.backgroundImage = `url(${API_URL}${data.profile_pic_uri})`;
   visitingProfileUsername.innerText = `${data.user_name}` ;
   visitingProfileBio.innerText = `${data.user_description}`;
