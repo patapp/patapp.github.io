@@ -142,7 +142,11 @@ class gridFiller {
       const renderTo   = (this.postsInitialized < this.postsDataCount ? this.postsInitialized : this.postsDataCount) - 1;
       this.postsDataContentLoadedTo = renderTo + 1;
       conLog('[gridFiller] I will render from ' + renderFrom + ' to ' + renderTo );
-      this.renderPosts (renderFrom, renderTo);
+      if ( renderTo < renderFrom ) {
+        conLog('[gridFiller] Aborting. Range failed.');
+        }else{
+        this.renderPosts (renderFrom, renderTo);
+        }
     }else{
       conLog('[gridFiller] fetchPosts() : all already fetched');
     }
