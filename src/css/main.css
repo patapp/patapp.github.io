@@ -219,4 +219,22 @@ input, label {
 .hide {
   display:none !important;
 }
-
+@media only screen and (min-width: 800px) {
+  #grid-search,
+  #grid-userposts {
+   grid-template-columns: repeat(4, 1fr) !important;
+   }
+ }
+@media only screen and (min-width: 1200px) {
+  #grid-search,
+  #grid-userposts {
+   grid-template-columns: repeat(6, 1fr) !important;
+   }
+ } 
+@media only screen and (min-width: 1600px) {
+  #grid-search,
+  #grid-userposts {
+   grid-template-columns: repeat(8, 1fr) !important;
+   }
+ }  
+}
