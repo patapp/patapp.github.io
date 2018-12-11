@@ -107,8 +107,16 @@ class gridFiller {
 
         liElem.appendChild(deleteIcon);
 
-        liElem.addEventListener('click', () => {
-          gridItemClicked ( this.elementID, this.postsDataArray[p] );
+        liElem.addEventListener('click', (e) => {
+          //const item = e.target;
+          let item = null;
+          if (e.target.tagName == "IMG") {
+            item = e.target.parentNode;
+          } else {
+            item = e.target;
+          }
+          
+          gridItemClicked ( this.elementID, this.postsDataArray[p], item );
         });
       }
     });
@@ -134,7 +142,11 @@ class gridFiller {
       const renderTo   = (this.postsInitialized < this.postsDataCount ? this.postsInitialized : this.postsDataCount) - 1;
       this.postsDataContentLoadedTo = renderTo + 1;
       conLog('[gridFiller] I will render from ' + renderFrom + ' to ' + renderTo );
-      this.renderPosts (renderFrom, renderTo);
+      if ( renderTo < renderFrom ) {
+        conLog('[gridFiller] Aborting. Range failed.');
+        }else{
+        this.renderPosts (renderFrom, renderTo);
+        }
     }else{
       conLog('[gridFiller] fetchPosts() : all already fetched');
     }

@@ -27,6 +27,7 @@
 		<link href="../src/css/pat-global.css" rel="stylesheet" type="text/css">
 		<link href="../src/css/post-card.css" rel="stylesheet" type="text/css">
 		<link href="../src/css/new-post.css" rel="stylesheet" type="text/css">
+		<link href="../src/css/post-viewer.css" rel="stylesheet" type="text/css">
 		<link rel="manifest" href="../manifest.json">
 		
 		<link rel="icon" href="../src/icons/pat_tab_icon_32x32.png">
@@ -35,19 +36,25 @@
 	</head>
 	<body>
 		
+		<div class="post-viewer modal-container hide" id="post-viewer">
+      <div class="post-viewer-content modal-content" id="post-viewer-content">
+        <div id="post-viewer-media"></div>
+      </div>
+		</div>		
+
 		<div class="loading-screen">
 			<img src="../src/svg/loading_paw.svg">
 		</div>
-
+		
 		<!-- Header title -->
 		<nav class="top-nav-bar">
 			<img src="../src/svg/pat_ic.svg">
-
+			
 			<div class="top-nav-bar__edit hidden">
 				<img class="top-nav-bar__edit-icon clickable" src="../src/svg/edit_ic.svg">
 				<span class="top-nav-bar__edit-save clickable hidden">SAVE</span>
 			</div>
-
+			
 		</nav>
 		
 		<!-- Tab views wrapper -->
@@ -72,14 +79,15 @@
 				<div class="search-tab__input">
 					<img src="../src/svg/search_input_ic.svg">
 					<input id="search-bar" type="text" placeholder="search">
+					<button id="reset">&#10799;</button>
 				</div>
 				
 				<div class="searc-tab__input" style="height:40px;display:block;width:100%;">
-				<ul id="search-for-options">
-          <li id="search-for-item-post" class="clickable selected">Post<span id="result-count-post" class="result-count"></span></li>
-          <li id="search-for-item-tag" class="clickable">Tag<span  id="result-count-tag" class="result-count"></span></li>
-          <li id="search-for-item-user" class="clickable">User<span  id="result-count-user" class="result-count"></span></li>
-				</ul>
+					<ul id="search-for-options">
+						<li id="search-for-item-post" class="clickable selected">Post<span id="result-count-post" class="result-count"></span></li>
+						<li id="search-for-item-tag" class="clickable">Tag<span  id="result-count-tag" class="result-count"></span></li>
+						<li id="search-for-item-user" class="clickable">User<span  id="result-count-user" class="result-count"></span></li>
+					</ul>
 				</div>
 				
 				<div class="search-tab__feed">
@@ -95,14 +103,14 @@
 			<div id="profile-tab" class="tab-views__tab-profile tab">
 				
 				<div class="profile-tab__detail-wrapper">
-
+					
 					<input id="new-profile-pic" class="hidden" type="file" accept="image/*">
 					
 					<div class="profile-tab__details">
-							
+						
 						<label class="profile-tab__change-pic clickable hidden" for="new-profile-pic">+ change picture</label>
 						
-						<div class="profile-tab__pic"></div>
+						<div class="profile-tab__pic" id="profile-tab__pic"></div>
 						
 						<div class="profile-tab__username">
 							<img src="../src/svg/sign_up_profile_ic.svg">
@@ -140,29 +148,34 @@
 					</div>
 					
 					<p class="profile-tab__posts-header">POSTS</p>
-
+					
 				</div>
-
-				<ul id="grid-userposts" class="profile-tab__posts-grid">
-				</ul>
+				
+				<div class="profile-tab__posts-grid">
+					<ul id="grid-userposts">
+						
+					</ul>
+				</div>
+				
+				<span id="search-load-trigger-userposts"></span>
 				
 			</div>
-
+			
 			<!-- Shown when user visits someone else's profile -->
 			<div id="visiting-profile" class="visiting-profile hidden">
 				
 				<div class="profile-tab__detail-wrapper">
 					<div class="profile-tab__details">
 						
-						<div class="profile-tab__pic"></div>
+						<div id="visiting-profile_pic" class="profile-tab__pic"></div>
 						
 						<div class="profile-tab__username">
 							<img src="../src/svg/sign_up_profile_ic.svg">
-							<span>patuser</span>
+							<span id="visiting-profile_username"></span>
 						</div>
 						
 						<div class="proflie-tab__bio">
-							<p>Chillwave palo santo skateboard vice. Hoodie shaman coloring book, art party wayfarers fixie af 8-bit tbh whatever iPhone mixtape truffaut. Irony tbh iPhone</p>
+							<p id="visiting-profile_bio">loading...</p>
 						</div>
 						
 					</div>
@@ -172,17 +185,17 @@
 							
 							<div class="stats__followers">
 								<p>followers</p>
-								<p>1337</p>
+								<p id="visiting-profile_followers">#</p>
 							</div>
 							
 							<div class="stats__following">
 								<p>following</p>
-								<p>15</p>
+								<p id="visiting-profile_following">#</p>
 							</div>
 							
 						</div>
 						
-						<button class="follow-btn">
+						<button id="visiting-profile_follow-btn" class="follow-btn">
 							<p class="follow-btn-text">
 								<img class="follow-btn__check-ic hidden" src="../src/svg/check_ic.svg">
 								<span>FOLLOW</span>
@@ -192,13 +205,26 @@
 					</div>
 					
 					<p class="profile-tab__posts-header">POSTS</p>
-
+					
 				</div>
-
-				<ul class="profile-tab__posts-grid"></ul>
+				
+				<div class="profile-tab__posts-grid">
+					<ul id="visiting-profile_posts" class="profile-tab__posts-grid">
+						
+					</ul>
+				</div>
 				
 			</div>
+			
+			<!-- View post -->
+			<div id="view-post" class="hidden">
+				<div id="view-post_card" class="post">
 
+				</div>
+			</div>
+
+			
+			<!-- Comment view -->
 			<div class="commentPopup">
 				<ul class="contentWrapper">
 				</ul>
@@ -208,7 +234,7 @@
 					<button class="commentInput__send"><img src="../src/svg/send_ic.svg"></button>
 				</div>
 			</div>
-
+			
 			
 		</div>
 		
@@ -232,7 +258,7 @@
 				
 				<ul id="current-tags">
 					
-					<input id="new-post-tags" type="text" placeholder="+ add tag" autocapitalize="off">
+					<input id="new-post-tags" type="text" placeholder="+ add tag" autocapitalize="off" maxlength="16">
 				</ul>
 				
 				<div class="new-post-form__tags-input__top-tags top-tags-hidden">
@@ -257,7 +283,9 @@
 			</div>
 			
 			<!-- Form buttons -->
-			<button disabled id="submit-new-post" class="btn btn-primary" type="submit">POST</button>
+			<div class="button-wrapper">
+				<button disabled id="submit-new-post" class="btn btn-primary" type="submit">POST</button>
+			</div>
 			<button type="button" id="new-post-cancel" class="btn btn-secondary">CANCEL</button>
 			
 		</form>
@@ -299,7 +327,7 @@
 		</ul>
 		
 	</nav>
-
+	
 	<!--<script src="../pwa.js"></script>-->
 	<script> const VIEW_PAGE = 'home'; </script>
 	<script src="../src/js/global.js"></script>
@@ -312,6 +340,7 @@
 	<script src="../src/js/home.js"></script>
 	<script src="../src/js/comments.js"></script>
 	<script src="../src/js/profile-controller.js"></script>
+	<script src="../src/js/post-viewer.js"></script>
 	<script src="../src/js/auto-session-check.js"></script>
 	
 </body>

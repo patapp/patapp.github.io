@@ -13,7 +13,7 @@
 
 
 
-const regex = /^[a-zA-Z0-9-_., ]$/;
+const regex = /^[a-zA-Z0-9-_., ]/;
 
 let topTagsArr      = [];
 let currentTagsArr  = [];
@@ -27,7 +27,7 @@ const fileInput      = document.getElementById('media');
 const mediaElement   = document.querySelector('.new-post-form__add-media');
 const description    = document.getElementById('new-post-description');
 
-const tagsAmount		 = document.getElementById('current-tags-amount');
+const tagsAmount	 = document.getElementById('current-tags-amount');
 const currentTags    = document.getElementById('current-tags');
 const tagsInput      = document.getElementById('new-post-tags');
 const topTagsSection = document.querySelector('.new-post-form__tags-input__top-tags');
@@ -114,14 +114,19 @@ const getTagsAsString = () => {
 	}
 };
 
+const clearSelectedMedia = () => {
+	URL.revokeObjectURL(mediaElement.children[1]);
+	mediaElement.removeChild(mediaElement.children[1]);
+}
 
-fileInput.addEventListener('change', () => {
+const checkNewPostFileInput = () => {
+	
+	console.log('fileInput change event called');
 	
 	if (fileInput.files && fileInput.files[0]) {
 		
 		if (mediaElement.children[1] !== undefined) {
-			URL.revokeObjectURL(mediaElement.children[1]);
-			mediaElement.removeChild(mediaElement.children[1]);
+			clearSelectedMedia();		
 		} else {
 			mediaElement.children[0].classList.toggle('hidden');
 		}
@@ -202,11 +207,16 @@ fileInput.addEventListener('change', () => {
 		
 		submitNewPost.disabled = true;
 		
-		mediaElement.removeChild(mediaElement.children[1]);
-		mediaElement.children[0].classList.toggle('hidden');
+		if (mediaElement.children[1] !== undefined) {
+			mediaElement.removeChild(mediaElement.children[1]);
+			mediaElement.children[0].classList.toggle('hidden');
+		}
 		
 	}
-	
+}
+
+fileInput.addEventListener('change', () => {
+	checkNewPostFileInput()
 });
 
 tagsInput.addEventListener('focus', () => {
@@ -233,12 +243,12 @@ tagsInput.addEventListener('input', (e) => {
 	tagsInput.style.width = "70px";
 	tagsInput.style.width = (tagsInput.scrollWidth)+"px";
 	
-	if (tagsInput.value.length > 16 || ( !regex.test(e.data) && e.inputType !== "deleteContentBackward")) {
-		const currentInput = tagsInput.value;
-		const limitedInput = currentInput.substring(0, currentInput.length-1);
-		tagsInput.value = limitedInput;
-		return;
-	}
+	// if (tagsInput.value.length > 16 || ( !regex.test(e.data) && e.inputType !== "deleteContentBackward")) {
+	// 	const currentInput = tagsInput.value;
+	// 	const limitedInput = currentInput.substring(0, currentInput.length-1);
+	// 	tagsInput.value = limitedInput;
+	// 	return;
+	// }
 	
 	if (regex.test(e.data) || e.inputType === "deleteContentBackward") {
 		
@@ -290,6 +300,8 @@ newPostForm.addEventListener('submit', (e) => {
 	
 	e.preventDefault();
 	
+	submitNewPost.disabled = true;
+	
 	const data = new FormData();
 	data.append ( 'upload_file', fileInput.files[0] );
 	data.append ( 'tags', getTagsAsString() );
@@ -297,20 +309,29 @@ newPostForm.addEventListener('submit', (e) => {
 	data.append ( 'session_id', sessionID );
 	data.append ( 'session_token', sessionToken );
 	
-	const options = { method: 'POST', "Content-Type": "application/x-www-form-urlencoded", body: data };
+	const options = { 
+		method: 'POST', "Content-Type": "application/x-www-form-urlencoded", 
+		body: data 
+	};
 	
-	fetch(API_URL + 'posts/upload', options).then( res => {
+	fetch(API_URL + 'posts/upload', options)
+	.then( (res) => {
 		return res.json();
-	}).then((json) => {
-		console.log(json);
+	}).then( (json) => {
+		console.log('New post upload json', json);
+		location.reload();
+	})
+	.catch(err => {
+		console.error('New post upload fetch', err);
 	});
 	
 	
 });
 
-setTimeout(() => {
+const updateTopTags = () => {
 	getJSON('POST', 'tags').then( res => {
 		if (res.success) {
+			console.log('Successfully updated top tags');
 			topTagsArr = res.tags;
 			topTagsArr.forEach(element => {
 				topTagsList.appendChild(newTag(element, true));
@@ -319,7 +340,26 @@ setTimeout(() => {
 	})
 	.catch( err => {
 		console.log('[getJSON] error: ', err);
-	});	
-}, 100);
+	});
+}
+
+const clearNewPostInputs = () => {
+	fileInput.value = "";
+	checkNewPostFileInput();
+	description.value = "";
+	tagsAmount.innerText = "0";
+	currentTagsArr = [];
+	
+	const currentTagsElements = document.querySelectorAll('#current-tags > .new-post-tag');
+	currentTagsElements.forEach(tag => {
+		currentTags.removeChild(tag);
+	});
+
+	const topTagsElements = document.querySelectorAll('#top-tags > .new-post-tag');
+	topTagsElements.forEach(tag => {
+		topTagsList.removeChild(tag);
+	});
+
+}
 
 updateCurrentTagsAmount();

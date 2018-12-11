@@ -14,7 +14,7 @@
 const editProfileElement = document.querySelector('.top-nav-bar__edit');
 const editIcon = document.querySelector('.top-nav-bar__edit-icon');
 const saveIcon = document.querySelector('.top-nav-bar__edit-save');
-
+let isEditMode = false;
 
 const menu = document.getElementById('menu');
 const menuLabelElement = document.querySelector('.bottom-nav-buttons__burger > span');
@@ -28,8 +28,23 @@ const newPostView = document.querySelector('.new-post-form-wrapper');
 const newPostButton = document.getElementById('new-post');
 const newPostCancelButton = document.getElementById('new-post-cancel');
 
-const visitingProfile = document.getElementById('visiting-profile');
 let isVisitingProfile = false;
+const visitingProfile = document.getElementById('visiting-profile');
+const visitingProfilePic = document.getElementById('visiting-profile_pic');
+const visitingProfileUsername = document.getElementById('visiting-profile_username');
+const visitingProfileBio = document.getElementById('visiting-profile_bio');
+const visitingProfileFollowers = document.getElementById('visiting-profile_followers');
+const visitingProfileFollowing = document.getElementById('visiting-profile_following');
+const visitingProfileFollowBtn = document.getElementById('visiting-profile_follow-btn');
+const visitingProfilePosts = document.getElementById('visiting-profile_posts');
+
+const viewPost = document.getElementById('view-post');
+const viewPostCard = document.getElementById('view-post_card');
+viewPostCard.innerHTML = postElement;
+
+const toggleViewPost = () => {
+  viewPost.classList.toggle('hidden');
+}
 
 const bottomNav = document.querySelector('.bottom-nav-bar');
 
@@ -80,6 +95,39 @@ const toggleBurgerToBack = () => {
   menuLabelElement.classList.toggle('menu-back');
   toggleBottomNavButtons();
   isBackButton = (isBackButton === false ? true : false);
+}
+
+let visitingUserID = -1;
+
+
+const setVisitingProfileInfo = (data) => {
+  console.log(data);
+  visitingProfilePic.style.backgroundImage = `url(${API_URL}${data.profile_pic_uri})`;
+  visitingProfileUsername.innerText = `${data.user_name}` ;
+  visitingProfileBio.innerText = `${data.user_description}`;
+  visitingProfileFollowers.innerText = `${data.followers}`;
+  visitingProfileFollowing.innerText = `${data.following}`;
+  gridVisiting.setSearchTypeAndTerm('user', data.user_id);
+  visitingUserID = data.user_id;
+  
+  if ( data.user_id == sessionLoggedInUserID ) {
+    
+    }else{
+    console.log('I AM : '+data.i_am_following);
+    gridVisiting.init();
+  
+    const btn = document.querySelector('#visiting-profile_follow-btn');
+    btn.classList.remove('hide');
+    
+  
+    const btntxt = document.querySelector('#visiting-profile_follow-btn .follow-btn-text span');
+    if ( data.i_am_following ) {
+      btntxt.textContent = 'UNFOLLOW'; 
+      }else{
+      btntxt.textContent = 'FOLLOW'; 
+      }
+    }
+  
 }
 
 const toggleVisitingProfile = () => {
@@ -142,12 +190,12 @@ const toggelNewPostView = () => {
 }
 
 newPostButton.addEventListener('click', () => {
-  location.href = "#new-post";
+  updateTopTags();
   toggelNewPostView();
 });
 newPostCancelButton.addEventListener('click', () => {
-  window.history.back();
   toggelNewPostView();
+  clearNewPostInputs();
 });
 
 const toggleBottomNavButtons = () => {
@@ -171,6 +219,7 @@ menu.addEventListener('change', () => {
 });
 
 editIcon.addEventListener('click', () => {
+  isEditMode = true;
   disableRadioButtons();
   enableProfieEditing();
   toggleEditToSave();
@@ -178,6 +227,7 @@ editIcon.addEventListener('click', () => {
 });
 
 saveIcon.addEventListener('click', () => {
+  isEditMode = false;
   enableRadioButtons();
   disableProfieEditing();
 

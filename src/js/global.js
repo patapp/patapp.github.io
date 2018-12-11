@@ -52,10 +52,12 @@ const getJSON = async ( rMethod , request, rParams='', dataObject = {}, sendSess
 
   return new Promise((resolve, reject) => {
 
+    var d = new Date();
+    var n = d.getTime();
+
     conLog({ function: 'getJSON'});
     conLog({ f: 'getJSON', method: rMethod, req: request, fullPath: API_URL + request + rParams + ( sendSessionInfo && sessionExists ? ( rParams == '' ? '?' : '&' ) + 'session_id=' + sessionID + '&session_token=' + sessionToken : '' ) });
     
-
     if ( sendSessionInfo ) {  
       dataObject.session_id    = sessionID;
       dataObject.session_token = sessionToken;
@@ -67,6 +69,8 @@ const getJSON = async ( rMethod , request, rParams='', dataObject = {}, sendSess
         method: rMethod,
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
       };
+    
+    dataParams.req_time = n;
     
     if ( rMethod != "GET" ) {
       dataParams.body = serialize(dataObject);

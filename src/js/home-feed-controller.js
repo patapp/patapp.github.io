@@ -91,10 +91,10 @@ const updateSlider = (slider, line, dots) => {
   
 }
 
-const setSlilderStylesToRated = (slider, parent) => {
+const setSlilderStylesToRated = (slider, postHeader) => {
   slider.max = 5;
   slider.classList.remove('unrated__slider');
-  parent.classList.remove('unrated__wrapper');
+  postHeader.classList.remove('unrated__wrapper');
 }
 
 const updatePostRating = (post, value) => {
@@ -112,36 +112,83 @@ const updatePostRating = (post, value) => {
 }
 
 
+const btn = document.getElementById('visiting-profile_follow-btn');
+btn.addEventListener('click', () => {
+const btntxt = document.querySelector('#visiting-profile_follow-btn .follow-btn-text span');
+if ( btntxt.textContent == 'FOLLOW' || btntxt.textContent == 'UNFOLLOW' ) {
+  const toValue = (btntxt.textContent == 'UNFOLLOW' ? false : true );
+  console.log(toValue);
+  btntxt.textContent = ' ... ';
+  setFollowUser(visitingUserID, toValue).then( (r) => {
+    if ( r == false ) {
+      btntxt.textContent = 'FOLLOW';
+      }else{
+      btntxt.textContent = 'UNFOLLOW';
+      }
+  });
+}
+});
+
+
+
 // *** For post element click listener ***
+const openUserView = (username) => {
+  toggleVisitingProfile();
+  const btn = document.getElementById('visiting-profile_follow-btn');
+  btn.classList.add('hide');
+  getJSON('POST','users/get-user-id', '', {user_name: username} ).then( (res) => {
+    
+    if ( res.success ) {
+      const userId = res.user_id;
+      console.log('SUCCESS: user id is: ' + userId );
+      
+      getUserProfileData(userId).then( res => {
+        setVisitingProfileInfo(res); 
+      });
+
+    } else {
+      alert('user not found');
+    }
+
+  });
+}
+
 const getUsernameFromDocument = (id) => {
+  
   const username = document.querySelector("#post-"+id+" .post-header__username > p").innerHTML;
   console.log('You clicked on user: ', username);
+  openUserView(username);
+  
 }
 
 const checkTarget = (id, target) => {
-
+  
+  console.log('[checkTarget] called');
+  console.log('target', target);
+  
   switch (target.tagName) {
     
     case "IMG":
-      if (target.closest('div').className === "post-header__picture") {
-        getUsernameFromDocument(id);
-        toggleVisitingProfile();
-      }
+    console.log('case IMG');
+    if (target.closest('div').classList.contains("post-header__picture")) {
+      getUsernameFromDocument(id);
+      
+    }
     break;
     
     case "P":
-      if (target.closest('div').className === "post-header__username") {
-        getUsernameFromDocument(id);
-        toggleVisitingProfile();
-      }
+    console.log('case P');
+    if (target.closest('div').classList.contains("post-header__username")) {
+      getUsernameFromDocument(id);
+    }
     break;
-
+    
     case "LI":
-      if (target.closest('ul').className === "post-info__tags") {
-        const tagValue = target.innerHTML;
-        console.log('You clicked on tag: ', tagValue);
-        makeSearch(tagValue);
-      }
+    if (target.closest('ul').className === "post-info__tags") {
+      const tagValue = target.innerHTML;
+      console.log('You clicked on tag: ', tagValue);
+      makeSearch(tagValue);
+    }
     break;
     
   }
@@ -219,7 +266,7 @@ const renderPosts = (from, to) => {
     
     for (let p=from; p<=to; p++) {
       
-      const parent                    = document.querySelector("#post-"+p);
+      const postHeader                    = document.querySelector("#post-"+p);
       
       const userpic                   = document.querySelector("#post-"+p+" .post-header__picture");
       const username                  = document.querySelector("#post-"+p+" .post-header__username");
@@ -241,14 +288,14 @@ const renderPosts = (from, to) => {
       const commentCount              = document.querySelector("#post-"+p+" .post-info__comments > span");
       const commentIcon               = document.querySelector("#post-"+p+" .post-info__comments > img");
       const addComments               = document.querySelector("#post-"+p+" .post-info__comments > p");
-
+      
       const timestamp                 = document.querySelector("#post-"+p+" .post-info__timestamp > p");
-
+      
       const unregisteredPopup         = document.querySelector("#post-"+p+" .unregisteredPopup");
       const unregisteredPopup_button  = document.querySelector("#post-"+p+" .unregisteredPopupContent > button");
       
       // Check if username, profilepic or any tag was clicked
-      parent.addEventListener('click', (e) => {
+      postHeader.addEventListener('click', (e) => {
         checkTarget(p, e.target);
       });
       
@@ -266,12 +313,12 @@ const renderPosts = (from, to) => {
       if (descriptionP.offsetHeight > 40) {
         showDesc.innerHTML = "more";
         description.classList.toggle('post-description-hidden');
-        description.classList.toggle('post-info__description::after');
+        //description.classList.toggle('post-info__description::after');
       }
       showDesc.addEventListener('click', () => {
         showDesc.innerHTML = (showDesc.innerHTML == "more" ? "less":"more");
         description.classList.toggle('post-description-hidden');
-        description.classList.toggle('post-info__description::after');
+        //description.classList.toggle('post-info__description::after');
       });
       timestamp.innerHTML = res.post_data[postsDataArray[p]].added_ago;
       
@@ -307,7 +354,7 @@ const renderPosts = (from, to) => {
         const imgSrc = API_URL + res.post_data[postsDataArray[p]].url;
         const image = new Image();
         const imgElem = document.createElement('img');
-
+        
         image.addEventListener('load', () => {
           const width  = image.width;
           const height = image.height;
@@ -318,7 +365,7 @@ const renderPosts = (from, to) => {
             imgElem.classList.add('landscape');
           }
         });
-
+        
         image.src = imgSrc;
         imgElem.setAttribute('src', imgSrc);
         postmedia.appendChild(imgElem);
@@ -362,41 +409,56 @@ const renderPosts = (from, to) => {
         
       });
       // -------------------- END OF POST RATING -----------------------------------
+      
+      //Redirects to the sign-up page when button is clicked on the unregistered popup on the welcome page
       unregisteredPopup_button.addEventListener('click', () => {
         window.location.href = "sign-up/";
       });
+      
       addComments.innerHTML = "Add comment...";
       if (res.post_data[postsDataArray[p]].comments > 999) {
+        //Prevents a long comment counter with a cap of 999
         commentCount.insertAdjacentHTML('beforeend',"999+");
       }
       else {
+        //Gets the number of comments for each post
         commentCount.insertAdjacentHTML('beforeend',res.post_data[postsDataArray[p]].comments);
       }
+      //When the entire comment div("Add comment..." and comment icon) is clicked
       comment.addEventListener('click', () =>{
+        //VIEW_PAGE checked to ensure comment window does not show for unregistered users
         if (VIEW_PAGE == 'home'){
+          //Shows comment window
           commentPopup.style.display="block";
+          //Burger button transitions into a back button and hides all other nav bar buttons
           toggleBurgerToBack();
-
+          //Determines ID of current post
+          setOpenID(postsDataArray[p]);
+          //Loads comments for current post
           loadComment(postsDataArray[p]);
-          sendComment(postsDataArray[p]);
-
+          
+          //When there is a back button being displayed
           if (isBackButton) {
             menu.addEventListener('click', () => {
+              //Hides comment window when back button is pressed
               commentPopup.style.display="none";
+              //Clears the loaded comments
               clearContent();
             });
           }
         }
+        //Different popup shown for unregistered users on welcome page
         else if (VIEW_PAGE =='') {
           unregisteredPopup.style.display="block";
         }
       });
+      //Dismisses popup when grey areas are clicked
       window.addEventListener('click', () => {
         if (event.target == unregisteredPopup) {
           unregisteredPopup.style.display="none";
         }
       });
-
+      
     }
   });
 }
@@ -415,19 +477,20 @@ const fetchPosts = () => {
 }
 
 const destroyUnneeded = () => {
-if ( postsInitialized > postsDataCount ) {
-  for ( let i = postsDataCount; i<postsInitialized; i++ ){
-    const destroyObject = document.getElementById('post-' + i);
-    if ( typeof destroyObject != 'undefined' ) {
-      destroyObject.remove();
+  if ( postsInitialized > postsDataCount ) {
+    for ( let i = postsDataCount; i<postsInitialized; i++ ){
+      const destroyObject = document.getElementById('post-' + i);
+      if ( typeof destroyObject != 'undefined' ) {
+        destroyObject.remove();
       }
     }
     postsInitialized = postsDataCount;
   }
-if ( postsDataCount == 0 ) {
-  // No media at all.
-  const hlt = document.getElementById('home-load-trigger');
-  hlt.innerHTML = 'No media to show. Maybe you should upload some, or start following someone =)';
+  if ( postsDataCount == 0 ) {
+    // No media at all.
+    const hlt = document.getElementById('home-load-trigger');
+    hlt.innerHTML = '<div class="msgTitle">No media to show =(</div><div class="msgText">Go follow someone to fill your feed =)</div>';
+    hlt.className = '';
   }
 }
 
@@ -484,17 +547,17 @@ const isVisibleOnScreen = (element) => {
 };
 
 if ( VIEW_PAGE == 'home' ) {
-
-const homeTab         = document.getElementById('home-tab');
-const homeLoadTrigger = document.getElementById('home-load-trigger');
-homeTab.addEventListener('scroll', () => {
   
-  if (isVisibleOnScreen(homeLoadTrigger)) {
-    console.log('Current tab HOME adding 5 new posts to home feed')
-    appendPosts(5);
-  }
+  const homeTab         = document.getElementById('home-tab');
+  const homeLoadTrigger = document.getElementById('home-load-trigger');
+  homeTab.addEventListener('scroll', () => {
+    
+    if (isVisibleOnScreen(homeLoadTrigger)) {
+      console.log('Current tab HOME adding 5 new posts to home feed')
+      appendPosts(5);
+    }
+    
+  });
+  appendPosts(5);
   
-});
-appendPosts(5);
-
 }

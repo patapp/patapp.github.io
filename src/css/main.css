@@ -219,4 +219,40 @@ input, label {
 .hide {
   display:none !important;
 }
+@media only screen and (min-width: 800px) {
+  #grid-search,
+  #grid-userposts {
+   grid-template-columns: repeat(4, 1fr) !important;
+   }
+ }
+@media only screen and (min-width: 1200px) {
+  #grid-search,
+  #grid-userposts {
+   grid-template-columns: repeat(6, 1fr) !important;
+   }
+}
+@media only screen and (min-width: 1600px) {
+  #grid-search,
+  #grid-userposts {
+   grid-template-columns: repeat(8, 1fr) !important;
+   }
+ }
 
+
+.msgTitle, .msgText {
+  font-family: 'Dosis', serif;
+  font-size: 20px;
+  text-align:center;
+  margin-top: 30px;
+  width: 100%;
+  display:inline-block;
+  float:left;
+  }
+.msgTitle{
+  text-transform:uppercase;
+  font-weight:700;
+  color: #FF145B;
+}
+.msgText {
+ font-size:16px;
+ }
