@@ -38,9 +38,13 @@ const visitingProfileFollowing = document.getElementById('visiting-profile_follo
 const visitingProfileFollowBtn = document.getElementById('visiting-profile_follow-btn');
 const visitingProfilePosts = document.getElementById('visiting-profile_posts');
 
-console.log(visitingProfileBio);
-console.log(visitingProfileFollowers);
-console.log(visitingProfileFollowing);
+const viewPost = document.getElementById('view-post');
+const viewPostCard = document.getElementById('view-post_card');
+viewPostCard.innerHTML = postElement;
+
+const toggleViewPost = () => {
+  viewPost.classList.toggle('hidden');
+}
 
 const bottomNav = document.querySelector('.bottom-nav-bar');
 

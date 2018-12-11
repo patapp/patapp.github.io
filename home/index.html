@@ -37,23 +37,23 @@
 	<body>
 		
 		<div class="post-viewer modal-container hide" id="post-viewer">
-      <div class="post-viewer-content modal-content" id="post-viewer-content">
-      </div>
+			<div class="post-viewer-content modal-content" id="post-viewer-content">
+			</div>
 		</div>
 		
 		<div class="loading-screen">
 			<img src="../src/svg/loading_paw.svg">
 		</div>
-
+		
 		<!-- Header title -->
 		<nav class="top-nav-bar">
 			<img src="../src/svg/pat_ic.svg">
-
+			
 			<div class="top-nav-bar__edit hidden">
 				<img class="top-nav-bar__edit-icon clickable" src="../src/svg/edit_ic.svg">
 				<span class="top-nav-bar__edit-save clickable hidden">SAVE</span>
 			</div>
-
+			
 		</nav>
 		
 		<!-- Tab views wrapper -->
@@ -81,11 +81,11 @@
 				</div>
 				
 				<div class="searc-tab__input" style="height:40px;display:block;width:100%;">
-				<ul id="search-for-options">
-          <li id="search-for-item-post" class="clickable selected">Post<span id="result-count-post" class="result-count"></span></li>
-          <li id="search-for-item-tag" class="clickable">Tag<span  id="result-count-tag" class="result-count"></span></li>
-          <li id="search-for-item-user" class="clickable">User<span  id="result-count-user" class="result-count"></span></li>
-				</ul>
+					<ul id="search-for-options">
+						<li id="search-for-item-post" class="clickable selected">Post<span id="result-count-post" class="result-count"></span></li>
+						<li id="search-for-item-tag" class="clickable">Tag<span  id="result-count-tag" class="result-count"></span></li>
+						<li id="search-for-item-user" class="clickable">User<span  id="result-count-user" class="result-count"></span></li>
+					</ul>
 				</div>
 				
 				<div class="search-tab__feed">
@@ -101,11 +101,11 @@
 			<div id="profile-tab" class="tab-views__tab-profile tab">
 				
 				<div class="profile-tab__detail-wrapper">
-
+					
 					<input id="new-profile-pic" class="hidden" type="file" accept="image/*">
 					
 					<div class="profile-tab__details">
-							
+						
 						<label class="profile-tab__change-pic clickable hidden" for="new-profile-pic">+ change picture</label>
 						
 						<div class="profile-tab__pic" id="profile-tab__pic"></div>
@@ -146,9 +146,9 @@
 					</div>
 					
 					<p class="profile-tab__posts-header">POSTS</p>
-
+					
 				</div>
-
+				
 				<div class="profile-tab__posts-grid">
 					<ul id="grid-userposts">
 						
@@ -158,7 +158,7 @@
 				<span id="search-load-trigger-userposts"></span>
 				
 			</div>
-
+			
 			<!-- Shown when user visits someone else's profile -->
 			<div id="visiting-profile" class="visiting-profile hidden">
 				
@@ -203,17 +203,24 @@
 					</div>
 					
 					<p class="profile-tab__posts-header">POSTS</p>
-
+					
 				</div>
-
+				
 				<ul id="visiting-profile_posts" class="profile-tab__posts-grid">
-
+					
 				</ul>
 				
 			</div>
-
+			
 			<!-- View post -->
+			<div id="view-post">
+				<div id="view-post_card" class="post">
 
+				</div>
+			</div>
+
+			
+			<!-- Comment view -->
 			<div class="commentPopup">
 				<ul class="contentWrapper">
 				</ul>
@@ -223,7 +230,7 @@
 					<button class="commentInput__send"><img src="../src/svg/send_ic.svg"></button>
 				</div>
 			</div>
-
+			
 			
 		</div>
 		
@@ -316,7 +323,7 @@
 		</ul>
 		
 	</nav>
-
+	
 	<!--<script src="../pwa.js"></script>-->
 	<script> const VIEW_PAGE = 'home'; </script>
 	<script src="../src/js/global.js"></script>

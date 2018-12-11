@@ -46,3 +46,11 @@
   margin: 16px;
   
 }
+
+#view-post {
+  position: fixed;
+  top: 50px;
+  width: 100vw;
+  height: calc(100vh - 100px);
+  overflow: scroll;
+}
