@@ -104,7 +104,8 @@ const setVisitingProfileInfo = (data) => {
   visitingProfileBio.innerText = `${data.user_description}`;
   visitingProfileFollowers.innerText = `${data.followers}`;
   visitingProfileFollowing.innerText = `${data.following}`;
-  
+  gridVisiting.setSearchTypeAndTerm('user', data.user_id);
+  gridVisiting.init();
 }
 
 const toggleVisitingProfile = () => {
