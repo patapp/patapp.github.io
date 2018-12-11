@@ -113,11 +113,8 @@ const updatePostRating = (post, value) => {
 
 
 // *** For post element click listener ***
-const getUsernameFromDocument = (id) => {
+const openUserView = (username) => {
   toggleVisitingProfile();
-  const username = document.querySelector("#post-"+id+" .post-header__username > p").innerHTML;
-  console.log('You clicked on user: ', username);
-  
   getJSON('POST','users/get-user-id', '', {user_name: username} ).then( (res) => {
     
     if ( res.success ) {
@@ -133,6 +130,14 @@ const getUsernameFromDocument = (id) => {
     }
 
   });
+}
+
+const getUsernameFromDocument = (id) => {
+  
+  const username = document.querySelector("#post-"+id+" .post-header__username > p").innerHTML;
+  console.log('You clicked on user: ', username);
+  openUserView(username);
+  
 }
 
 const checkTarget = (id, target) => {
