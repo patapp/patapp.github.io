@@ -489,7 +489,8 @@ const destroyUnneeded = () => {
   if ( postsDataCount == 0 ) {
     // No media at all.
     const hlt = document.getElementById('home-load-trigger');
-    hlt.innerHTML = 'No media to show. Maybe you should upload some, or start following someone =)';
+    hlt.innerHTML = '<div class="msgTitle">No media to show =(</div><div class="msgText">Go follow someone to fill your feed =)</div>';
+    hlt.className = '';
   }
 }
 
