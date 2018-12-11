@@ -112,9 +112,30 @@ const updatePostRating = (post, value) => {
 }
 
 
+const btn = document.getElementById('visiting-profile_follow-btn');
+btn.addEventListener('click', () => {
+const btntxt = document.querySelector('#visiting-profile_follow-btn .follow-btn-text span');
+if ( btntxt.textContent == 'FOLLOW' || btntxt.textContent == 'UNFOLLOW' ) {
+  const toValue = (btntxt.textContent == 'UNFOLLOW' ? false : true );
+  console.log(toValue);
+  btntxt.textContent = ' ... ';
+  setFollowUser(visitingUserID, toValue).then( (r) => {
+    if ( r == false ) {
+      btntxt.textContent = 'FOLLOW';
+      }else{
+      btntxt.textContent = 'UNFOLLOW';
+      }
+  });
+}
+});
+
+
+
 // *** For post element click listener ***
 const openUserView = (username) => {
   toggleVisitingProfile();
+  const btn = document.getElementById('visiting-profile_follow-btn');
+  btn.classList.add('hide');
   getJSON('POST','users/get-user-id', '', {user_name: username} ).then( (res) => {
     
     if ( res.success ) {

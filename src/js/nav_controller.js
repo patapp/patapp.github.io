@@ -97,6 +97,9 @@ const toggleBurgerToBack = () => {
   isBackButton = (isBackButton === false ? true : false);
 }
 
+let visitingUserID = -1;
+
+
 const setVisitingProfileInfo = (data) => {
   console.log(data);
   visitingProfilePic.style.backgroundImage = `url(${API_URL}${data.profile_pic_uri})`;
@@ -105,7 +108,26 @@ const setVisitingProfileInfo = (data) => {
   visitingProfileFollowers.innerText = `${data.followers}`;
   visitingProfileFollowing.innerText = `${data.following}`;
   gridVisiting.setSearchTypeAndTerm('user', data.user_id);
-  gridVisiting.init();
+  visitingUserID = data.user_id;
+  
+  if ( data.user_id == sessionLoggedInUserID ) {
+    
+    }else{
+    console.log('I AM : '+data.i_am_following);
+    gridVisiting.init();
+  
+    const btn = document.querySelector('#visiting-profile_follow-btn');
+    btn.classList.remove('hide');
+    
+  
+    const btntxt = document.querySelector('#visiting-profile_follow-btn .follow-btn-text span');
+    if ( data.i_am_following ) {
+      btntxt.textContent = 'UNFOLLOW'; 
+      }else{
+      btntxt.textContent = 'FOLLOW'; 
+      }
+    }
+  
 }
 
 const toggleVisitingProfile = () => {
