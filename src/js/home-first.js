@@ -92,7 +92,7 @@ const appIsReady = () => {
   
   const userItemClicked = ( userID, userName ) => {
     //alert ( 'User Item clicked! User ID: ' + userID + ', Name: ' + userName );
-    getUserProfileData(userName);
+    getUsernameFromDocument(userName);
   }  
   
   const searchTab = document.getElementById('search-tab');
