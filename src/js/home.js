@@ -75,14 +75,15 @@ const deletePost = (id, element=null) => {
 // NEW FUNCTIONS BY SAMULI ************************************************************************************************************************************************************
 
 const setFollowUser = ( userID, followOrNot ) => {
+  return new Promise((resolve, reject) => {
   getJSON( (followOrNot ? 'POST' : 'DELETE'), 'follow', '', {user_id: userID}).then( (r) => {
     if ( r.success ) {
       console.log( '[setFollowUser] You are now ' + (followOrNot?'FOLLOWING':'NOT FOLLOWING') + ' user ' + userID );
-      // data is set ok - update the button state here!
+      resolve(followOrNot);
     }else{
-      console.log('[setFollowUser] ERROR: ' + r.error);
+      resolve(!followOrNot);
     }
-    // here you should disable loading or enable button operation again!
+  });
   });
 };
 
