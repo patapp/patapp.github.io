@@ -15,6 +15,8 @@ const loadingScreen = document.querySelector('.loading-screen');
 
 const gridSearch = new gridFiller('grid-search', 'landing', 27 );
 const gridUserPosts = new gridFiller('grid-userposts', 'user', 18 );
+const gridVisiting = new gridFiller('visiting-profile_posts', 'user', 18);
+
 
 
 let lastSearchTerm = '';
@@ -79,6 +81,7 @@ const appIsReady = () => {
   
   gridUserPosts.setSearchTerm(sessionLoggedInUserID);
   gridSearch.init();
+  
   renderUserProfileData(sessionLoggedInUserID);
   
   
