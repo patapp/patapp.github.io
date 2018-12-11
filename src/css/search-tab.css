@@ -10,6 +10,12 @@
     border-radius: 8px;
     margin: 8px;
 }
+
+#reset {
+    font-size: 15px;
+    color: var(--color-brown);
+    margin-right: 20px;
+}
 .search-tab__input > img {
     margin: 0 16px;
 }
