@@ -114,6 +114,7 @@ const updatePostRating = (post, value) => {
 
 // *** For post element click listener ***
 const getUsernameFromDocument = (id) => {
+  toggleVisitingProfile();
   const username = document.querySelector("#post-"+id+" .post-header__username > p").innerHTML;
   console.log('You clicked on user: ', username);
   
@@ -145,7 +146,7 @@ const checkTarget = (id, target) => {
     console.log('case IMG');
     if (target.closest('div').classList.contains("post-header__picture")) {
       getUsernameFromDocument(id);
-      toggleVisitingProfile();
+      
     }
     break;
     
@@ -153,7 +154,6 @@ const checkTarget = (id, target) => {
     console.log('case P');
     if (target.closest('div').classList.contains("post-header__username")) {
       getUsernameFromDocument(id);
-      toggleVisitingProfile();
     }
     break;
     
