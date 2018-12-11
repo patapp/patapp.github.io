@@ -1,9 +1,7 @@
-/* .new-post-form-wrapper,
-.new-post-form {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-} */
+.new-post-form-wrapper {
+	max-width: 600px;
+    margin: 0 auto;
+}
 .new-post-hidden {
 	display: none;
 }
@@ -37,6 +35,7 @@
 	width: 100vw;
 	height: 100vw;
 	max-height: 500px;
+	max-width: 600px;
 }
 .new-post-form__add-media > span {
 	color: #D4B7A3;
