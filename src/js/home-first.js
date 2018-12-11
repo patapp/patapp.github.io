@@ -32,7 +32,8 @@ const gridItemClicked = ( grid, itemID, element ) => {
     }
   } else {
     // show full image overlay
-    alert( 'GridItemClicked! Grid: ' + grid + ' ItemID: ' + itemID );
+    //alert( 'GridItemClicked! Grid: ' + grid + ' ItemID: ' + itemID );
+    showMediaPopup(itemID);
   }
 }
 
